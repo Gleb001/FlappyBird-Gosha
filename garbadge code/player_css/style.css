@@ -1,0 +1,16 @@
+
+#player {
+
+    width: 32px;
+    height: 32px;
+
+    position: absolute;
+    left: 47.5%;
+    top: 45%;
+
+    background-color: transparent;
+
+    border: 1px solid black;
+    border-radius: 50%;
+
+}

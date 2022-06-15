@@ -1,30 +1,70 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-    <link rel="stylesheet" href="styles/style.css">
-    <link rel="stylesheet" href="styles/media.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/texts/texts.css">
+    <link rel="stylesheet" href="styles/media/media.css">
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale = 1.0">
 
-    <title>Trenning my JavaScript skills</title>
+    <title>Flappy Gosha</title>
 
 </head>
+
 <body>
 
-
-    <div class="game_field__wrapper">
-        <section id="game_field" class="js-game_field__expectation">
-            <h1 class="game__name">Flappy Bird</h1>
-            <button class="button__start_game">
-                Start game
-            </button>
-        </section>
-    </div>
+    <!-- script main -->
+    <script type="module" src="scripts/main.js"></script>
 
 
-    <script type="module" src="scripts/index_old.js"></script>
+    <!-- script abstractions -->
+
+    <!-- game mechanism -->
+    <script type="module" src="scripts/abstractions/game mechanism/game_engine.js"></script>
+    <script type="module" src="scripts/abstractions/game mechanism/algorithms/components_algorithms.js"></script>
+    <script type="module" src="scripts/abstractions/game mechanism/algorithms/algorithms.js"></script>
+
+    <!-- game animations -->
+    <script type="module" src="scripts/abstractions/game animations/collector_animations.js"></script>
+
+    <!-- game patterns -->
+    <script type="module" src="scripts/abstractions/game patterns/collector_pattern_animations.js"></script>
+    <script type="module" src="scripts/abstractions/game patterns/collector_pattern_html_elements.js"></script>
+
+
+    <!-- script components -->
+    <script type="module" src="scripts/components/player/player.js"></script>
+    <script type="module" src="scripts/components/obstacle/obstacle.js"></script>
+    <script type="module" src="scripts/components/play field/play_field.js"></script>
+
+    <!-- collector components -->
+    <script type="module" src="scripts/components/collector_components.js"></script>
+
+
+    <!-- script elements -->
+
+    <!-- windows -->
+    <script type="module" src="scripts/elements/windows/result_window.js"></script>
+
+    <!-- texts -->
+    <script type="module" src="scripts/elements/texts/game name/game_name.js"></script>
+    <script type="module" src="scripts/elements/texts/game over/game_over.js"></script>
+    <script type="module" src="scripts/elements/texts/result gamer/result_gamer.js"></script>
+    <script type="module" src="scripts/elements/texts/introduction message/introduction_message.js"></script>
+    <script type="module" src="scripts/elements/texts/suggestion to start game/suggestion_start_game.js"></script>
+
+    <!-- counters -->
+    <script type="module" src="scripts/elements/counters/countdown/countdown.js"></script>
+    <script type="module" src="scripts/elements/counters/counter obstacles/counter_obstacles.js"></script>
+
+    <!-- figures -->
+    <script type="module" src="scripts/elements/figures/circle.js"></script>
+
+    <!-- collector elements -->
+    <script type="module" src="scripts/elements/collector_elements.js"></script>
 
 </body>
 
