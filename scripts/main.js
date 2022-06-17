@@ -23,7 +23,8 @@ window.addEventListener('keydown', changeAlgirtmicConstruction);
 // change play field width (#) //
 function changePlayFieldWidth() {
 
-    let play_field__wrapper = document.querySelector(`.play_field__wrapper`);
+    let play_field = document.getElementById('play_field');
+    let play_field__wrapper = play_field.parentElement;
 
     if (window.screen.availWidth > 1600) {
         play_field__wrapper.style.width = 85 + 'vw';
@@ -49,10 +50,11 @@ function startIntroGame() {
 // change algoritmic construction (1) //
 function changeAlgirtmicConstruction(event) {
 
-    let element = event.target;
+    if (event.code != undefined && event.code != 'Space') { return };
 
-    if (element.classList.contains('js-play_field__expection') ||
-        (document.querySelector('.js-play_field__expection') && event.code == 'Space')) {
+    let play_field = document.getElementById('play_field');
+
+    if (play_field.classList.contains('js-play_field__expection')) {
 
         GameEngine.start(
             algorithms.preparation_start_game
@@ -61,15 +63,13 @@ function changeAlgirtmicConstruction(event) {
 
     }
 
-    if (element.classList.contains('js-play_field__expection_process_game') ||
-        (document.querySelector('.js-play_field__expection_process_game') && event.code == 'Space')) {
+    if (play_field.classList.contains('js-play_field__expection_process_game')) {
 
         GameEngine.start(
             algorithms.start_game
         );
 
         expectionEndGame();
-        
         return;
 
     }
@@ -79,12 +79,13 @@ function changeAlgirtmicConstruction(event) {
 function expectionEndGame() {
 
     let play_field = document.getElementById('play_field');
+    let interval_expection = 15;
 
     let expection_end_game = setInterval(
 
-        function() {
+        function () {
 
-            if(play_field.classList.contains('js-play_field__game_over')) {
+            if (play_field.classList.contains('js-play_field__game_over')) {
 
                 GameEngine.start(
                     algorithms.end_game
@@ -95,9 +96,8 @@ function expectionEndGame() {
             }
 
         },
-        5
+        interval_expection
 
     );
-
 
 }

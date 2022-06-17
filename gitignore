@@ -1,4 +1,7 @@
 
+### Garbadge code ###
+garbadge_code/*
+
 # Created by https://www.toptal.com/developers/gitignore/api/windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows
 
@@ -29,6 +32,3 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.toptal.com/developers/gitignore/api/windows
-
-### Garbadge code ###
-/garbadge code

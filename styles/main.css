@@ -29,6 +29,8 @@ body {
 
     position: relative;
 
+    z-index: -1;
+
 }
 
 .play_field__wrapper {
@@ -40,6 +42,8 @@ body {
 
     box-sizing: border-box;
     padding: 0;
+
+    opacity: 1;
 
 }
 

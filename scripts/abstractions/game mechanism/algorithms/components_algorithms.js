@@ -35,12 +35,10 @@ const components_algorithms = {
             collector_elements.texts.introduction_message.setIntroductionMessage({
                 parts_message: [
                     'Hello world',
-                    'Привет, мир',
-                    '你好世界',
-                    'Hallo Welt',
-                    'Bonjour le monde'
-                    // 'I present to you my game',
-                    // 'called'
+                    // 'Привет, мир',
+                    // '你好世界',
+                    // 'Hallo Welt',
+                    // 'Bonjour le monde'
                 ]
             });
             collector_elements.texts.introduction_message.show();
@@ -208,23 +206,23 @@ const components_algorithms = {
         // tracking player actions //
         trackingGamerActions() {
 
+            collector_components.player.endExecutionCurrentFunction();
+
             window.addEventListener('click', PlayerFly);
             window.addEventListener('keydown', PlayerFly);
 
             function PlayerFly(event) {
 
-                let element = event.target;
+                if( event.code != undefined && event.code != 'Space' ) { return };
 
                 if (
-                    document.querySelector('.player_fall') && document.querySelector('.js-play_field__process_game') &&
-                    (element.classList.contains('js-play_field__process_game') || event.code == 'Space')
-                ) {
-                    collector_components.player.fly();
-                }
+                    !document.querySelector('.player_fall') &&
+                    !document.querySelector('.js-play_field__process_game')
+                ) { return };
+
+                collector_components.player.fly();
 
             }
-
-            collector_components.player.endExecutionCurrentFunction();
 
         },
 
@@ -238,7 +236,6 @@ const components_algorithms = {
         checkMovementPlayer() {
             collector_components.player.checkMovement();
         },
-
 
     },
 
@@ -263,7 +260,7 @@ const components_algorithms = {
 
             collector_components.Obstacle.endCreatingAndMovingObstaclesOnPlayer();
             collector_components.player.endCheckMovement();
-            // collector_elements.counters.counter_obstacles.end();
+            collector_elements.counters.counter_obstacles.end();
 
             collector_components.player.endExecutionCurrentFunction();
 
