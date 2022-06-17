@@ -1,0 +1,83 @@
+
+/* suggestion start game */
+#suggestion_start_game {
+
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+}
+
+/* arrow to oright */
+.arrow_to_right {
+
+    margin-right: 10px;
+    display: inline-block;
+
+    width: 25px;
+    height: .5px;
+
+    background-color: black;
+
+    position: relative;
+    top: 2px;
+
+}
+
+.arrow_to_right::before,
+.arrow_to_right::after {
+
+    content: '';
+    display: inline-block;
+
+    width: 4px;
+    height: .5px;
+
+    background-color: black;
+
+    position: absolute;
+    left: 85%;
+
+}
+
+.arrow_to_right::before {
+
+    transform: rotate(45deg);
+    bottom: 2px;
+
+}
+
+.arrow_to_right::after {
+
+    transform: rotate(135deg);
+    top: 2px;
+
+}
+
+/* media */
+@media screen and (max-width: 2000px) {
+
+
+
+}
+
+@media screen and (max-width: 1600px) {
+
+
+
+}
+
+@media screen and (max-width: 1000px) {
+
+
+
+}
+
+@media screen and (max-width: 478px) {
+
+
+}

@@ -39,9 +39,8 @@ class ResultGamer extends collector_pattern_html_elements.GameElement {
         this.create();
         
         this.INVOLVED_ELEMENT = '#game_over';
-        console.log(this);
-
         this.HTML_LINK.style.opacity = 0;
+        
         this.HTML_LINK.setAttribute('disabled', '');
 
     }

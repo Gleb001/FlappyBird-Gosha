@@ -1,0 +1,58 @@
+
+/* obstacle */
+.obstacle {
+
+    height: 110%;
+
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: absolute;
+    top: -5%;
+
+}
+
+/* obstacle top and bottom */
+.obstacle_top,
+.obstacle_bottom {
+
+    width: 100%;
+
+    border: 1px solid black;
+    border-radius: 10px;
+
+}
+
+/* media */
+@media screen and (max-width: 2000px) {
+
+    .obstacle {
+        width: 95px;
+    }
+
+}
+
+@media screen and (max-width: 1600px) {
+
+    .obstacle {
+        width: 80px;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    .obstacle {
+        width: 90px;
+    }
+
+}
+
+@media screen and (max-width: 478px) {
+
+    .obstacle {
+        width: 70px;
+    }
+
+}

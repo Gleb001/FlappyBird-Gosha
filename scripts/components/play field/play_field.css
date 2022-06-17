@@ -1,0 +1,71 @@
+
+/* play field */
+#play_field {
+
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    box-sizing: border-box;
+    padding: 20px 0;
+
+    background-color: #78C4D1;
+
+    position: relative;
+
+    z-index: -1;
+
+}
+
+
+/* play field wrapper */
+.play_field__wrapper {
+
+    margin: 0 auto;
+
+    height: 100vh;
+    width: 100vw;
+
+    box-sizing: border-box;
+    padding: 0;
+
+    opacity: 1;
+
+}
+
+
+/* js- styles play field */
+.js-play_field__introduction,
+.js-play_field__prepare,
+.js-play_field__game_over {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+
+.js-play_field__process_game,
+.js-play_field__expection_process_game {
+
+    background-color: white;
+    cursor: pointer;
+
+}
+
+.js-play_field__expection {
+    cursor: pointer;
+}
+
+/* game author */
+#game_author {
+
+    width: 100%;
+    text-align: center;
+
+    position: absolute;
+    bottom: 20px;
+
+    z-index: 5;
+
+}

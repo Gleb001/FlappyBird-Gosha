@@ -1,14 +1,10 @@
 
 // import elements //
 
-// windows
-import { result_window } from './windows/result_window.js';
-
 // figures
-import { circle } from './figures/circle.js';
+import { circle } from './figures/circle/circle.js';
 
 // counters
-import { countdown } from './counters/countdown/countdown.js';
 import { counter_obstacles } from './counters/counter obstacles/counter_obstacles.js';
 
 // texts
@@ -21,11 +17,6 @@ import { suggestion_start_game } from './texts/suggestion to start game/suggesti
 // element collector //
 const collector_elements = {
 
-    // windows //
-    windows: {
-        result_window
-    },
-
     // texts //
     texts: {
         game_name,
@@ -37,7 +28,6 @@ const collector_elements = {
 
     // counters //
     counters: {
-        countdown,
         counter_obstacles
     },
 

@@ -1,0 +1,90 @@
+/* player */
+#player {
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: absolute;
+
+    z-index: 2;
+
+}
+
+/* media */
+@media screen and (max-width: 2000px) {
+
+    #player {
+
+        width: 75px;
+        height: 75px;
+
+    }
+
+    .player_fall {
+        background-image: url(../../../images/player_fall\ \(75x75\).png);
+    }
+
+    .player_fly {
+        background-image: url(../../../images/player_fly\ \(75x75\).png);
+    }
+
+}
+
+@media screen and (max-width: 1600px) {
+
+    #player {
+
+        width: 60px;
+        height: 60px;
+
+    }
+
+    .player_fall {
+        background-image: url(../../../images/player_fall\ \(55x55\).png);
+    }
+
+    .player_fly {
+        background-image: url(../../../images/player_fly\ \(55x55\).png);
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    #player {
+
+        width: 60px;
+        height: 60px;
+
+    }
+
+    .player_fall {
+        background-image: url(../../../images/player_fall\ \(75x75\).png);
+    }
+
+    .player_fly {
+        background-image: url(../../../images/player_fly\ \(75x75\).png);
+    }
+
+}
+
+@media screen and (max-width: 478px) {
+
+    #player {
+
+        width: 55px;
+        height: 55px;
+
+        border-radius: 8px;
+
+    }
+
+    .player_fall {
+        background-image: url(../../../images/player_fall\ \(55x55\).png);
+    }
+
+    .player_fly {
+        background-image: url(../../../images/player_fly\ \(55x55\).png);
+    }
+
+}

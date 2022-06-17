@@ -1,0 +1,50 @@
+
+/* obstacle counter */
+#counter_obstacles {
+
+    width: 160px;
+    height: auto;
+
+    border: none;
+    background-color: transparent;
+
+    text-align: right;
+
+    position: absolute;
+
+    z-index: 1;
+
+}
+
+/* media */
+@media screen and (max-width: 2000px) {
+
+    #counter_obstacles {
+        right: 60px;
+    }
+
+}
+
+@media screen and (max-width: 1600px) {
+
+    #counter_obstacles {
+        right: 45px;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    #counter_obstacles {
+        right: 40px;
+    }
+
+}
+
+@media screen and (max-width: 478px) {
+
+    #counter_obstacles {
+        right: 30px;
+    }
+
+}

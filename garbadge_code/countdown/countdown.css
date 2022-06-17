@@ -1,0 +1,40 @@
+
+/* countdown */
+#countdown {
+
+    width: auto;
+    height: auto;
+    display: inline-block;
+
+    border: none;
+    background-color: transparent;
+
+    text-align: right;
+
+    position: absolute;
+    right: 40px;
+
+}
+/* media */
+@media screen and (max-width: 2000px) {
+
+
+
+}
+
+@media screen and (max-width: 1600px) {
+
+
+
+}
+
+@media screen and (max-width: 1000px) {
+
+
+
+}
+
+@media screen and (max-width: 478px) {
+
+
+}

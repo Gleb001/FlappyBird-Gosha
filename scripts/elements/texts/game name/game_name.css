@@ -1,0 +1,59 @@
+
+/* game name */
+#game_name {
+
+    margin: 5px auto;
+    text-align: center;
+
+    z-index: 3;
+
+}
+
+/* game_name__wrapper */
+.game_name__wrapper {
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    position: relative;
+
+}
+
+/* media */
+@media screen and (max-width: 2000px) {
+
+    .game_name__wrapper {
+        height: 75px;
+        bottom: 10px;
+    }
+
+
+}
+
+@media screen and (max-width: 1600px) {
+
+    .game_name__wrapper {
+        height: 70px;
+        bottom: 20px;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    .game_name__wrapper {
+        height: 65px;
+        bottom: 22.5px;
+    }
+
+}
+
+@media screen and (max-width: 478px) {
+
+    .game_name__wrapper {
+        height: 60px;
+        bottom: 17.5px;
+    }
+
+}

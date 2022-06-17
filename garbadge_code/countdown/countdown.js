@@ -1,7 +1,7 @@
 
 // import //
-import { collector_animations } from '../../../abstractions/game animations/collector_animations.js';
-import { collector_pattern_html_elements } from '../../../abstractions/game patterns/collector_pattern_html_elements.js';
+import { collector_animations } from '../../scripts/abstractions/game animations/collector_animations.js';
+import { collector_pattern_html_elements } from '../../scripts/abstractions/game patterns/collector_pattern_html_elements.js';
 
 // countdown class //
 class Countdown extends collector_pattern_html_elements.GameElement {

@@ -1,0 +1,49 @@
+
+/* result_gamer */
+#result_gamer {
+
+    display: block;
+    margin: 10px auto;
+
+    border: 1px solid black;
+    border-radius: 8px;
+
+    text-align: center;
+
+    z-index: 1;
+
+}
+
+/* media */
+@media screen and (max-width: 2000px) {
+
+    #result_gamer {
+        width: 210px;
+    }
+
+}
+
+@media screen and (max-width: 1600px) {
+
+    #result_gamer {
+        width: 200px;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+
+    #result_gamer {
+        width: 190px;
+    }
+
+}
+
+@media screen and (max-width: 478px) {
+
+    #result_gamer {
+        height: 30px;
+        width: 145px;
+    }
+
+}

@@ -1,0 +1,27 @@
+/* game_over */
+#game_over {
+
+    margin: 5px auto;
+    text-align: center;
+
+    z-index: 3;
+
+}
+
+/* game_over__wrapper  */
+.game_over__wrapper {
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+}
+
+/* media */
+@media screen and (max-width: 2000px) {}
+
+@media screen and (max-width: 1600px) {}
+
+@media screen and (max-width: 1000px) {}
+
+@media screen and (max-width: 478px) {}

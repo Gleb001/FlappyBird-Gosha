@@ -59,7 +59,7 @@ class IntroductionMessage extends collector_pattern_html_elements.GameElement {
         collector_animations.transparency.start({
             execution_command: collector_animations.transparency.COLLECTOR_COMMANDS.appear.name,
             involved_elements: [introduction_message.HTML_LINK],
-            duration_animation: 1000,
+            duration_animation: 750,
             next_function: function () {
 
                 setTimeout(
@@ -81,7 +81,7 @@ class IntroductionMessage extends collector_pattern_html_elements.GameElement {
 
             execution_command: collector_animations.transparency.COLLECTOR_COMMANDS.disappear.name,
             involved_elements: [introduction_message.HTML_LINK],
-            duration_animation: 1000,
+            duration_animation: 750,
             next_function: function () {
 
                 if (introduction_message._number_current_message == introduction_message._parts_message.length - 1) {
@@ -116,16 +116,3 @@ const introduction_message = new IntroductionMessage({
 
 // export //
 export { introduction_message };
-
-
-
-// Note //
-
-// n.1
-    // private properties for the internal mechanism (class) //
-    // with default values //
-    // static _parts_message = null;
-    // static _number_current_message = null;
-    // static _duration_delay_show_messages = 250;
-    // static _duration_appear = 1000;
-    // static _duration_disappear = 1000;
