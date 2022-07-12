@@ -18,19 +18,6 @@ const algorithms = {
         components_algorithms.introduction_game.showSuggestionStartGame,
     ],
 
-    // раздели алгоритм preparation start game на три раздельные части
-    // 1) игрок только зашёл в игру
-    // 2) игрок уже играл в игру
-    // 3) соединяющая 1 и 2
-    // То есть примерно так:
-    //          |
-    //      ---------
-    //      |       |
-    //      1       2
-    //      |       |
-    //      ---------
-    //          |
-    //          3
     preparation_start_game: [
         components_algorithms.preparation_start_game.setPlayFieldStatusPrepare,
         components_algorithms.preparation_start_game.stopShowingSuggestionStartGame,
