@@ -1,135 +1,138 @@
 
 // import //
-import { collector_animations } from "../../abstractions/game animations/collector_animations.js";
-import { collector_pattern_html_elements } from "../../abstractions/game patterns/collector_pattern_html_elements.js";
+import { patterns_game_elements } from "../../abstractions/game patterns/patterns_game_elements.js";
 
-// obstacle classes //
-class Obstacle extends collector_pattern_html_elements.GameComponent {
+// pattern obstacle //
+class ConstructorObstacles extends patterns_game_elements.GameComponent {
+
+    // public object properties //
+    // with default values //
+    max_height = 65;
+    min_height = 25;
+
 
     // public methods for external interaction (object) //
 
-    // constructor
-    constructor({
-        teg_value,
-        id_name,
-        class_name,
-        attribute_value,
-        html_value,
-
-        presence_wrapper,
-        involved_element,
-        insert_command
-    }) {
-
-        super({
-            teg_value,
-            id_name,
-            class_name,
-            attribute_value,
-            html_value,
-
-            presence_wrapper,
-            involved_element,
-            insert_command
-        });
-
+    // constructor //
+    constructor({ ...group_objects_with_settings }) {
+        super(group_objects_with_settings);
     }
 
-    // moving
-    movingOnPlayer() {
+    // setter
+    setHeightParameters() {
 
-        // This code fragment needs to be corrected, that is
-        // bring in the appropriate type of animation call.
-        // The reason the code looks like this and not otherwise 
-        // is because the animation cannot be played by more than
-        // one object.
-        // The solution, perhaps, lies in the use of an asynchronous
-        // function.
+        let obstacle_top = this.HTML_LINK.querySelector('.obstacle_top');
+        let obstacle_bottom = this.HTML_LINK.querySelector('.obstacle_bottom');
+        let obstacle_top__height = (Math.random() * (this.max_height - this.min_height)) +
+            this.min_height;
 
-        let play_field = document.querySelector('#play_field');
-        let obstacle = this;
-
-        let start_value = play_field.offsetWidth + obstacle.HTML_LINK.offsetWidth;
-        let final_value = -obstacle.HTML_LINK.offsetWidth;
-        let change_distance = final_value - start_value;
-
-        this.HTML_LINK.style.left = start_value + 'px';
-
-        let start_animation = performance.now();
-
-        window.requestAnimationFrame(function animate(timestamp) {
-
-            let time_fraction = (timestamp - start_animation) / Obstacle._durationMoving;
-            if (time_fraction > 1) time_fraction = 1;
-
-
-            let replacement_value = time_fraction * change_distance;
-            let new_value = start_value + replacement_value;
-
-            obstacle.HTML_LINK.style.left = new_value + 'px';
-
-
-            if (time_fraction < 1) {
-                window.requestAnimationFrame(animate);
-            } else {
-                obstacle.delete();
-            }
-
-        });
-
-    }
-
-    // set
-    setHeightInsideObstacles() {
-
-        this.obstacle_top = this.HTML_LINK.querySelector('.obstacle_top');
-        this.obstacle_bottom = this.HTML_LINK.querySelector('.obstacle_bottom');
-
-        let obstacle_top__height = (Math.random() * (Obstacle._max_height - Obstacle._min_height)) + Obstacle._min_height;
-
-        if (obstacle_top__height - Obstacle._past_obstacle_top__height > 15) {
-            obstacle_top__height -= 7;
+        if (obstacles_administrator.past_obstacle_top__height - obstacle_top__height > 15) {
+            obstacle_top__height += 5;
+        } else if (obstacle_top__height - obstacles_administrator.past_obstacle_top__height > 15) {
+            obstacle_top__height -= 5;
         }
 
-        this.obstacle_top.style.height = obstacle_top__height + '%';
-        this.obstacle_bottom.style.height = (100 - (obstacle_top__height + Obstacle.PassHeight)) + '%';
-        Obstacle._past_obstacle_top__height = obstacle_top__height;
+        obstacle_top.style.height = obstacle_top__height + '%';
+        obstacle_bottom.style.height = (100 - (obstacle_top__height + this.pass_height)) + '%';
+
+        obstacles_administrator.past_obstacle_top__height = obstacle_top__height;
 
     }
 
+    // getter
+    get duration_moving_to_left() {
 
+        if (window.screen.availWidth > 1600) return 4000;
 
+        if (window.screen.availWidth > 1000) return 3800;
 
-    // private properties for the internal mechanism //
+        if (window.screen.availWidth > 478) return 3300;
+
+        return 3400;
+
+    }
+
+    get pass_height() {
+
+        let player = document.getElementById('player');
+
+        // переводим значение высоты pass height из px в % //
+        return (player.offsetHeight * 3.5) / (window.screen.availHeight * 0.01);
+
+    }
+
+}
+
+// constructor obstacles //
+const obstacles_administrator = {
+
+    // public object properties //
     // with default values //
-    static _max_height = 65;
-    static _min_height = 28;
-    static _pass_height = 30;
-    static _past_obstacle_top__height = 0;
+    new_obstacle: null,
+    number_obstacles: 0,
+    number_current_obstacle: 1,
 
-    static _number_new_obstacle = 1;
-    static number_current_obstacle = 1;
-    static number_passed_obstacle = 0;
+    past_obstacle_top__height: 0,
 
 
-    // private methods for the internal mechanism (class) //
+    // public methods //
 
-    // methods creating new obstacles
-    static startCreatingAndMovingObstaclesOnPlayer() {
+    // start
+    startCreatingAndMovingObstacles() {
 
-        this._number_new_obstacle = 1;
+        this.number_obstacles = 0;
+
+        let play_field = document.getElementById('play_field');
+
+        let creating_obstacles = setInterval(
+
+            function () {
+
+                obstacles_administrator._createNewObstacle();
+                obstacles_administrator._setHeightObstacle();
+                obstacles_administrator._movingObstacle();
+
+                if (play_field.classList.contains('js-play_field__game_over')) {
+                    clearInterval(creating_obstacles);
+                }
+
+            },
+            this.interval_create_obstacles
+
+        );
+
+    },
+
+    startAutoUpdatingNumberCurrentObstacle() {
+
         this.number_current_obstacle = 1;
-        this.number_passed_obstacle = 0;
 
-        obstacleMaker.start();
+        let player = document.getElementById('player');
+        let play_field = document.getElementById('play_field');
 
-    }
-    static endCreatingAndMovingObstaclesOnPlayer() {
-        obstacleMaker.end();
-    }
+        let update_number_current_obstacle = setInterval(
 
-    // delete obstacles
-    static deleteObstacles() {
+            function () {
+
+                let current_obstacle = obstacles_administrator.current_obstacle;
+                if (!current_obstacle) return;
+
+                if (player.offsetLeft > (current_obstacle.offsetLeft + current_obstacle.offsetWidth)) {
+                    obstacles_administrator.number_current_obstacle++;
+                }
+
+                if (play_field.classList.contains('js-play_field__game_over')) {
+                    clearInterval(update_number_current_obstacle);
+                }
+
+            }, 100
+
+        );
+
+    },
+
+    // delete
+    deleteObstacles() {
 
         let array_obstacles = document.querySelectorAll('.obstacle');
 
@@ -140,179 +143,123 @@ class Obstacle extends collector_pattern_html_elements.GameComponent {
 
         }
 
-    }
+    },
 
-    // set
-    static setNumberCurrentAndPassedObstacle() {
+    // getter
+    get interval_create_obstacles() {
 
-        let player = document.getElementById('player');
-        let current_obstacle = document.getElementById(`obstacle_${this.number_current_obstacle}`);
-        if (!current_obstacle) { return };
+        if (window.screen.availWidth > 1600) return 900;
 
-        if (player.offsetLeft > (current_obstacle.offsetLeft + current_obstacle.offsetWidth)) {
-            this.number_current_obstacle++;
-            this.number_passed_obstacle++;
-        }
+        if (window.screen.availWidth > 1000) return 900;
 
-    }
+        if (window.screen.availWidth > 800) return 1100;
 
-    // get
+        if (window.screen.availWidth > 478) return 1050;
 
-    // height
-    static get PassHeight() {
+        return 1250;
 
-        if (window.screen.availHeight > 1000) {
-            return 24;
-        }
+    },
 
-        if (window.screen.availHeight > 800) {
-            return 26;
-        }
+    get current_obstacle() {
 
-        if (window.screen.availHeight > 650) {
-            return 30;
-        }
-
-        return 32;
-
-    }
-
-    // -duration
-    static get _durationMoving() {
-
-        if (window.screen.availWidth > 1600) { return 3750 };
-
-        if (window.screen.availWidth > 1000) { return 3750 };
-
-        if (window.screen.availWidth > 478) { return 3300 };
-
-        return 3400;
-
-    }
-
-    // -number
-    static get NumberPassedObstacle() {
-        
-        this.setNumberCurrentAndPassedObstacle();
-        return this.number_passed_obstacle;
-
-    }
-    static get NumberCurrentObstacle() {
-
-        this.setNumberCurrentAndPassedObstacle();
-        return this.number_current_obstacle;
-
-    }
-
-    // -obstacle
-    static get CurrentObstacle() {
-
-        let current_obstacle = document.getElementById(`obstacle_${this.NumberCurrentObstacle}`);
+        let current_obstacle = document.getElementById(`obstacle_${this.number_current_obstacle
+            }`);
         return current_obstacle;
 
-    }
-
-}
-
-// controller for creating obstacles (abstract addition) object //
-const obstacleMaker = {
-
-    // public methods for external interaction //
-
-    // start create
-    start() {
-
-        this._creating_obstacle = setInterval(
-
-            function () {
-
-                obstacleMaker._createNewObstacle();
-                obstacleMaker._setHeightInsideObstacles();
-                obstacleMaker._movingObstacleOnPlayer();
-
-            },
-            this._intervalCreateObstacles
-
-        );
-
-    },
-
-    end() {
-        clearInterval(this._creating_obstacle);
     },
 
 
-
-    // private properties for the internal mechanism //
-    // with default values //
-    _new_obstacle: null,
-    _creating_obstacle: null,
-
-
-    // private methods for the internal mechanism (class) //
-
-    // get
-    get _intervalCreateObstacles() {
-
-        if (window.screen.availWidth > 1600) { return 850 };
-
-        if (window.screen.availWidth > 1000) { return 900 };
-
-        if (window.screen.availWidth > 478) { return 1200 };
-
-        return 1300;
-
-    },
+    // private methods//
 
     // create
     _createNewObstacle() {
 
-        this._new_obstacle = new Obstacle({
+        this.new_obstacle = new ConstructorObstacles({
 
-            teg_value: 'div',
-            id_name: `obstacle_${Obstacle._number_new_obstacle++}`,
-            class_name: 'obstacle',
-            html_value:
-                `
-                <div class="obstacle_top"></div>
-                <div class="obstacle_bottom"></div>
-            `,
+            HTML_SETTINGS: {
 
-            presence_wrapper: false,
-            involved_element: '#play_field',
-            insert_command: 'append'
+                ID_NAME: `obstacle_${++obstacles_administrator.number_obstacles}`,
+
+                tag_name: 'div',
+                class_name: 'obstacle',
+                start_styles: `width: ${obstacles_administrator._getWidthObstacle()}px`,
+                html_value:
+                    `
+                    <div class="obstacle_top"></div>
+                    <div class="obstacle_bottom"></div>
+                `,
+
+            },
+
+            DOM_TREE_SETTINGS: {
+
+                involved_element: '#play_field',
+                insert_command: 'append'
+
+            },
+
+            ANIMATIONS_SETTINGS: {
+
+                ANIMATIONS: {
+
+                    get moving_to_left() {
+
+                        let play_field = document.querySelector('#play_field');
+                        let obstacle = obstacles_administrator.new_obstacle;
+
+                        return obstacle.createAnimation({
+
+                            changing_properties: [
+
+                                {
+                                    name: 'left',
+                                    start_value: play_field.offsetWidth + obstacle.HTML_LINK.offsetWidth,
+                                    final_value: -(obstacle.HTML_LINK.offsetWidth + 20),
+                                    unit_of_measurement: 'px',
+                                },
+
+                            ],
+                            changing_element: obstacle.HTML_LINK,
+                            duration: obstacle.duration_moving_to_left,
+                            timing_function: obstacle.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                            next_function: function () {
+                                obstacle.deleteHTML();
+                            },
+
+                        });
+
+                    }
+
+                },
+
+            },
 
         });
 
-        this._new_obstacle.create();
+        this.new_obstacle.createHTML();
 
     },
 
-    // set
-    _setHeightInsideObstacles() {
-        this._new_obstacle.setHeightInsideObstacles();
+    // setter
+    _setHeightObstacle() {
+        this.new_obstacle.setHeightParameters();
+    },
+
+    // getter
+    _getWidthObstacle() {
+
+        let player = document.getElementById('player');
+
+        return player.offsetWidth + 30;
+
     },
 
     // moving
-    _movingObstacleOnPlayer() {
-        this._new_obstacle.movingOnPlayer();
+    _movingObstacle() {
+        this.new_obstacle.ANIMATIONS_SETTINGS.ANIMATIONS.moving_to_left.start();
     },
 
 };
 
 // export
-export { Obstacle };
-
-
-
-// Note //
-
-// n.1 -- решено
-// Сможешь сделать? :)
-// Продумай как всё же будет лучше оформить методы по работе с
-// внутренними препятствиями:
-// 1) оставить как есть - тогда методы принадлежат каждому созданному
-// obstacle-у;
-// 2) поменять владение/полномочия - данные методы принадлежат только
-// классу, создающему obstacle-ы
-// Удачи, жду решение!
+export { obstacles_administrator };

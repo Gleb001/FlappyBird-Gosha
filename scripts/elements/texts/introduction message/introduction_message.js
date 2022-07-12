@@ -1,100 +1,30 @@
 
 // import //
-import { collector_animations } from '../../../abstractions/game animations/collector_animations.js';
-import { collector_pattern_html_elements } from '../../../abstractions/game patterns/collector_pattern_html_elements.js';
+import { patterns_game_elements } from '../../../abstractions/game patterns/patterns_game_elements.js';
 
 // introduction message class //
-class IntroductionMessage extends collector_pattern_html_elements.GameElement {
+class IntroductionMessage extends patterns_game_elements.GameElement {
 
-    // public methods for external interaction (object) //
-
-    // constructor
-    constructor({
-        teg_value,
-        id_name,
-        class_name,
-        html_value,
-
-        presence_wrapper,
-        involved_element,
-        insert_command
-    }) {
-
-        super({
-            teg_value,
-            id_name,
-            class_name,
-            html_value,
-
-            presence_wrapper,
-            involved_element,
-            insert_command
-        });
-
+    // constructor //
+    constructor({ ...group_objects_with_settings }) {
+        super(group_objects_with_settings);
     }
 
-    // initialisation
-    initialisation() {
+    // public object methods //
 
-        this.create();
-        this.HTML_LINK.style.opacity = 0;
-        
-        this.endExecutionCurrentFunction();
-
-    }
-
-    // prepare
-    setIntroductionMessage({ parts_message }) {
+    // setter
+    setIntroductionMessage(...parts_message) {
         this._parts_message = parts_message;
         this._number_current_message = 0;
     }
 
-    // show
-    show() {
+    get duration_of_reading_message() {
 
-        this.setHTML_VALUE(
-            this._parts_message[this._number_current_message]
-        );
+        let message = this._parts_message[this._number_current_message];
+        let duration_read_letter = 40;
+        let number_letter_in_the_message = message.length;
 
-        collector_animations.transparency.start({
-            execution_command: collector_animations.transparency.COLLECTOR_COMMANDS.appear.name,
-            involved_elements: [introduction_message.HTML_LINK],
-            duration_animation: 750,
-            next_function: function () {
-
-                setTimeout(
-                    function() {
-                        introduction_message.hide();
-                    }, 100
-                );
-
-            },
-
-        });
-
-    }
-
-    // hide
-    hide() {
-
-        collector_animations.transparency.start({
-
-            execution_command: collector_animations.transparency.COLLECTOR_COMMANDS.disappear.name,
-            involved_elements: [introduction_message.HTML_LINK],
-            duration_animation: 750,
-            next_function: function () {
-
-                if (introduction_message._number_current_message == introduction_message._parts_message.length - 1) {
-                    introduction_message.delete();
-                    introduction_message.endExecutionCurrentFunction();
-                } else {
-                    introduction_message._number_current_message++;
-                    introduction_message.show();
-                }
-
-            }
-
-        });
+        return duration_read_letter * number_letter_in_the_message
 
     }
 
@@ -103,14 +33,98 @@ class IntroductionMessage extends collector_pattern_html_elements.GameElement {
 // introduction message object //
 const introduction_message = new IntroductionMessage({
 
-    teg_value: 'span',
-    id_name: 'introduction_message',
-    class_name: 'main_title',
-    html_value: null,
+    HTML_SETTINGS: {
 
-    presence_wrapper: false,
-    involved_element: '#play_field',
-    insert_command: 'prepend'
+        ID_NAME: 'introduction_message',
+
+        tag_name: 'span',
+        class_name: 'main_title',
+        start_styles: 'opacity: 0',
+
+    },
+
+    DOM_TREE_SETTINGS: {
+
+        involved_element: '#play_field',
+        insert_command: 'prepend'
+
+    },
+
+    ANIMATIONS_SETTINGS: {
+
+        ANIMATIONS: {
+
+            get appear() {
+
+                introduction_message.setHtmlValue(
+                    introduction_message._parts_message[introduction_message._number_current_message]
+                );
+
+                return introduction_message.createAnimation({
+
+                    changing_properties: [
+
+                        {
+                            name: 'opacity',
+                            start_value: 0,
+                            final_value: 1,
+                            unit_of_measurement: '',
+                        },
+
+                    ],
+                    changing_element: introduction_message.HTML_LINK,
+                    duration: introduction_message.duration_of_reading_message,
+                    timing_function: introduction_message.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                    next_function: function () {
+
+                        setTimeout(
+                            function () {
+                                introduction_message.ANIMATIONS_SETTINGS.ANIMATIONS.disappear.start();
+                            }, 100
+                        );
+
+                    },
+
+                });
+
+            },
+
+            get disappear() {
+
+                return introduction_message.createAnimation({
+
+                    changing_properties: [
+
+                        {
+                            name: 'opacity',
+                            start_value: 1,
+                            final_value: 0,
+                            unit_of_measurement: '',
+                        },
+
+                    ],
+                    changing_element: introduction_message.HTML_LINK,
+                    duration: introduction_message.duration_of_reading_message,
+                    timing_function: introduction_message.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                    next_function: function () {
+
+                        if (introduction_message._number_current_message == introduction_message._parts_message.length - 1) {
+                            introduction_message.deleteHTML();
+                            introduction_message.endExecutionCurrentFunction();
+                        } else {
+                            introduction_message._number_current_message++;
+                            introduction_message.ANIMATIONS_SETTINGS.ANIMATIONS.appear.start();
+                        }
+
+                    },
+
+                });
+
+            },
+
+        }
+
+    },
 
 });
 

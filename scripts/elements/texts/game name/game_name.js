@@ -1,78 +1,13 @@
 
 // import //
-import { collector_animations } from '../../../abstractions/game animations/collector_animations.js';
-import { collector_pattern_html_elements } from '../../../abstractions/game patterns/collector_pattern_html_elements.js';
+import { patterns_game_elements } from '../../../abstractions/game patterns/patterns_game_elements.js';
 
 // game name class //
-class GameName extends collector_pattern_html_elements.GameElement {
+class GameName extends patterns_game_elements.GameElement {
 
-    // public methods for external interaction (object) //
-
-    // constructor
-    constructor({
-        teg_value,
-        id_name,
-        class_name,
-        html_value,
-
-        presence_wrapper,
-        involved_element,
-        insert_command
-    }) {
-
-        super({
-            teg_value,
-            id_name,
-            class_name,
-            html_value,
-
-            presence_wrapper,
-            involved_element,
-            insert_command
-        });
-
-    }
-
-    // initialisation
-    initialisation() {
-
-        this.create();
-        this.HTML_LINK.style.opacity = 0;
-        this.endExecutionCurrentFunction();
-
-    }
-
-    // show
-    show() {
-
-        collector_animations.transparency.start({
-
-            execution_command: collector_animations.transparency.COLLECTOR_COMMANDS.appear.name,
-            involved_elements: [game_name.HTML_LINK],
-            duration_animation: 1000,
-            next_function: this.endExecutionCurrentFunction
-
-        });
-
-    }
-
-    // hide
-    hide() {
-
-        let game_name__wrapper = document.querySelector('.game_name__wrapper');
-
-        collector_animations.transparency.start({
-
-            execution_command: collector_animations.transparency.COLLECTOR_COMMANDS.disappear.name,
-            involved_elements: [game_name__wrapper],
-            duration_animation: 1000,
-            next_function: function () {
-                game_name__wrapper.remove();
-                game_name.endExecutionCurrentFunction();
-            },
-
-        });
-
+    // constructor //
+    constructor({ ...group_objects_with_settings }) {
+        super(group_objects_with_settings);
     }
 
 }
@@ -80,42 +15,87 @@ class GameName extends collector_pattern_html_elements.GameElement {
 // play field object //
 const game_name = new GameName({
 
-    teg_value: 'div',
-    id_name: 'game_name',
-    class_name: 'main_title',
-    html_value: 'Flappy Gosha',
+    HTML_SETTINGS: {
 
-    presence_wrapper: true,
-    involved_element: '#play_field',
-    insert_command: 'prepend'
+        ID_NAME: 'game_name',
+
+        tag_name: 'div',
+        class_name: 'main_title',
+        start_styles: 'opacity: 0',
+        html_value: 'Flappy Gosha',
+
+    },
+
+    DOM_TREE_SETTINGS: {
+
+        presence_wrapper: true,
+        involved_element: '#play_field',
+        insert_command: 'prepend'
+
+    },
+
+    ANIMATIONS_SETTINGS: {
+
+        ANIMATIONS: {
+
+            get appear() {
+
+                return game_name.createAnimation({
+
+                    changing_properties: [
+
+                        {
+                            name: 'opacity',
+                            start_value: 0,
+                            final_value: 1,
+                            unit_of_measurement: '',
+                        },
+
+                    ],
+                    changing_element: game_name.HTML_LINK,
+                    duration: 1000,
+                    timing_function: game_name.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                    next_function: function () {
+                        game_name.endExecutionCurrentFunction();
+                    }
+
+                });
+
+            },
+
+            get disappear() {
+
+                let game_name__wrapper = document.querySelector(`.${game_name.HTML_SETTINGS.ID_NAME}__wrapper`);
+
+                return game_name.createAnimation({
+
+                    
+                    changing_properties: [
+
+                        {
+                            name: 'opacity',
+                            start_value: 1,
+                            final_value: 0,
+                            unit_of_measurement: '',
+                        },
+
+                    ],
+                    changing_element: game_name.HTML_LINK,
+                    duration: 1000,
+                    timing_function: game_name.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                    next_function: function () {
+                        game_name__wrapper.remove();
+                    },
+
+                });
+
+            },
+
+        },
+
+    },
 
 });
 
 // export
 export { game_name };
-
-
-
-// Note //
-
-// n.1
-// // move up //
-// moveUp() {
-//     this._preparingToMoveUp();
-//     this._moveUpInPlayField();
-// },
-// // internal mechanism of the move up game name //
-// // prepare
-// _preparingToMoveUp() {
-//     this.HTML_LINK = document.getElementById('game_name');
-// },
-// // move up on the play field
-// _moveUpInPlayField() {
-//     collector_animations.movement.start({
-//         execution_command: collector_animations.movement.execution_command.move_up,
-//         duration_animation: game_name._duration_move_up,
-//         involved_element: game_name.HTML_LINK,
-//         distance_movement: 25,
-//         next_function: null
-//     });
-// },F

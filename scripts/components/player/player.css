@@ -11,7 +11,26 @@
 }
 
 /* media */
-@media screen and (max-width: 2000px) {
+@media screen and (min-height: 1080px) {
+
+    #player {
+
+        width: 85px;
+        height: 85px;
+
+    }
+
+    .player_fall {
+        background-image: url(../../../images/player_fall_75x75.png);
+    }
+
+    .player_fly {
+        background-image: url(../../../images/player_fly_75x75.png);
+    }
+
+}
+
+@media screen and (max-height: 1080px) {
 
     #player {
 
@@ -21,70 +40,68 @@
     }
 
     .player_fall {
-        background-image: url(../../../images/player_fall\ \(75x75\).png);
+        background-image: url(../../../images/player_fall_75x75.png);
     }
 
     .player_fly {
-        background-image: url(../../../images/player_fly\ \(75x75\).png);
+        background-image: url(../../../images/player_fly_75x75.png);
     }
 
 }
 
-@media screen and (max-width: 1600px) {
+@media screen and (max-height: 896px) {
 
     #player {
 
-        width: 60px;
-        height: 60px;
+        width: 65px;
+        height: 65px;
 
     }
 
     .player_fall {
-        background-image: url(../../../images/player_fall\ \(55x55\).png);
+        background-image: url(../../../images/player_fall_75x75.png);
     }
 
     .player_fly {
-        background-image: url(../../../images/player_fly\ \(55x55\).png);
+        background-image: url(../../../images/player_fly_75x75.png);
     }
 
 }
 
-@media screen and (max-width: 1000px) {
-
-    #player {
-
-        width: 60px;
-        height: 60px;
-
-    }
-
-    .player_fall {
-        background-image: url(../../../images/player_fall\ \(75x75\).png);
-    }
-
-    .player_fly {
-        background-image: url(../../../images/player_fly\ \(75x75\).png);
-    }
-
-}
-
-@media screen and (max-width: 478px) {
+@media screen and (max-height: 768px) {
 
     #player {
 
         width: 55px;
         height: 55px;
 
-        border-radius: 8px;
+    }
+
+    .player_fall {
+        background-image: url(../../../images/player_fall_55x55.png);
+    }
+
+    .player_fly {
+        background-image: url(../../../images/player_fly_55x55.png);
+    }
+
+}
+
+@media screen and (max-height: 640px) {
+
+    #player {
+
+        width: 50px;
+        height: 50px;
 
     }
 
     .player_fall {
-        background-image: url(../../../images/player_fall\ \(55x55\).png);
+        background-image: url(../../../images/player_fall_45x45.png);
     }
 
     .player_fly {
-        background-image: url(../../../images/player_fly\ \(55x55\).png);
+        background-image: url(../../../images/player_fly_45x45.png);
     }
 
 }

@@ -1,142 +1,35 @@
 
 // import //
-import { collector_animations } from '../../../abstractions/game animations/collector_animations.js';
-import { collector_pattern_html_elements } from '../../../abstractions/game patterns/collector_pattern_html_elements.js';
+import { patterns_game_elements } from '../../../abstractions/game patterns/patterns_game_elements.js';
 
-import { Obstacle } from '../../../components/obstacle/obstacle.js';
+import { obstacles_administrator } from '../../../components/obstacle/obstacle.js';
 
 // counter obstacles class //
-class counterObstacles extends collector_pattern_html_elements.GameElement {
+class counterObstacles extends patterns_game_elements.GameElement {
 
-    // public methods for external interaction (object) //
-
-    // constructor
-    constructor({
-        teg_value,
-        id_name,
-        class_name,
-        html_value,
-
-        presence_wrapper,
-        involved_element,
-        insert_command
-    }) {
-
-        super({
-            teg_value,
-            id_name,
-            class_name,
-            html_value,
-
-            presence_wrapper,
-            involved_element,
-            insert_command
-        });
-
-        this.number_current_obstacle = null;
-
-    }
-
-    // initialisation
-    initialisation() {
-
-        this.create();
-        this.HTML_LINK.setAttribute('disabled', '');
-        this.HTML_LINK.setAttribute('value', '0');
-        this.HTML_LINK.style.top = -(this.HTML_LINK.offsetTop + this.HTML_LINK.offsetHeight + 20) + 'px';
-
-        this.endExecutionCurrentFunction();
-
-    }
-
-    // show
-    show() {
-
-        collector_animations.move.start({
-
-            execution_command: collector_animations.move.COLLECTOR_COMMANDS.move_down.name,
-            involved_elements: [counter_obstacles.HTML_LINK],
-            start_position: counterObstacles.StartValue,
-            final_position: counterObstacles.FinalValue,
-            duration_animation: 450,
-            next_function: this.endExecutionCurrentFunction
-
-        });
-
+    // constructor //
+    constructor({ ...group_objects_with_settings }) {
+        super(group_objects_with_settings);
     }
 
     // start
     start() {
 
-        counterObstacles._startCheckingPassObstacle();
-        this.endExecutionCurrentFunction();
+        let play_field = document.getElementById('play_field');
 
-    }
-
-    // end
-    end() {
-        clearInterval(counterObstacles._checking_pass_obstacle);
-    }
-
-
-
-
-    // private properties for the internal mechanism (class) //
-    // with default values //
-    static _checking_pass_obstacle = null;
-
-
-    // private methods for the internal mechanism (class) //
-
-    // get
-    static get StartValue() {
-        return counter_obstacles.HTML_LINK.offsetTop +
-            counter_obstacles.HTML_LINK.offsetHeight + 20;
-    }
-    static get FinalValue() {
-
-        if (window.screen.availWidth > 1600) {
-            return 25;
-        }
-
-        if (window.screen.availWidth < 1600 && window.screen.availWidth > 1000) {
-            return 10;
-        }
-
-        if (window.screen.availWidth < 1000 && window.screen.availWidth > 478) {
-            return 8;
-        }
-
-        if (window.screen.availWidth < 478) {
-            return 5;
-        }
-
-    }
-
-    // check
-    static _startCheckingPassObstacle() {
-
-        this._checking_pass_obstacle = setInterval(
+        let end_counting = setInterval(
 
             function () {
 
-                Obstacle.setNumberCurrentAndPassedObstacle();
-                counter_obstacles.HTML_LINK.value = Obstacle.NumberPassedObstacle;
+                counter_obstacles.HTML_LINK.value = obstacles_administrator.number_current_obstacle - 1;
                 
-            }, 5
+                if (play_field.classList.contains('js-play_field__game_over')) {
+                    clearInterval(end_counting);
+                }
+
+            }, 10
 
         );
-
-    }
-
-    // update
-    static _updateValueCounterObstacles() {
-
-        counter_obstacles.HTML_LINK.value = counter_obstacles.number_current_obstacle;
-        counter_obstacles.number_current_obstacle++;
-
-        counterObstacles._startCheckingPassObstacle();
-
     }
 
 }
@@ -144,14 +37,67 @@ class counterObstacles extends collector_pattern_html_elements.GameElement {
 // counter ostacles object //
 const counter_obstacles = new counterObstacles({
 
-    teg_value: 'input',
-    id_name: 'counter_obstacles',
-    class_name: 'countdown_text',
-    html_value: null,
+    HTML_SETTINGS: {
 
-    presence_wrapper: false,
-    involved_element: '#play_field',
-    insert_command: 'prepend'
+        ID_NAME: 'counter_obstacles',
+
+        tag_name: 'input',
+        class_name: 'counter_obstacles_text',
+        start_styles: `top: -100px`,
+        attributes: [
+
+            {
+                name: 'disabled',
+                value: ''
+            },
+            {
+                name: 'value',
+                value: '0'
+            }
+
+        ]
+
+    },
+
+    DOM_TREE_SETTINGS: {
+
+        involved_element: '#play_field',
+        insert_command: 'prepend'
+
+    },
+
+    ANIMATIONS_SETTINGS: {
+
+        ANIMATIONS: {
+
+            get move_down() {
+
+                return counter_obstacles.createAnimation({
+
+                    changing_properties: [
+
+                        {
+                            name: 'top',
+                            start_value: counter_obstacles.HTML_LINK.offsetTop,
+                            final_value: 0,
+                            unit_of_measurement: 'px',
+                        }
+
+                    ],
+                    changing_element: counter_obstacles.HTML_LINK,
+                    duration: 300,
+                    timing_function: counter_obstacles.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                    next_function: function () {
+                        counter_obstacles.endExecutionCurrentFunction();
+                    }
+
+                });
+
+            },
+
+        }
+
+    },
 
 });
 

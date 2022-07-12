@@ -6,6 +6,10 @@
     height: 100%;
     overflow: hidden;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
     box-sizing: border-box;
     padding: 20px 0;
 
@@ -26,35 +30,19 @@
     height: 100vh;
     width: 100vw;
 
-    box-sizing: border-box;
-    padding: 0;
-
     opacity: 1;
 
 }
 
 
 /* js- styles play field */
-.js-play_field__introduction,
-.js-play_field__prepare,
-.js-play_field__game_over {
-
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
+.js-play_field__clickable {
+    cursor: pointer;
 }
 
 .js-play_field__process_game,
 .js-play_field__expection_process_game {
-
     background-color: white;
-    cursor: pointer;
-
-}
-
-.js-play_field__expection {
-    cursor: pointer;
 }
 
 /* game author */

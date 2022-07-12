@@ -3,43 +3,50 @@
 import { GameEngine } from './abstractions/game mechanism/game_engine.js';
 import { algorithms } from './abstractions/game mechanism/algorithms/algorithms.js';
 
+// import components //
+import { player } from './components/player/player.js';
+
 
 // events in the game //
 
-// resize window game (#) //
-window.addEventListener('resize', changePlayFieldWidth);
+// resize window game //
+window.addEventListener('resize', changeWidthPlayField);
 
-// load game (0) //
+// load game //
 window.addEventListener('load', startIntroGame);
 
-// exprecton and prepare game (1) //
-window.addEventListener('click', changeAlgirtmicConstruction);
-window.addEventListener('keydown', changeAlgirtmicConstruction);
+// actions gamer in the game //
+window.addEventListener('click', function (event) {
 
+    if (event.target.className == '') return;
+
+    eventsDependingOnStatePlayField();
+
+});
+window.addEventListener('keydown', function (event) {
+
+    if (event.code != undefined && event.code != 'Space') return;
+
+    eventsDependingOnStatePlayField();
+
+});
 
 
 // functions //
 
 // change play field width (#) //
-function changePlayFieldWidth() {
+function changeWidthPlayField() {
 
-    let play_field = document.getElementById('play_field');
-    let play_field__wrapper = play_field.parentElement;
+    let play_field__wrapper = document.querySelector('.play_field__wrapper');;
 
-    if (window.screen.availWidth > 1600) {
-        play_field__wrapper.style.width = 85 + 'vw';
-        return;
-    }
+    if (window.screen.availWidth > 1600) return play_field__wrapper.style.width = 85 + 'vw';
 
-    if (window.screen.availWidth > 1000) {
-        play_field__wrapper.style.width = 80 + 'vw';
-        return;
-    }
+    if (window.screen.availWidth > 1000) return play_field__wrapper.style.width = 80 + 'vw';
 
     play_field__wrapper.style.width = 100 + 'vw';
 
 }
-// start intro game (0) //
+// start intro game //
 function startIntroGame() {
 
     GameEngine.start(
@@ -47,14 +54,18 @@ function startIntroGame() {
     );
 
 }
-// change algoritmic construction (1) //
-function changeAlgirtmicConstruction(event) {
-
-    if (event.code != undefined && event.code != 'Space') { return };
+// events depending on the state of the game floor //
+function eventsDependingOnStatePlayField() {
 
     let play_field = document.getElementById('play_field');
+    let play_field__wrapper = document.querySelector('.play_field__wrapper');
 
-    if (play_field.classList.contains('js-play_field__expection')) {
+    if (getComputedStyle(play_field__wrapper).cursor != 'pointer') return;
+
+    // start preparation start game //
+    if (play_field.classList.contains(
+        'js-play_field__expection'
+    )) {
 
         GameEngine.start(
             algorithms.preparation_start_game
@@ -63,7 +74,10 @@ function changeAlgirtmicConstruction(event) {
 
     }
 
-    if (play_field.classList.contains('js-play_field__expection_process_game')) {
+    // start expection process game //
+    if (play_field.classList.contains(
+        'js-play_field__expection_process_game'
+    )) {
 
         GameEngine.start(
             algorithms.start_game
@@ -74,8 +88,20 @@ function changeAlgirtmicConstruction(event) {
 
     }
 
+    // player fly //
+    if (play_field.classList.contains(
+        'js-play_field__process_game'
+    )) {
+
+        if (document.querySelector('.player_fall')) {
+            player.ANIMATIONS_SETTINGS.ANIMATIONS.fly.start();
+        }
+        return;
+
+    }
+
 }
-// expextion (2) //
+// expextion end game //
 function expectionEndGame() {
 
     let play_field = document.getElementById('play_field');
@@ -85,7 +111,9 @@ function expectionEndGame() {
 
         function () {
 
-            if (play_field.classList.contains('js-play_field__game_over')) {
+            if (play_field.classList.contains(
+                'js-play_field__game_over'
+            )) {
 
                 GameEngine.start(
                     algorithms.end_game
