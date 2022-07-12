@@ -1,13 +1,14 @@
 
 // import //
 import { patterns_game_elements } from '../../../abstractions/game patterns/patterns_game_elements.js';
-
 import { obstacles_administrator } from '../../../components/obstacle/obstacle.js';
 
 // counter obstacles class //
 class counterObstacles extends patterns_game_elements.GameElement {
 
-    // constructor //
+    // public object properties //
+
+    // constructor
     constructor({ ...group_objects_with_settings }) {
         super(group_objects_with_settings);
     }

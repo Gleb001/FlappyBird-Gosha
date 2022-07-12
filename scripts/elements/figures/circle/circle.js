@@ -5,13 +5,12 @@ import { patterns_game_elements } from '../../../abstractions/game patterns/patt
 // circle class //
 class Circle extends patterns_game_elements.GameElement {
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor({ ...group_objects_with_settings }) {
         super(group_objects_with_settings);
     }
-
-
-    // public methods for external interaction (object) //
 
     // getter
     get background_color() {
@@ -34,17 +33,11 @@ class Circle extends patterns_game_elements.GameElement {
 
     get duration_scale() {
 
-        if (window.screen.availWidth > 1600) {
-            return 700;
-        }
+        if (window.screen.availWidth > 1600) return 700;
 
-        if (window.screen.availWidth > 1000) {
-            return 650;
-        }
+        if (window.screen.availWidth > 1000) return 650;
 
-        if (window.screen.availWidth > 600) {
-            return 600;
-        }
+        if (window.screen.availWidth > 600) return 600;
 
         return 800;
 
@@ -59,7 +52,6 @@ class Circle extends patterns_game_elements.GameElement {
             return play_field.offsetHeight * increasing_coefficient;
         } else {
             return play_field.offsetWidth * increasing_coefficient;
-
         }
 
     }

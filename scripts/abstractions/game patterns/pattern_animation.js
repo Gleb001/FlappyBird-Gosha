@@ -20,7 +20,7 @@ class Animation {
             start_value: 0,
             final_value: 0,
             unit_of_measurement: null,
-            function_value:  null,
+            function_value: null,
         }
 
     ];
@@ -29,7 +29,9 @@ class Animation {
     timing_function = null;
     next_function = null;
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor(group_objects_with_settings) {
 
         // replacing default settings with the specified settings
@@ -40,10 +42,6 @@ class Animation {
         }
 
     }
-
-
-
-    // public methods //
 
     // start
     start() {
@@ -73,6 +71,8 @@ class Animation {
     end() {
         window.cancelAnimationFrame(this.ID_ANIMATION);
     }
+
+
 
     // private object methods //
 
@@ -137,9 +137,9 @@ class Animation {
         let unit_of_measurement = property.unit_of_measurement;
         let function_value = property.function_value;
 
-        if(!game_element) return;
+        if (!game_element) return;
 
-        if(function_value) {
+        if (function_value) {
             game_element.style[property.name] = `${function_value}(${new_value}${unit_of_measurement})`;
         } else {
             game_element.style[property.name] = new_value + unit_of_measurement;

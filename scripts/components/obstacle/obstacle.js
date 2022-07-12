@@ -3,17 +3,16 @@
 import { patterns_game_elements } from "../../abstractions/game patterns/patterns_game_elements.js";
 
 // pattern obstacle //
-class ConstructorObstacles extends patterns_game_elements.GameComponent {
+class Obstacle extends patterns_game_elements.GameComponent {
 
     // public object properties //
     // with default values //
     max_height = 65;
     min_height = 25;
 
+    // public object methods //
 
-    // public methods for external interaction (object) //
-
-    // constructor //
+    // constructor
     constructor({ ...group_objects_with_settings }) {
         super(group_objects_with_settings);
     }
@@ -27,9 +26,9 @@ class ConstructorObstacles extends patterns_game_elements.GameComponent {
             this.min_height;
 
         if (obstacles_administrator.past_obstacle_top__height - obstacle_top__height > 15) {
-            obstacle_top__height += 5;
+            obstacle_top__height += 6.5;
         } else if (obstacle_top__height - obstacles_administrator.past_obstacle_top__height > 15) {
-            obstacle_top__height -= 5;
+            obstacle_top__height -= 6.5;
         }
 
         obstacle_top.style.height = obstacle_top__height + '%';
@@ -56,24 +55,22 @@ class ConstructorObstacles extends patterns_game_elements.GameComponent {
 
         let player = document.getElementById('player');
 
-        // переводим значение высоты pass height из px в % //
         return (player.offsetHeight * 3.5) / (window.screen.availHeight * 0.01);
 
     }
 
 }
 
-// constructor obstacles //
+// obstacles administrator //
 const obstacles_administrator = {
 
-    // public object properties //
+    // public properties //
     // with default values //
     new_obstacle: null,
     number_obstacles: 0,
     number_current_obstacle: 1,
 
     past_obstacle_top__height: 0,
-
 
     // public methods //
 
@@ -169,12 +166,13 @@ const obstacles_administrator = {
     },
 
 
-    // private methods//
+
+    // private methods //
 
     // create
     _createNewObstacle() {
 
-        this.new_obstacle = new ConstructorObstacles({
+        this.new_obstacle = new Obstacle({
 
             HTML_SETTINGS: {
 

@@ -21,7 +21,6 @@
 
 }
 
-
 /* play field wrapper */
 .play_field__wrapper {
 
@@ -30,10 +29,7 @@
     height: 100vh;
     width: 100vw;
 
-    opacity: 1;
-
 }
-
 
 /* js- styles play field */
 .js-play_field__clickable {
@@ -43,17 +39,4 @@
 .js-play_field__process_game,
 .js-play_field__expection_process_game {
     background-color: white;
-}
-
-/* game author */
-#game_author {
-
-    width: 100%;
-    text-align: center;
-
-    position: absolute;
-    bottom: 20px;
-
-    z-index: 5;
-
 }

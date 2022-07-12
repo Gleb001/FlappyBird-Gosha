@@ -48,7 +48,7 @@
     }
 
     .counter_obstacles_text {
-        font-size: 5em;
+        font-size: 5.6em;
     }
 
 }
@@ -64,12 +64,28 @@
     }
 
     .counter_obstacles_text {
-        font-size: 5em;
+        font-size: 5.55em;
     }
 
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
+
+    .main_title {
+        font-size: 2.45em;
+    }
+
+    .main_text {
+        font-size: .8em;
+    }
+
+    .counter_obstacles_text {
+        font-size: 6em;
+    }
+
+}
+
+@media screen and (max-width: 768px) {
 
     .main_title {
         font-size: 2.45em;
@@ -96,7 +112,7 @@
     }
 
     .counter_obstacles_text {
-        font-size: 4.5em;
+        font-size: 5.1em;
     }
 
 }

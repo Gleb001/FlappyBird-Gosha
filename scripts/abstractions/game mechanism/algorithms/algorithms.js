@@ -1,8 +1,8 @@
 
-// import abstractions
+// import //
 import { components_algorithms } from "./components_algorithms.js";
 
-// the main algorithmic constructions of the game
+// the main algorithmic constructions of the game //
 const algorithms = {
 
     introduction_game: [
@@ -42,7 +42,6 @@ const algorithms = {
     ],
 
     end_game: [
-        // components_algorithms.end_game.turnOffAsyncFunction,
         components_algorithms.end_game.animationLosingFall,
         components_algorithms.end_game.animationEndGame,
         components_algorithms.end_game.clearPlayField,
@@ -56,5 +55,5 @@ const algorithms = {
 
 }
 
-// export
+// export //
 export { algorithms };

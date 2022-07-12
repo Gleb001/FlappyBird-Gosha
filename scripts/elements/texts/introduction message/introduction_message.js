@@ -5,12 +5,12 @@ import { patterns_game_elements } from '../../../abstractions/game patterns/patt
 // introduction message class //
 class IntroductionMessage extends patterns_game_elements.GameElement {
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor({ ...group_objects_with_settings }) {
         super(group_objects_with_settings);
     }
-
-    // public object methods //
 
     // setter
     setIntroductionMessage(...parts_message) {
@@ -18,6 +18,7 @@ class IntroductionMessage extends patterns_game_elements.GameElement {
         this._number_current_message = 0;
     }
 
+    // getter
     get duration_of_reading_message() {
 
         let message = this._parts_message[this._number_current_message];

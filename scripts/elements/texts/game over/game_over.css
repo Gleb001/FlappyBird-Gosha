@@ -11,17 +11,13 @@
 /* game_over__wrapper  */
 .game_over__wrapper {
 
+    height: 100px;
+
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 
+    position: relative;
+    bottom: 33px;
+
 }
-
-/* media */
-@media screen and (max-width: 2000px) {}
-
-@media screen and (max-width: 1600px) {}
-
-@media screen and (max-width: 1000px) {}
-
-@media screen and (max-width: 478px) {}

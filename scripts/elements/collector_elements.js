@@ -17,13 +17,9 @@ import { suggestion_start_game } from './texts/suggestion to start game/suggesti
 // element collector //
 const collector_elements = {
 
-    // texts //
-    texts: {
-        game_name,
-        game_over,
-        result_gamer,
-        suggestion_start_game,
-        introduction_message
+    // figures //
+    figures: {
+        circle,
     },
 
     // counters //
@@ -31,9 +27,14 @@ const collector_elements = {
         counter_obstacles
     },
 
-    // figures //
-    figures: {
-        circle,
+
+    // texts //
+    texts: {
+        game_name,
+        game_over,
+        result_gamer,
+        suggestion_start_game,
+        introduction_message
     }
 
 };

@@ -5,14 +5,14 @@ import { patterns_game_elements } from '../../../abstractions/game patterns/patt
 // suggestion to start the game class //
 class SuggestionStartGame extends patterns_game_elements.GameElement {
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor({ ...group_objects_with_settings }) {
         super(group_objects_with_settings);
     }
 
-    // public object methods //
-
-    // stop show
+    // stop showing
     stopShow() {
         this.ANIMATIONS_SETTINGS.ANIMATIONS.appear.end();
         this.ANIMATIONS_SETTINGS.ANIMATIONS.disappear.end();

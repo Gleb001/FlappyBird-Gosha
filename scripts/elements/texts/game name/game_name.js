@@ -5,7 +5,9 @@ import { patterns_game_elements } from '../../../abstractions/game patterns/patt
 // game name class //
 class GameName extends patterns_game_elements.GameElement {
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor({ ...group_objects_with_settings }) {
         super(group_objects_with_settings);
     }
@@ -97,5 +99,5 @@ const game_name = new GameName({
 
 });
 
-// export
+// export //
 export { game_name };

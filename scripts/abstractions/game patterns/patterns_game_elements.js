@@ -44,7 +44,9 @@ class GameElement {
 
     };
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor(group_objects_with_settings) {
 
         // replacing default settings with the specified settings
@@ -66,10 +68,6 @@ class GameElement {
         }
 
     }
-
-
-
-    // public object methods //
 
     // create
     createHTML() {
@@ -134,6 +132,7 @@ class GameElement {
     };
 
 
+
     // public class methods //
 
     // add
@@ -167,7 +166,6 @@ class GameElement {
         }
 
     }
-
 
     // private class methods //
 
@@ -229,12 +227,12 @@ class GameElement {
 // class game component //
 class GameComponent extends GameElement {
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor(group_objects_with_settings) {
         super(group_objects_with_settings);
     }
-
-    // public object methods //
 
     // getter
     get height() {

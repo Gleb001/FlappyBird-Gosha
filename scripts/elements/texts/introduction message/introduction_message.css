@@ -3,39 +3,8 @@
 #introduction_message {
     
     text-align: center;
+
     position: relative;
-
-}
-
-/* media */
-@media screen and (max-width: 2000px) {
-
-    #introduction_message {
-        bottom: 10px;
-    }
-
-}
-
-@media screen and (max-width: 1600px) {
-
-    #introduction_message {
-        bottom: 20px;
-    }
-
-}
-
-@media screen and (max-width: 1000px) {
-
-    #introduction_message {
-        bottom: 22.5px;
-    }
-
-}
-
-@media screen and (max-width: 478px) {
-
-    #introduction_message {
-        bottom: 17.5px;
-    }
+    bottom:  35px;
 
 }

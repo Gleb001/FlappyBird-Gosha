@@ -63,29 +63,21 @@ class PlayField extends patterns_game_elements.GameComponent {
 
     };
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor({ ...group_objects_with_settings }) {
         super(group_objects_with_settings);
     }
 
-
-
-    // public object methods //
-
     // getter
     get narrowing_value() {
 
-        if (window.screen.availWidth > 1600) {
-            return 20;
-        }
+        if (window.screen.availWidth > 1600) return 20;
 
-        if (window.screen.availWidth > 1000) {
-            return 25;
-        }
+        if (window.screen.availWidth > 1000) return 25;
 
-        if (window.screen.availWidth < 1000) {
-            return 0;
-        }
+        return 0;
 
     };
 

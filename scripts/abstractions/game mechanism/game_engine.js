@@ -1,8 +1,8 @@
 
-// engine
+// engine //
 const GameEngine = {
 
-    // public methods for external interaction //
+    // public object methods //
 
     // start
     start(ordered_functions) {
@@ -19,8 +19,7 @@ const GameEngine = {
 
 
 
-    
-    // private properties for the internal mechanism //
+    // private object properties for the internal mechanism //
     // with default values //
     _endCurrentFunction: false,
     _duration_interval_check: 10,
@@ -30,7 +29,7 @@ const GameEngine = {
     _number_functions: null,
     _ordered_functions: null,
 
-    // private methods for the internal mechanism //
+    // private object methods for the internal mechanism //
     
     // prepare
     _preparingToLaunchWork(ordered_functions) {
@@ -96,5 +95,5 @@ const GameEngine = {
 
 }
 
-// export
+// export //
 export { GameEngine };

@@ -12,7 +12,7 @@
 
 }
 
-/* arrow to oright */
+/* arrow to right */
 .arrow_to_right {
 
     margin-right: 10px;
@@ -28,8 +28,8 @@
 
 }
 
-.arrow_to_right::before,
-.arrow_to_right::after {
+.arrow_to_right::after,
+.arrow_to_right::before {
 
     content: '';
     display: inline-block;
@@ -44,13 +44,6 @@
 
 }
 
-.arrow_to_right::before {
-
-    transform: rotate(45deg);
-    bottom: 2px;
-
-}
-
 .arrow_to_right::after {
 
     transform: rotate(135deg);
@@ -58,26 +51,9 @@
 
 }
 
-/* media */
-@media screen and (max-width: 2000px) {
+.arrow_to_right::before {
 
-
-
-}
-
-@media screen and (max-width: 1600px) {
-
-
-
-}
-
-@media screen and (max-width: 1000px) {
-
-
-
-}
-
-@media screen and (max-width: 478px) {
-
+    transform: rotate(45deg);
+    bottom: 2px;
 
 }

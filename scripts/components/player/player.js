@@ -21,14 +21,12 @@ class Player extends patterns_game_elements.GameComponent {
 
     };
 
-    // constructor //
+    // public object methods //
+
+    // constructor
     constructor({ ...group_objects_with_settings }) {
         super(group_objects_with_settings);
     }
-
-
-
-    // public object methods //
 
     // start
     startDemonstrationFlight() {
@@ -53,7 +51,7 @@ class Player extends patterns_game_elements.GameComponent {
 
     }
 
-    // check movement
+    // check
     checkMovement() {
 
         let waiting_lose = setInterval(
@@ -74,7 +72,7 @@ class Player extends patterns_game_elements.GameComponent {
 
     }
 
-    // getters
+    // getter
     get duration_fly() {
 
         if (window.screen.availHeight > 1070) return 230;
@@ -107,13 +105,10 @@ class Player extends patterns_game_elements.GameComponent {
 
     // private object methods //
 
-    // check 
+    // getter
     get _checkingCollisionsFloor() {
 
-        if (
-            this.HTML_LINK.offsetTop + this.HTML_LINK.offsetHeight >=
-            play_field.HTML_LINK.offsetHeight
-        ) return true;
+        if (this.top + this.height >= play_field.height) return true;
 
     }
 
@@ -126,18 +121,14 @@ class Player extends patterns_game_elements.GameComponent {
         let obstacle_bottom = current_obstacle.querySelector('.obstacle_bottom');
 
         let first_expression =
-            this.HTML_LINK.offsetLeft <=
-            (current_obstacle.offsetLeft + current_obstacle.offsetWidth)
+            this.left <= (current_obstacle.offsetLeft + current_obstacle.offsetWidth)
             &&
-            (this.HTML_LINK.offsetLeft + this.HTML_LINK.offsetWidth) >=
-            current_obstacle.offsetLeft;
+            (this.left + this.width) >= current_obstacle.offsetLeft;
 
         let second_expression =
-            this.HTML_LINK.offsetTop <=
-            (obstacle_top.clientHeight - this.HTML_LINK.offsetHeight * 0.75)
+            this.top <= (obstacle_top.clientHeight - this.height * 0.75)
             ||
-            this.HTML_LINK.offsetHeight + this.HTML_LINK.offsetTop >=
-            (obstacle_bottom.offsetTop - this.HTML_LINK.offsetHeight * 0.75);
+            this.height + this.top >= (obstacle_bottom.offsetTop - this.height * 0.75);
 
         if (first_expression && second_expression) return true;
 
@@ -181,9 +172,8 @@ const player = new Player({
 
                         {
                             name: 'left',
-                            start_value: player.HTML_LINK.offsetLeft,
-                            final_value: play_field.HTML_LINK.offsetWidth / 2 -
-                                player.HTML_LINK.offsetWidth / 2,
+                            start_value: player.left,
+                            final_value: play_field.width / 2 - player.width / 2,
                             unit_of_measurement: 'px',
                         },
 
@@ -210,8 +200,8 @@ const player = new Player({
 
                         {
                             name: 'top',
-                            start_value: player.HTML_LINK.offsetTop,
-                            final_value: player.HTML_LINK.offsetTop - player.height,
+                            start_value: player.top,
+                            final_value: player.top - player.height,
                             unit_of_measurement: 'px',
                         },
 
@@ -237,8 +227,8 @@ const player = new Player({
 
                         {
                             name: 'top',
-                            start_value: player.HTML_LINK.offsetTop,
-                            final_value: play_field.HTML_LINK.offsetHeight - player.HTML_LINK.offsetHeight,
+                            start_value: player.top,
+                            final_value: play_field.height - player.height,
                             unit_of_measurement: 'px',
                         },
 

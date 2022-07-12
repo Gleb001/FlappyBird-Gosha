@@ -29,12 +29,14 @@ const components_algorithms = {
             collector_elements.texts.suggestion_start_game.endExecutionCurrentFunction();
         },
 
-        // narrowing //
+        // animations //
+
+        // narrowing
         narrowingPlayField() {
             collector_components.play_field.ANIMATIONS_SETTINGS.ANIMATIONS.narrowing.start();
         },
 
-        // show //
+        // showing
         showIntroductionMessage() {
 
             collector_elements.texts.introduction_message.setIntroductionMessage(
@@ -56,7 +58,7 @@ const components_algorithms = {
             collector_elements.texts.suggestion_start_game.ANIMATIONS_SETTINGS.ANIMATIONS.appear.start();
         },
 
-        // set //
+        // setter //
         setPlayFieldStatusIntroduction() {
 
             collector_components.play_field.setClassName(
@@ -86,40 +88,52 @@ const components_algorithms = {
 
     preparation_start_game: {
 
-        // set //
-        setPlayFieldStatusPrepare() {
-
-            collector_components.play_field.setClassName(
-                collector_components.play_field.statuses.prepare_game.classes
-            );
-            collector_components.play_field.HTML_LINK.parentElement.style.cursor = 'auto';
-
-            collector_components.play_field.endExecutionCurrentFunction();
-
+        // create HTML //
+        createHTMLCircle() {
+            collector_elements.figures.circle.createHTML();
+            collector_elements.figures.circle.endExecutionCurrentFunction();
         },
 
-        setPlayFieldStatusExpectionProcessGame() {
-
-            collector_components.play_field.setClassName(
-                collector_components.play_field.statuses.expection_process_game.classes
-            );
-            collector_components.play_field.HTML_LINK.parentElement.style.cursor = 'pointer';
-
-            collector_components.play_field.endExecutionCurrentFunction();
-
+        createHTMLCounterObstacles() {
+            collector_elements.counters.counter_obstacles.createHTML();
+            collector_elements.counters.counter_obstacles.endExecutionCurrentFunction();
         },
 
-        // stop //
+        createHTMLPlayer() {
+            collector_components.player.createHTML();
+            collector_components.player.endExecutionCurrentFunction();
+        },
+
+        createHTMLCountdown() {
+            collector_elements.counters.countdown.createHTML();
+            collector_elements.counters.countdown.endExecutionCurrentFunction();
+        },
+
+        // animations //
+
+        // stop showing
         stopShowingSuggestionStartGame() {
             collector_elements.texts.suggestion_start_game.stopShow();
         },
 
-        // animation start game //
+        // start game
         animationStartGame() {
             collector_elements.figures.circle.ANIMATIONS_SETTINGS.ANIMATIONS.scale.start();
         },
 
-        // hide //
+        // showing
+        showCounterObstacles() {
+            collector_elements.counters.counter_obstacles.ANIMATIONS_SETTINGS.ANIMATIONS.move_down.start();
+        },
+
+        showAndStartDemonstratePlayersFlight() {
+
+            collector_components.player.ANIMATIONS_SETTINGS.ANIMATIONS.moving_to_right.start();
+            collector_components.player.startDemonstrationFlight();
+
+        },
+
+        // hidding
         hideResultGamer() {
 
             collector_elements.texts.result_gamer.deleteHTML();
@@ -147,37 +161,26 @@ const components_algorithms = {
 
         },
 
-        // createHTML //
-        createHTMLCircle() {
-            collector_elements.figures.circle.createHTML();
-            collector_elements.figures.circle.endExecutionCurrentFunction();
+        // setter //
+        setPlayFieldStatusPrepare() {
+
+            collector_components.play_field.setClassName(
+                collector_components.play_field.statuses.prepare_game.classes
+            );
+            collector_components.play_field.HTML_LINK.parentElement.style.cursor = 'auto';
+
+            collector_components.play_field.endExecutionCurrentFunction();
+
         },
 
-        createHTMLCounterObstacles() {
-            collector_elements.counters.counter_obstacles.createHTML();
-            collector_elements.counters.counter_obstacles.endExecutionCurrentFunction();
-        },
+        setPlayFieldStatusExpectionProcessGame() {
 
-        createHTMLPlayer() {
-            collector_components.player.createHTML();
-            collector_components.player.endExecutionCurrentFunction();
-        },
+            collector_components.play_field.setClassName(
+                collector_components.play_field.statuses.expection_process_game.classes
+            );
+            collector_components.play_field.HTML_LINK.parentElement.style.cursor = 'pointer';
 
-        createHTMLCountdown() {
-            collector_elements.counters.countdown.createHTML();
-            collector_elements.counters.countdown.endExecutionCurrentFunction();
-        },
-
-        // show //
-        showCounterObstacles() {
-            collector_elements.counters.counter_obstacles.ANIMATIONS_SETTINGS.ANIMATIONS.move_down.start();
-        },
-
-        // show and start demonstrate the player's flight // 
-        showAndStartDemonstratePlayersFlight() {
-
-            collector_components.player.ANIMATIONS_SETTINGS.ANIMATIONS.moving_to_right.start();
-            collector_components.player.startDemonstrationFlight();
+            collector_components.play_field.endExecutionCurrentFunction();
 
         },
 
@@ -185,7 +188,34 @@ const components_algorithms = {
 
     start_game: {
 
-        // set //
+        // animations //
+
+        // starting
+        startCreatingAndMovingObstaclessOnPlayer() {
+
+            // Importent Note !!! //
+            // Сначала запускаем автообновление счётчика препятствий
+            // и только потом создание препятствий
+
+            collector_components.obstacles_administrator.startAutoUpdatingNumberCurrentObstacle();
+            collector_components.obstacles_administrator.startCreatingAndMovingObstacles();
+
+            collector_components.player.endExecutionCurrentFunction();
+
+        },
+
+        // starting //
+        startCounterObstacles() {
+            collector_elements.counters.counter_obstacles.start();
+            collector_elements.counters.counter_obstacles.endExecutionCurrentFunction();
+        },
+
+        // checking //
+        checkMovementPlayer() {
+            collector_components.player.checkMovement();
+        },
+
+        // setter //
         setPlayFieldStatusProcessGame() {
 
             collector_components.play_field.setClassName(
@@ -206,63 +236,11 @@ const components_algorithms = {
 
         },
 
-        // start //
-        startCreatingAndMovingObstaclessOnPlayer() {
-
-            // Importent Note !!! //
-            // Сначала запускаем автообновление счётчика препятствий
-            // и только потом создание препятствий
-
-            collector_components.obstacles_administrator.startAutoUpdatingNumberCurrentObstacle();
-            collector_components.obstacles_administrator.startCreatingAndMovingObstacles();
-
-            collector_components.player.endExecutionCurrentFunction();
-
-        },
-
-        startCounterObstacles() {
-            collector_elements.counters.counter_obstacles.start();
-            collector_elements.counters.counter_obstacles.endExecutionCurrentFunction();
-        },
-
-        // check //
-        checkMovementPlayer() {
-            collector_components.player.checkMovement();
-        },
-
     },
 
     end_game: {
 
-        // animations //
-        animationLosingFall() {
-            collector_components.player.ANIMATIONS_SETTINGS.ANIMATIONS.losing_fall.start();
-        },
-
-        animationEndGame() {
-
-            collector_elements.figures.circle.createHTML();
-            collector_elements.figures.circle.ANIMATIONS_SETTINGS.ANIMATIONS.scale.start();
-
-        },
-
-        // turn off //
-        // turnOffAsyncFunction() {
-        //     collector_components.obstacles_administrator.endCreatingAndMovingObstaclesOnPlayer();
-        // },
-
-        // clear //
-        clearPlayField() {
-
-            collector_components.play_field.setHtmlValue(
-                collector_components.play_field.statuses.introduction.html
-            );
-
-            collector_components.play_field.endExecutionCurrentFunction();
-
-        },
-
-        // createHTMLs //
+        // create HTML //
         createHTMLResultGamerAndGameOver() {
 
             collector_elements.texts.game_over.createHTML();
@@ -277,7 +255,22 @@ const components_algorithms = {
             collector_elements.texts.suggestion_start_game.createHTML();
         },
 
-        // show //
+        // animations //
+
+        // losing fall
+        animationLosingFall() {
+            collector_components.player.ANIMATIONS_SETTINGS.ANIMATIONS.losing_fall.start();
+        },
+
+        // end game
+        animationEndGame() {
+
+            collector_elements.figures.circle.createHTML();
+            collector_elements.figures.circle.ANIMATIONS_SETTINGS.ANIMATIONS.scale.start();
+
+        },
+
+        // showing
         showGameOver() {
             collector_elements.texts.game_over.ANIMATIONS_SETTINGS.ANIMATIONS.appear.start();
         },
@@ -290,7 +283,18 @@ const components_algorithms = {
             collector_elements.texts.suggestion_start_game.ANIMATIONS_SETTINGS.ANIMATIONS.appear();
         },
 
-        // set //
+        // clear //
+        clearPlayField() {
+
+            collector_components.play_field.setHtmlValue(
+                collector_components.play_field.statuses.introduction.html
+            );
+
+            collector_components.play_field.endExecutionCurrentFunction();
+
+        },
+
+        // setter //
         setPlayFieldStatusExpection() {
 
             collector_components.play_field.setClassName(
