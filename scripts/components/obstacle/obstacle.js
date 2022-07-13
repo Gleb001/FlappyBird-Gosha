@@ -8,7 +8,7 @@ class Obstacle extends patterns_game_elements.GameComponent {
     // public object properties //
     // with default values //
     max_height = 65;
-    min_height = 25;
+    min_height = 28;
 
     // public object methods //
 
@@ -26,10 +26,10 @@ class Obstacle extends patterns_game_elements.GameComponent {
             this.min_height;
 
         if (obstacles_administrator.past_obstacle_top__height - obstacle_top__height > 15) {
-            obstacle_top__height += 6.5;
+            obstacle_top__height += 10;
         } else if (obstacle_top__height - obstacles_administrator.past_obstacle_top__height > 15) {
-            obstacle_top__height -= 6.5;
-        }
+            obstacle_top__height -= 10;
+        } 
 
         obstacle_top.style.height = obstacle_top__height + '%';
         obstacle_bottom.style.height = (100 - (obstacle_top__height + this.pass_height)) + '%';
@@ -39,18 +39,6 @@ class Obstacle extends patterns_game_elements.GameComponent {
     }
 
     // getter
-    get duration_moving_to_left() {
-
-        if (window.screen.availWidth > 1600) return 4000;
-
-        if (window.screen.availWidth > 1000) return 3800;
-
-        if (window.screen.availWidth > 478) return 3300;
-
-        return 3400;
-
-    }
-
     get pass_height() {
 
         let player = document.getElementById('player');
@@ -145,15 +133,28 @@ const obstacles_administrator = {
     // getter
     get interval_create_obstacles() {
 
-        if (window.screen.availWidth > 1600) return 900;
+        let player = document.getElementById('player');
+        let play_field = document.getElementById('play_field');
 
-        if (window.screen.availWidth > 1000) return 900;
+        let distance = 2 * player.offsetWidth;
+        let speed_obstacle = (play_field.offsetWidth + (2 * this._getWidthObstacle()) + 30) / this.duration_moving_obstacle;
+        let time_interval = distance + (2 * this._getWidthObstacle() + 30) / speed_obstacle;
 
-        if (window.screen.availWidth > 800) return 1100;
+        return time_interval;
 
-        if (window.screen.availWidth > 478) return 1050;
+    },
 
-        return 1250;
+    get duration_moving_obstacle() {
+
+        if (window.screen.availWidth > 1600) return 4000;
+
+        if (window.screen.availWidth > 1000) return 3800;
+
+        if (window.screen.availWidth > 768) return 3600;
+
+        if (window.screen.availWidth > 478) return 3400;
+
+        return 3400;
 
     },
 
@@ -218,7 +219,7 @@ const obstacles_administrator = {
 
                             ],
                             changing_element: obstacle.HTML_LINK,
-                            duration: obstacle.duration_moving_to_left,
+                            duration: obstacles_administrator.duration_moving_obstacle,
                             timing_function: obstacle.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
                             next_function: function () {
                                 obstacle.deleteHTML();

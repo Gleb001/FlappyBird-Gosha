@@ -77,13 +77,13 @@ class Player extends patterns_game_elements.GameComponent {
 
         if (window.screen.availHeight > 1070) return 230;
 
-        if (window.screen.availHeight > 896) return 230;
+        if (window.screen.availHeight > 896) return 240;
 
-        if (window.screen.availHeight > 768) return 230;
+        if (window.screen.availHeight > 768) return 250;
 
-        if (window.screen.availHeight > 640) return 240;
+        if (window.screen.availHeight > 640) return 250;
 
-        return 240;
+        return 255;
 
     }
 
@@ -95,9 +95,9 @@ class Player extends patterns_game_elements.GameComponent {
 
         if (window.screen.availHeight > 768) return 1450;
 
-        if (window.screen.availHeight > 640) return 1400;
+        if (window.screen.availHeight > 640) return 1450;
 
-        return 1350;
+        return 1550;
 
     }
 

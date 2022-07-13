@@ -105,7 +105,7 @@ const circle = new Circle({
                         {
                             name: 'left',
                             start_value: play_field.offsetWidth / 2,
-                            final_value: -circle.final_value_scale / 4.5,
+                            final_value: play_field.offsetWidth / 2 + (-circle.final_value_scale / 2),
                             unit_of_measurement: 'px',
                         },
 
