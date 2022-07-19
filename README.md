@@ -19,6 +19,14 @@
 
 ![Flappy Gosha system (ru) 01](https://user-images.githubusercontent.com/89206789/179702762-db058d8a-c30f-4026-9148-952c17dcd904.png)
 
+## Описание работы с данной системой
+В данном разделе будет описана работа с описанной выше системой, а именно:
+- работа с компонентами и элементами игры;
+- работа с алгоритмами и его составляющими;
+- работа с анимациями;
+- обзор абстракций игры.
+
+Так как данная система ещё не полностью испробована и, следовательно, не доделана - написание данного раздела будет отложено на будущее. Это будущее наступит сразу после создания ещё 2-х подобных проектов-игр.
 
 # FlappyGosha (en)
 Hi, my first home project is presented to you-a game called FlappyGosha. A lot of blood, sweat, tears, effort and time were shed on this project with one goal - to create the best (ideal) browser game system; the well-known FlappyBird game was taken as a test prototype. You can see how successfully I managed to implement the presented goal through the game code itself (I'm a beginner, so I'm sure I could have missed something - I would be very grateful if you could correct or tell me how it could be done much better) and the result is displayed in the browser.
@@ -40,3 +48,12 @@ The internal mechanism of the game stems from one action - reaction to the actio
 Below is a diagram of the described mechanism.
 
 ![Flappy Gosha system (en)](https://user-images.githubusercontent.com/89206789/179704756-5d0bd28d-4fa7-47b8-9512-698fdf9713c3.png)
+
+## Description of working with this system
+This section will describe working with the system described above, namely:
+- working with components and elements of the game;
+- working with algorithms and its components;
+- working with animations;
+- overview of the abstractions of the game.
+
+Since this system has not yet been fully tested and, therefore, has not been completed, the writing of this section will be postponed for the future. This future will come immediately after the creation of 2 more similar projects-games.
