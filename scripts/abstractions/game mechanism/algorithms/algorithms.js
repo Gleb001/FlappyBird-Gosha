@@ -28,7 +28,7 @@ const algorithms = {
         components_algorithms.preparation_start_game.hideGameName,
         components_algorithms.preparation_start_game.createHTMLCounterObstacles,
         components_algorithms.preparation_start_game.showCounterObstacles,
-        components_algorithms.preparation_start_game.createHTMLPlayer,Adding an introduction message
+        components_algorithms.preparation_start_game.createHTMLPlayer,
         components_algorithms.preparation_start_game.setPlayFieldStatusExpectionProcessGame,
         components_algorithms.preparation_start_game.showAndStartDemonstratePlayersFlight,
     ],
