@@ -63,10 +63,10 @@ const suggestion_make_action = new SuggestionMakeStart({
 
                 return `
                 <div class="suggestion_make_action">
-                    <img src='../../../images/suggestion make action/click_mouse.svg' class="click_mouse">
+                    <img src='../../../images/suggestion make action/click_mouse.png' class="click_mouse">
                 </div>
                 <div class="suggestion_make_action">
-                    <img src='../../../images/suggestion make action/button_space.svg' class="button_space">
+                    <img src='../../../images/suggestion make action/button_space.png' class="button_space">
                 </div>
                 `
 
@@ -74,7 +74,7 @@ const suggestion_make_action = new SuggestionMakeStart({
 
                 return `
                 <div class="suggestion_make_action">
-                    <img src='../../../images/suggestion make action/click_arm.svg' class="click_arm">
+                    <img src='../../../images/suggestion make action/click_arm.png' class="click_arm">
                 </div>
                 `
 
