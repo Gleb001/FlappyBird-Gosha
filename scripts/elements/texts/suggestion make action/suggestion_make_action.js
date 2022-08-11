@@ -56,13 +56,31 @@ const suggestion_make_action = new SuggestionMakeStart({
         ID_NAME: 'suggestion_make_action__wrapper',
 
         tag_name: 'span',
-        start_styles: `left: ${-100}px`,
-        html_value:
-            `
-            <div class='suggestion_make_action'>
-                <img src='../../../images/suggestion make action/clicker.gif'>
-            </div>
-        `
+        start_styles: `left: ${-175}px`,
+        get html_value() {
+
+            if(window.screen.availWidth > 1024) {
+
+                return `
+                <div class="suggestion_make_action">
+                    <img src='../../../images/suggestion make action/click_mouse.svg' class="click_mouse">
+                </div>
+                <div class="suggestion_make_action">
+                    <img src='../../../images/suggestion make action/button_space.svg' class="button_space">
+                </div>
+                `
+
+            } else {
+
+                return `
+                <div class="suggestion_make_action">
+                    <img src='../../../images/suggestion make action/click_arm.svg' class="click_arm">
+                </div>
+                `
+
+            }
+
+        }
 
     },
 

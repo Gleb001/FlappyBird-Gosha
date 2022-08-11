@@ -107,8 +107,7 @@ const syncGameEngine = {
 
         if (
             this.components.number_current_component >
-            this.components.number_components &&
-            !this.algorithms.launch_next_algorithm
+            this.components.number_components
         ) {
             
             this.launch_next_algorithm = true;

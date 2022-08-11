@@ -81,8 +81,9 @@ function checkPlayFieldClass() {
 
         syncGameEngine._launchWorkAlgorithm();
 
-    } else if (expection_process_game) {
+    } else if (expection_process_game && !checkPlayFieldClass.end) {
 
+        checkPlayFieldClass.wait_end_game = true;
         syncGameEngine._launchWorkAlgorithm();
         expectionEndGame();
 
@@ -109,6 +110,7 @@ function expectionEndGame() {
             if (checking_class) {
 
                 clearInterval(expection_end_game);
+                checkPlayFieldClass.wait_end_game = false;
                 syncGameEngine._launchWorkAlgorithm();
 
             }

@@ -1,0 +1,19 @@
+<svg width="36" height="42" viewBox="0 0 36 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="24.5" y1="30" x2="24.5" y2="1" stroke="black"/>
+<path d="M5.48129 1.5H23.5642V28.5H0.981293V6C0.981293 3.51472 2.99601 1.5 5.48129 1.5Z" fill="#454545" stroke="black"/>
+<line x1="23.8529" y1="30" x2="23.8529" y2="1" stroke="black"/>
+<line x1="0.5" y1="-0.5" x2="5.38174" y2="-0.5" transform="matrix(0.625599 -0.780145 0.3659 0.930654 20.6952 29.7458)" stroke="black" stroke-linecap="round"/>
+<line x1="0.5" y1="-0.5" x2="2.07326" y2="-0.5" transform="matrix(0.625599 -0.780145 0.3659 0.930654 22.9412 29.8679)" stroke="black" stroke-linecap="round"/>
+<line x1="0.5" y1="-0.5" x2="10.8959" y2="-0.5" transform="matrix(0.625599 -0.780145 0.3659 0.930654 1.07332 10.7227)" stroke="black" stroke-linecap="round"/>
+<line y1="-0.5" x2="19.3403" y2="-0.5" transform="matrix(0.635622 -0.772 0.357604 0.933873 1.0428 16.7331)" stroke="black"/>
+<line x1="0.5" y1="-0.5" x2="18.9833" y2="-0.5" transform="matrix(0.625599 -0.780145 0.3659 0.930654 1.09499 16.8676)" stroke="black" stroke-linecap="round"/>
+<line x1="0.5" y1="-0.5" x2="13.4691" y2="-0.5" transform="matrix(0.625599 -0.780145 0.3659 0.930654 15.6417 29.7583)" stroke="black" stroke-linecap="round"/>
+<line x1="0.5" y1="-0.5" x2="21.3947" y2="-0.5" transform="matrix(0.635622 -0.772 0.357604 0.933873 10.5882 29.7478)" stroke="black" stroke-linecap="round"/>
+<line x1="0.5" y1="-0.5" x2="30.0978" y2="-0.5" transform="matrix(0.625599 -0.780145 0.3659 0.930654 5.53473 29.8707)" stroke="black" stroke-linecap="round"/>
+<line x1="0.5" y1="-0.5" x2="26.7031" y2="-0.5" transform="matrix(0.625599 -0.780145 0.3659 0.930654 1.11568 23.0099)" stroke="black" stroke-linecap="round"/>
+<line x1="0.5" y1="-0.5" x2="34.4229" y2="-0.5" transform="matrix(0.625599 -0.780145 0.3659 0.930654 1.13634 28.9742)" stroke="black" stroke-linecap="round"/>
+<rect x="21.0267" y="14.5" width="6.07487" height="9" rx="3.03743" fill="#171717" stroke="black"/>
+<line x1="1" y1="29.5" x2="33" y2="29.5" stroke="black"/>
+<line x1="1" y1="28.5" x2="33" y2="28.5" stroke="black"/>
+<path d="M1 40L1 28" stroke="black"/>
+</svg>
