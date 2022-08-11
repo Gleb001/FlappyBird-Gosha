@@ -10,10 +10,10 @@
 
 /* texts */
 @import url('../scripts/elements/texts/game name/game_name.css');
-@import url('../scripts/elements/texts/game over/game_over.css');
+@import url('../scripts/elements/texts/game over text/game_over_text.css');
 @import url('../scripts/elements/texts/introduction message/introduction_message.css');
 @import url('../scripts/elements/texts/result gamer/result_gamer.css');
-@import url('../scripts/elements/texts/suggestion to start game/suggestion_start_game.css');
+@import url('../scripts/elements/texts/suggestion make action/suggestion_make_action.css');
 
 /* counters */
 @import url('../scripts/elements/counters/counter obstacles/counter_obstacles.css');

@@ -11,16 +11,17 @@
 }
 
 /* media */
-@media screen and (min-height: 1080px) {
+@media screen and (min-height: 1020px) {
 
     #player {
 
-        width: 85px;
-        height: 85px;
+        width: 90px;
+        height: 90px;
 
     }
 
-    .player_fall {
+    .player_fall,
+    .losing_fall {
         background-image: url(../../../images/player_fall_75x75.png);
     }
 
@@ -30,16 +31,17 @@
 
 }
 
-@media screen and (max-height: 1080px) {
+@media screen and (max-height: 1020px) {
 
     #player {
 
-        width: 75px;
-        height: 75px;
+        width: 90px;
+        height: 90px;
 
     }
 
-    .player_fall {
+    .player_fall,
+    .losing_fall {
         background-image: url(../../../images/player_fall_75x75.png);
     }
 
@@ -58,7 +60,8 @@
 
     }
 
-    .player_fall {
+    .player_fall,
+    .losing_fall {
         background-image: url(../../../images/player_fall_75x75.png);
     }
 
@@ -72,12 +75,13 @@
 
     #player {
 
-        width: 55px;
-        height: 55px;
+        width: 57.5px;
+        height: 57.5px;
 
     }
 
-    .player_fall {
+    .player_fall,
+    .losing_fall {
         background-image: url(../../../images/player_fall_55x55.png);
     }
 
@@ -91,12 +95,13 @@
 
     #player {
 
-        width: 50px;
-        height: 50px;
+        width: 55px;
+        height: 55px;
 
     }
 
-    .player_fall {
+    .player_fall,
+    .losing_fall {
         background-image: url(../../../images/player_fall_45x45.png);
     }
 

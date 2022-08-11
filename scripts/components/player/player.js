@@ -1,5 +1,6 @@
 
 // import //
+import { syncGameEngine } from "../../abstractions/game mechanism/engines/sync_game_engine.js";
 import { patterns_game_elements } from "../../abstractions/game patterns/patterns_game_elements.js";
 
 import { obstacles_administrator } from "../obstacle/obstacle.js";
@@ -12,11 +13,15 @@ class Player extends patterns_game_elements.GameComponent {
     statuses = {
 
         fly: {
-            class: ['player_fly'],
+            class: 'player_fly',
         },
 
         fall: {
-            class: ['player_fall'],
+            class: 'player_fall',
+        },
+
+        losing_fall: {
+            class: 'losing_fall',
         }
 
     };
@@ -35,17 +40,26 @@ class Player extends patterns_game_elements.GameComponent {
 
             function () {
 
-                let center_of_the_play_field = window.screen.availHeight / 2 - 70;
+                let presence_class_game_over = play_field.HTML_LINK.classList.contains(
+                    play_field.statuses.process_game.class
+                );
 
-                if (player.HTML_LINK.offsetTop >= center_of_the_play_field) {
+                if (
+                    presence_class_game_over ||
+                    !player.HTML_LINK
+                ) {
+                    clearInterval(demonstration_flight);
+                    return;
+                }
+
+                let center_of_the_play_field = window.screen.availHeight / 2 - 70;
+                let player_below_center_play_field = player.top >= center_of_the_play_field;
+
+                if (player_below_center_play_field) {
                     player.ANIMATIONS_SETTINGS.ANIMATIONS.fly.start();
                 }
 
-                if (play_field.HTML_LINK.classList.contains('js-play_field__process_game')) {
-                    clearInterval(demonstration_flight);
-                }
-
-            }, 100
+            }, this.duration_fly + 75
 
         );
 
@@ -59,14 +73,19 @@ class Player extends patterns_game_elements.GameComponent {
             function () {
 
                 if (
+                    !player.HTML_LINK ||
                     player._checkingCollisionsFloor ||
                     player._checkingCollisionsObstacle
                 ) {
+
                     clearInterval(waiting_lose);
-                    player.endExecutionCurrentFunction();
+                    play_field.setClassName(
+                        play_field.statuses.game_over.class
+                    );
+
                 }
 
-            }, 10
+            }, 20
 
         );
 
@@ -102,14 +121,11 @@ class Player extends patterns_game_elements.GameComponent {
     }
 
 
-
     // private object methods //
 
     // getter
     get _checkingCollisionsFloor() {
-
         if (this.top + this.height >= play_field.height) return true;
-
     }
 
     get _checkingCollisionsObstacle() {
@@ -126,9 +142,9 @@ class Player extends patterns_game_elements.GameComponent {
             (this.left + this.width) >= current_obstacle.offsetLeft;
 
         let second_expression =
-            this.top <= (obstacle_top.clientHeight - this.height * 0.75)
+            this.top <= (obstacle_top.clientHeight - this.height * 0.6)
             ||
-            this.height + this.top >= (obstacle_bottom.offsetTop - this.height * 0.75);
+            this.height + this.top >= (obstacle_bottom.offsetTop - this.height * 0.6);
 
         if (first_expression && second_expression) return true;
 
@@ -147,8 +163,7 @@ const player = new Player({
         start_styles:
             `
             left: -150px; 
-            top: ${window.screen.availHeight / 2 - 70
-            }px
+            top: ${window.screen.availHeight / 2 - 70}px
          `,
 
     },
@@ -178,10 +193,13 @@ const player = new Player({
                         },
 
                     ],
+                    timing_function: {
+                        name: player.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: player.HTML_LINK,
                     duration: 2000,
-                    timing_function: player.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
-                    next_function: null
+                    synchronous: true
 
                 });
 
@@ -189,7 +207,7 @@ const player = new Player({
 
             get fly() {
 
-                if (player.HTML_LINK.classList.contains(player.statuses.fly.class)) return;
+                if (!player.HTML_LINK.classList.contains(player.statuses.fall.class)) return;
 
                 player.ANIMATIONS_SETTINGS.ANIMATIONS.fall.end();
                 player.setClassName(player.statuses.fly.class);
@@ -206,9 +224,12 @@ const player = new Player({
                         },
 
                     ],
+                    timing_function: {
+                        name: player.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: player.HTML_LINK,
                     duration: player.duration_fly,
-                    timing_function: player.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
                     next_function: function () {
                         player.ANIMATIONS_SETTINGS.ANIMATIONS.fall.start();
                     }
@@ -233,10 +254,12 @@ const player = new Player({
                         },
 
                     ],
+                    timing_function: {
+                        name: player.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: player.HTML_LINK,
-                    duration: player.duration_fall,
-                    timing_function: player.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
-                    next_function: null
+                    duration: player.duration_fall
 
                 });
 
@@ -257,12 +280,13 @@ const player = new Player({
                         },
 
                     ],
+                    timing_function: {
+                        name: player.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: player.HTML_LINK,
                     duration: 450,
-                    timing_function: player.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
-                    next_function: function () {
-                        player.endExecutionCurrentFunction();
-                    }
+                    synchronous: true,
 
                 });
 

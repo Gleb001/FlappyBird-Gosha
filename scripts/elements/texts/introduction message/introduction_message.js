@@ -31,6 +31,7 @@ class IntroductionMessage extends patterns_game_elements.GameElement {
 
 };
 
+
 // introduction message object //
 const introduction_message = new IntroductionMessage({
 
@@ -73,17 +74,15 @@ const introduction_message = new IntroductionMessage({
                         },
 
                     ],
+                    timing_function: {
+                        name: introduction_message.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: introduction_message.HTML_LINK,
                     duration: introduction_message.duration_of_reading_message,
-                    timing_function: introduction_message.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                    synchronous: true,
                     next_function: function () {
-
-                        setTimeout(
-                            function () {
-                                introduction_message.ANIMATIONS_SETTINGS.ANIMATIONS.disappear.start();
-                            }, 100
-                        );
-
+                        introduction_message.ANIMATIONS_SETTINGS.ANIMATIONS.disappear.start();
                     },
 
                 });
@@ -104,14 +103,17 @@ const introduction_message = new IntroductionMessage({
                         },
 
                     ],
+                    timing_function: {
+                        name: introduction_message.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: introduction_message.HTML_LINK,
                     duration: introduction_message.duration_of_reading_message,
-                    timing_function: introduction_message.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                    synchronous: true,
                     next_function: function () {
 
                         if (introduction_message._number_current_message == introduction_message._parts_message.length - 1) {
                             introduction_message.deleteHTML();
-                            introduction_message.endExecutionCurrentFunction();
                         } else {
                             introduction_message._number_current_message++;
                             introduction_message.ANIMATIONS_SETTINGS.ANIMATIONS.appear.start();

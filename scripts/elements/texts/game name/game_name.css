@@ -12,13 +12,11 @@
 /* game_name__wrapper */
 .game_name__wrapper {
 
-    height: 75px;
-
     display: flex;
     justify-content: space-between;
     flex-direction: column;
 
     position: relative;
-    bottom: 33px;
+    bottom: 15px;
 
 }

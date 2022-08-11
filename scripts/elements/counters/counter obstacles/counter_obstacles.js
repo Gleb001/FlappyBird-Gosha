@@ -23,7 +23,7 @@ class counterObstacles extends patterns_game_elements.GameElement {
             function () {
 
                 counter_obstacles.HTML_LINK.value = obstacles_administrator.number_current_obstacle - 1;
-                
+
                 if (play_field.classList.contains('js-play_field__game_over')) {
                     clearInterval(end_counting);
                 }
@@ -80,17 +80,18 @@ const counter_obstacles = new counterObstacles({
                         {
                             name: 'top',
                             start_value: counter_obstacles.HTML_LINK.offsetTop,
-                            final_value: 0,
+                            final_value: -5,
                             unit_of_measurement: 'px',
                         }
 
                     ],
+                    timing_function: {
+                        name: counter_obstacles.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: counter_obstacles.HTML_LINK,
                     duration: 300,
-                    timing_function: counter_obstacles.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
-                    next_function: function () {
-                        counter_obstacles.endExecutionCurrentFunction();
-                    }
+                    synchronous: true,
 
                 });
 

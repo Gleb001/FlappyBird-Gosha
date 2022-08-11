@@ -39,6 +39,7 @@
 }
 
 .js-play_field__process_game,
+.js-play_field__prepare_game,
 .js-play_field__expection_process_game {
     background-color: white;
 }

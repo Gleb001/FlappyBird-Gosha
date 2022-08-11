@@ -20,7 +20,7 @@
 
     color: rgb(230, 230, 230);
     font-family: 'Segoe UI', sans-serif;
-    font-weight: 600;
+    font-weight: 400;
 
 }
 
@@ -48,7 +48,7 @@
     }
 
     .counter_obstacles_text {
-        font-size: 5.6em;
+        font-size: 5.5em;
     }
 
 }
@@ -56,7 +56,7 @@
 @media screen and (max-width: 1600px) {
 
     .main_title {
-        font-size: 2.5em;
+        font-size: 2.7em;
     }
 
     .main_text {
@@ -64,7 +64,7 @@
     }
 
     .counter_obstacles_text {
-        font-size: 5.55em;
+        font-size: 5.25em;
     }
 
 }
@@ -72,7 +72,7 @@
 @media screen and (max-width: 1200px) {
 
     .main_title {
-        font-size: 2.45em;
+        font-size: 2.55em;
     }
 
     .main_text {
@@ -80,7 +80,7 @@
     }
 
     .counter_obstacles_text {
-        font-size: 6em;
+        font-size: 5em;
     }
 
 }
@@ -88,7 +88,7 @@
 @media screen and (max-width: 768px) {
 
     .main_title {
-        font-size: 2.45em;
+        font-size: 2.4em;
     }
 
     .main_text {
@@ -112,7 +112,7 @@
     }
 
     .counter_obstacles_text {
-        font-size: 5.1em;
+        font-size: 4.8em;
     }
 
 }

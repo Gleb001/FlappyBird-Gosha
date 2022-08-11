@@ -14,6 +14,7 @@ class GameName extends patterns_game_elements.GameElement {
 
 }
 
+
 // play field object //
 const game_name = new GameName({
 
@@ -54,12 +55,13 @@ const game_name = new GameName({
                         },
 
                     ],
+                    timing_function: {
+                        name: game_name.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: game_name.HTML_LINK,
                     duration: 1000,
-                    timing_function: game_name.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
-                    next_function: function () {
-                        game_name.endExecutionCurrentFunction();
-                    }
+                    synchronous: true,
 
                 });
 
@@ -71,7 +73,6 @@ const game_name = new GameName({
 
                 return game_name.createAnimation({
 
-                    
                     changing_properties: [
 
                         {
@@ -82,11 +83,18 @@ const game_name = new GameName({
                         },
 
                     ],
+                    timing_function: {
+                        name: game_name.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
                     changing_element: game_name.HTML_LINK,
                     duration: 1000,
-                    timing_function: game_name.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
                     next_function: function () {
-                        game_name__wrapper.remove();
+
+                        if(game_name__wrapper) {
+                            game_name__wrapper.remove();
+                        }
+                        
                     },
 
                 });

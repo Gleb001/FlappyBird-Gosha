@@ -18,16 +18,12 @@ class Circle extends patterns_game_elements.GameElement {
         let play_field = document.getElementById('play_field');
 
         if (play_field.classList.contains(
-            'js-play_field__expection_process_game'
-        )) {
-            return 'white';
-        }
+            'js-play_field__prepare_game'
+        )) return 'white';
 
         if (play_field.classList.contains(
             'js-play_field__game_over'
-        )) {
-            return '#78C4D1';
-        }
+        )) return '#78C4D1';
 
     }
 
@@ -111,21 +107,23 @@ const circle = new Circle({
 
 
                     ],
+                    timing_function: {
+                        name: circle.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.ease_in,
+                        coefficient: 1
+                    },
                     changing_element: circle.HTML_LINK,
                     duration: circle.duration_scale,
-                    timing_function: circle.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.ease_in,
+                    synchronous: true,
                     next_function: function () {
 
                         play_field.style.backgroundColor = circle.background_color;
-
                         setTimeout(
-                            function () {
-                                circle.deleteHTML();
-                            },
-                            100
-                        );
 
-                        circle.endExecutionCurrentFunction();
+                            function() {
+                                circle.deleteHTML();
+                            }, 100
+
+                        );
 
                     },
 

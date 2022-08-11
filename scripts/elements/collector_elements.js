@@ -9,10 +9,10 @@ import { counter_obstacles } from './counters/counter obstacles/counter_obstacle
 
 // texts
 import { game_name } from './texts/game name/game_name.js';
-import { game_over } from './texts/game over/game_over.js';
+import { game_over_text } from './texts/game over text/game_over_text.js';
 import { result_gamer } from './texts/result gamer/result_gamer.js';
 import { introduction_message } from './texts/introduction message/introduction_message.js';
-import { suggestion_start_game } from './texts/suggestion to start game/suggestion_start_game.js';
+import { suggestion_make_action } from './texts/suggestion make action/suggestion_make_action.js';
 
 // element collector //
 const collector_elements = {
@@ -31,9 +31,9 @@ const collector_elements = {
     // texts //
     texts: {
         game_name,
-        game_over,
+        game_over_text,
         result_gamer,
-        suggestion_start_game,
+        suggestion_make_action,
         introduction_message
     }
 

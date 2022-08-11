@@ -19,7 +19,7 @@
 @media screen and (max-width: 2000px) {
 
     #counter_obstacles {
-        right: 60px;
+        right: 50px;
     }
 
 }
@@ -27,7 +27,7 @@
 @media screen and (max-width: 1600px) {
 
     #counter_obstacles {
-        right: 45px;
+        right: 35px;
     }
 
 }
@@ -35,7 +35,7 @@
 @media screen and (max-width: 1000px) {
 
     #counter_obstacles {
-        right: 40px;
+        right: 30px;
     }
 
 }
@@ -43,7 +43,7 @@
 @media screen and (max-width: 478px) {
 
     #counter_obstacles {
-        right: 30px;
+        right: 20px;
     }
 
 }

@@ -1,6 +1,6 @@
 
 // import //
-import { GameEngine } from "../game mechanism/game_engine.js";
+import { syncGameEngine } from "../game mechanism/engines/sync_game_engine.js";
 import { Animation } from "./pattern_animation.js";
 
 // class game element //
@@ -94,11 +94,6 @@ class GameElement {
 
     }
 
-    // end
-    endExecutionCurrentFunction() {
-        GameEngine.endCurrentFunction();
-    }
-
     // setter
     setHtmlValue(new_value) {
 
@@ -107,21 +102,9 @@ class GameElement {
 
     }
 
-    setClassName(new_values) {
+    setClassName(new_value) {
 
-        this.HTML_LINK.className = '';
-
-        for (
-            let index = 0;
-            index <= new_values.length - 1;
-            index++
-        ) {
-
-            let value = new_values[index];
-            this.HTML_LINK.classList.add(value);
-
-        }
-
+        this.HTML_LINK.className = new_value;
         this.HTML_SETTINGS.class_name = this.HTML_LINK.className;
 
     }
@@ -130,6 +113,15 @@ class GameElement {
     get HTML_LINK() {
         return document.getElementById(this.HTML_SETTINGS.ID_NAME);
     };
+
+    // work sync game engine
+    stopWorkSyncGameEngine() {
+        syncGameEngine.stop(true);
+    }
+
+    continueWorkSyncGameEngine() {
+        syncGameEngine.stop(false);
+    }
 
 
 

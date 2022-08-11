@@ -1,6 +1,8 @@
 
 // import //
 import { patterns_game_elements } from "../../abstractions/game patterns/patterns_game_elements.js";
+import { player } from "../player/player.js";
+import { play_field } from "../play field/play_field.js";
 
 // pattern obstacle //
 class Obstacle extends patterns_game_elements.GameComponent {
@@ -26,10 +28,10 @@ class Obstacle extends patterns_game_elements.GameComponent {
             this.min_height;
 
         if (obstacles_administrator.past_obstacle_top__height - obstacle_top__height > 15) {
-            obstacle_top__height += 10;
+            obstacle_top__height += 7;
         } else if (obstacle_top__height - obstacles_administrator.past_obstacle_top__height > 15) {
-            obstacle_top__height -= 10;
-        } 
+            obstacle_top__height -= 7;
+        }
 
         obstacle_top.style.height = obstacle_top__height + '%';
         obstacle_bottom.style.height = (100 - (obstacle_top__height + this.pass_height)) + '%';
@@ -40,11 +42,20 @@ class Obstacle extends patterns_game_elements.GameComponent {
 
     // getter
     get pass_height() {
+        return (player.height * 3.5) / (window.screen.availHeight * 0.01);
+    }
 
-        let player = document.getElementById('player');
 
-        return (player.offsetHeight * 3.5) / (window.screen.availHeight * 0.01);
 
+    // private object methods //
+
+    // getter
+    static get obstacle_width() {
+        return player.width + 30;
+    }
+
+    static get obstacle_left() {
+        return play_field.width + this.obstacle_width;
     }
 
 }
@@ -54,7 +65,6 @@ const obstacles_administrator = {
 
     // public properties //
     // with default values //
-    new_obstacle: null,
     number_obstacles: 0,
     number_current_obstacle: 1,
 
@@ -67,18 +77,27 @@ const obstacles_administrator = {
 
         this.number_obstacles = 0;
 
-        let play_field = document.getElementById('play_field');
-
         let creating_obstacles = setInterval(
 
             function () {
 
-                obstacles_administrator._createNewObstacle();
-                obstacles_administrator._setHeightObstacle();
-                obstacles_administrator._movingObstacle();
+                let presence_player = player.HTML_LINK;
+                let presence_class_game_over = play_field.HTML_LINK.classList.contains(
+                    play_field.statuses.game_over.class
+                );
 
-                if (play_field.classList.contains('js-play_field__game_over')) {
+                if (presence_class_game_over || !presence_player) {
+
                     clearInterval(creating_obstacles);
+
+                } else {
+
+                    let new_obstacle = obstacles_administrator._createNewObstacle();
+
+                    new_obstacle.createHTML();
+                    new_obstacle.setHeightParameters();
+                    new_obstacle.ANIMATIONS_SETTINGS.ANIMATIONS.moving_to_left.start();
+
                 }
 
             },
@@ -92,9 +111,6 @@ const obstacles_administrator = {
 
         this.number_current_obstacle = 1;
 
-        let player = document.getElementById('player');
-        let play_field = document.getElementById('play_field');
-
         let update_number_current_obstacle = setInterval(
 
             function () {
@@ -102,11 +118,11 @@ const obstacles_administrator = {
                 let current_obstacle = obstacles_administrator.current_obstacle;
                 if (!current_obstacle) return;
 
-                if (player.offsetLeft > (current_obstacle.offsetLeft + current_obstacle.offsetWidth)) {
+                if (player.left > (current_obstacle.offsetLeft + current_obstacle.offsetWidth)) {
                     obstacles_administrator.number_current_obstacle++;
                 }
 
-                if (play_field.classList.contains('js-play_field__game_over')) {
+                if (play_field.HTML_LINK.classList.contains('js-play_field__game_over')) {
                     clearInterval(update_number_current_obstacle);
                 }
 
@@ -133,12 +149,9 @@ const obstacles_administrator = {
     // getter
     get interval_create_obstacles() {
 
-        let player = document.getElementById('player');
-        let play_field = document.getElementById('play_field');
-
-        let distance = 2 * player.offsetWidth;
-        let speed_obstacle = (play_field.offsetWidth + (2 * this._getWidthObstacle()) + 30) / this.duration_moving_obstacle;
-        let time_interval = distance + (2 * this._getWidthObstacle() + 30) / speed_obstacle;
+        let distance = 4 * player.width;
+        let speed_obstacle = (play_field.width + (2 * Obstacle.obstacle_width) + 30) / this.duration_moving_obstacle;
+        let time_interval = distance + (2 * Obstacle.obstacle_width + 30) / speed_obstacle;
 
         return time_interval;
 
@@ -146,15 +159,15 @@ const obstacles_administrator = {
 
     get duration_moving_obstacle() {
 
-        if (window.screen.availWidth > 1600) return 4000;
+        if (window.screen.availWidth > 1600) return 4300;
 
-        if (window.screen.availWidth > 1000) return 3800;
+        if (window.screen.availWidth > 1000) return 4100;
 
-        if (window.screen.availWidth > 768) return 3600;
+        if (window.screen.availWidth > 768) return 3900;
 
-        if (window.screen.availWidth > 478) return 3400;
+        if (window.screen.availWidth > 478) return 3900;
 
-        return 3400;
+        return 3700;
 
     },
 
@@ -173,7 +186,7 @@ const obstacles_administrator = {
     // create
     _createNewObstacle() {
 
-        this.new_obstacle = new Obstacle({
+        let new_obstacle = new Obstacle({
 
             HTML_SETTINGS: {
 
@@ -181,7 +194,11 @@ const obstacles_administrator = {
 
                 tag_name: 'div',
                 class_name: 'obstacle',
-                start_styles: `width: ${obstacles_administrator._getWidthObstacle()}px`,
+                start_styles:
+                    `
+                    width: ${Obstacle.obstacle_width}px;
+                    left: ${Obstacle.obstacle_left}px;
+                `,
                 html_value:
                     `
                     <div class="obstacle_top"></div>
@@ -203,26 +220,26 @@ const obstacles_administrator = {
 
                     get moving_to_left() {
 
-                        let play_field = document.querySelector('#play_field');
-                        let obstacle = obstacles_administrator.new_obstacle;
-
-                        return obstacle.createAnimation({
+                        return new_obstacle.createAnimation({
 
                             changing_properties: [
 
                                 {
                                     name: 'left',
-                                    start_value: play_field.offsetWidth + obstacle.HTML_LINK.offsetWidth,
-                                    final_value: -(obstacle.HTML_LINK.offsetWidth + 20),
+                                    start_value: Obstacle.obstacle_left,
+                                    final_value: -(Obstacle.obstacle_width + 20),
                                     unit_of_measurement: 'px',
                                 },
 
                             ],
-                            changing_element: obstacle.HTML_LINK,
+                            timing_function: {
+                                name: new_obstacle.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                                coefficient: 1
+                            },
+                            changing_element: new_obstacle.HTML_LINK,
                             duration: obstacles_administrator.duration_moving_obstacle,
-                            timing_function: obstacle.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
                             next_function: function () {
-                                obstacle.deleteHTML();
+                                new_obstacle.deleteHTML();
                             },
 
                         });
@@ -235,27 +252,8 @@ const obstacles_administrator = {
 
         });
 
-        this.new_obstacle.createHTML();
+        return new_obstacle;
 
-    },
-
-    // setter
-    _setHeightObstacle() {
-        this.new_obstacle.setHeightParameters();
-    },
-
-    // getter
-    _getWidthObstacle() {
-
-        let player = document.getElementById('player');
-
-        return player.offsetWidth + 30;
-
-    },
-
-    // moving
-    _movingObstacle() {
-        this.new_obstacle.ANIMATIONS_SETTINGS.ANIMATIONS.moving_to_left.start();
     },
 
 };

@@ -1,130 +1,119 @@
 
-// import abstractions //
-import { GameEngine } from './abstractions/game mechanism/game_engine.js';
+// import //
+
+// abstractions
+import { syncGameEngine } from './abstractions/game mechanism/engines/sync_game_engine.js';
+import { asyncGameEngine } from './abstractions/game mechanism/engines/async_game_engine.js';
 import { algorithms } from './abstractions/game mechanism/algorithms/algorithms.js';
 
-// import components //
+// components
 import { player } from './components/player/player.js';
+import { play_field } from './components/play field/play_field.js';
 
 
 // events in the game //
 
-// resize window game //
-window.addEventListener('resize', changeWidthPlayField);
+// resize
+window.addEventListener('resize', function changeWidthPlayField() {
 
-// load game //
-window.addEventListener('load', startIntroGame);
+    let play_field__wrapper = document.querySelector('.play_field__wrapper');;
 
-// actions gamer in the game //
+    if (window.screen.availWidth > 1600) {
+        return play_field__wrapper.style.width = 85 + 'vw';
+    }
+
+    if (window.screen.availWidth > 1000) {
+        return play_field__wrapper.style.width = 80 + 'vw';
+    }
+
+    play_field__wrapper.style.width = 100 + 'vw';
+
+});
+
+// load
+window.addEventListener('load', function startGameEngines() {
+
+    syncGameEngine.start(
+        algorithms.syncronous
+    );
+
+    asyncGameEngine.start(
+        algorithms.asyncronous
+    );
+
+});
+
+// gamer's actions in the game
 window.addEventListener('click', function (event) {
 
     if (event.target.className == '') return;
 
-    eventsDependingOnStatePlayField();
+    checkPlayFieldClass();
 
 });
 window.addEventListener('keydown', function (event) {
 
     if (event.code != undefined && event.code != 'Space') return;
 
-    eventsDependingOnStatePlayField();
+    checkPlayFieldClass();
 
 });
 
+function checkPlayFieldClass() {
 
-// functions //
+    let presence_pointer = getComputedStyle(
+        play_field.HTML_LINK.parentElement
+    ).cursor == 'pointer';
 
-// change play field width (#) //
-function changeWidthPlayField() {
+    if (!presence_pointer) return;
 
-    let play_field__wrapper = document.querySelector('.play_field__wrapper');;
-
-    if (window.screen.availWidth > 1600) return play_field__wrapper.style.width = 85 + 'vw';
-
-    if (window.screen.availWidth > 1000) return play_field__wrapper.style.width = 80 + 'vw';
-
-    play_field__wrapper.style.width = 100 + 'vw';
-
-}
-// start intro game //
-function startIntroGame() {
-
-    GameEngine.start(
-        algorithms.introduction_game
+    let expection_prepare_game = play_field.HTML_LINK.classList.contains(
+        play_field.statuses.expection_prepare_game.class
     );
+    let expection_process_game = play_field.HTML_LINK.classList.contains(
+        play_field.statuses.expection_process_game.class
+    )
+    let process_game = play_field.HTML_LINK.classList.contains(
+        play_field.statuses.process_game.class
+    )
 
-}
-// events depending on the state of the game floor //
-function eventsDependingOnStatePlayField() {
+    if (expection_prepare_game) {
 
-    let play_field = document.getElementById('play_field');
-    let play_field__wrapper = document.querySelector('.play_field__wrapper');
+        syncGameEngine._launchWorkAlgorithm();
 
-    if (getComputedStyle(play_field__wrapper).cursor != 'pointer') return;
+    } else if (expection_process_game) {
 
-    // start preparation start game //
-    if (play_field.classList.contains(
-        'js-play_field__expection'
-    )) {
-
-        GameEngine.start(
-            algorithms.preparation_start_game
-        );
-        return;
-
-    }
-
-    // start expection process game //
-    if (play_field.classList.contains(
-        'js-play_field__expection_process_game'
-    )) {
-
-        GameEngine.start(
-            algorithms.start_game
-        );
-
+        syncGameEngine._launchWorkAlgorithm();
         expectionEndGame();
-        return;
 
-    }
-
-    // player fly //
-    if (play_field.classList.contains(
-        'js-play_field__process_game'
-    )) {
+    } else if (process_game) {
 
         if (document.querySelector('.player_fall')) {
             player.ANIMATIONS_SETTINGS.ANIMATIONS.fly.start();
         }
-        return;
 
     }
 
 }
-// expextion end game //
-function expectionEndGame() {
 
-    let play_field = document.getElementById('play_field');
-    let interval_expection = 15;
+function expectionEndGame() {
 
     let expection_end_game = setInterval(
 
         function () {
 
-            if (play_field.classList.contains(
-                'js-play_field__game_over'
-            )) {
+            let checking_class = play_field.HTML_LINK.classList.contains(
+                play_field.statuses.game_over.class
+            );
 
-                GameEngine.start(
-                    algorithms.end_game
-                );
+            if (checking_class) {
 
                 clearInterval(expection_end_game);
+                syncGameEngine._launchWorkAlgorithm();
 
             }
 
-        },
-        interval_expection
+        }, 25
 
     );
 

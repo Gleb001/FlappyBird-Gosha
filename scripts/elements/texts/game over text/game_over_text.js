@@ -14,17 +14,18 @@ class GameOver extends patterns_game_elements.GameElement {
 
 }
 
+
 // play field object //
-const game_over = new GameOver({
+const game_over_text = new GameOver({
 
     HTML_SETTINGS: {
 
-        ID_NAME: 'game_over',
+        ID_NAME: 'game_over_text',
 
         tag_name: 'div',
         class_name: 'main_title',
         start_styles: 'opacity: 0',
-        html_value: 'Game over',
+        html_value: 'your score',
 
     },
 
@@ -42,7 +43,7 @@ const game_over = new GameOver({
 
             get appear() {
 
-                return game_over.createAnimation({
+                return game_over_text.createAnimation({
 
                     changing_properties: [
 
@@ -54,12 +55,13 @@ const game_over = new GameOver({
                         },
 
                     ],
-                    changing_element: game_over.HTML_LINK,
-                    duration: 500,
-                    timing_function: game_over.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
-                    next_function: function () {
-                        game_over.endExecutionCurrentFunction();
-                    }
+                    timing_function: {
+                        name: game_over_text.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
+                    changing_element: game_over_text.HTML_LINK,
+                    duration: 1000,
+                    synchronous: true,
 
                 });
 
@@ -67,9 +69,11 @@ const game_over = new GameOver({
 
             get disappear() {
 
-                let game_over__wrapper = document.querySelector(`.${game_over.HTML_SETTINGS.ID_NAME}__wrapper`);
+                if(!game_over_text.HTML_LINK) return;
 
-                return game_over.createAnimation({
+                let game_over_text__wrapper = document.querySelector(`.${game_over_text.HTML_SETTINGS.ID_NAME}__wrapper`);
+
+                return game_over_text.createAnimation({
 
                     changing_properties: [
 
@@ -81,11 +85,18 @@ const game_over = new GameOver({
                         },
 
                     ],
-                    changing_element: game_over.HTML_LINK,
+                    timing_function: {
+                        name: game_over_text.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
+                        coefficient: 1
+                    },
+                    changing_element: game_over_text.HTML_LINK,
                     duration: 500,
-                    timing_function: game_over.ANIMATIONS_SETTINGS.TIMING_FUNCTIONS.linear,
                     next_function: function () {
-                        game_over__wrapper.remove();
+
+                        if (!game_over_text__wrapper) return;
+
+                        game_over_text__wrapper.remove();
+
                     },
 
                 });
@@ -99,4 +110,4 @@ const game_over = new GameOver({
 });
 
 // export
-export { game_over };
+export { game_over_text };

@@ -1,4 +1,7 @@
 
+// import //
+import { syncGameEngine } from "../game mechanism/engines/sync_game_engine.js";
+
 // pattern animation //
 class Animation {
 
@@ -7,8 +10,10 @@ class Animation {
         ease: 'ease',
         ease_in: 'ease-in',
         ease_out: 'ease-out',
-        linear: 'linear'
-    }
+        linear: 'linear',
+        bounce_start: 'bounce_start',
+        bounce_end: 'bounce_end',
+    };
 
     // public object properies //
     // with default values //
@@ -20,13 +25,19 @@ class Animation {
             start_value: 0,
             final_value: 0,
             unit_of_measurement: null,
-            function_value: null,
+            function_value: null
         }
 
     ];
+    timing_function = {
+        name: null,
+        coefficient: 1
+    }
     duration = 0;
+    delay = 0;
+    synchronous = false;
     changing_element = null;
-    timing_function = null;
+    wait_next_function = false;
     next_function = null;
 
     // public object methods //
@@ -36,9 +47,7 @@ class Animation {
 
         // replacing default settings with the specified settings
         for (let object in group_objects_with_settings) {
-
             this[object] = group_objects_with_settings[object];
-
         }
 
     }
@@ -46,24 +55,36 @@ class Animation {
     // start
     start() {
 
+        if (this.synchronous) {
+            syncGameEngine.stop(this.synchronous);
+        }
+
         let current_animation = this;
         let start_animation = performance.now();
 
-        this.ID_ANIMATION = window.requestAnimationFrame(function animate(timestamp) {
+        this.ID_ANIMATION = window.requestAnimationFrame(
 
-            let time_fraction = (timestamp - start_animation) / current_animation.duration;
-            if (time_fraction > 1) time_fraction = 1;
+            function animate(timestamp) {
 
-            current_animation._changeEachPropertyInOrder(time_fraction);
+                let time_fraction = (timestamp - start_animation) / current_animation.duration;
+                if (time_fraction > 1) time_fraction = 1;
 
-            if (time_fraction < 1) {
-                window.requestAnimationFrame(animate);
-            } else {
-                current_animation._startNextFunction();
-                current_animation.end();
+                current_animation._changeEachPropertyInOrder(time_fraction);
+
+                if (time_fraction < 1) {
+                    window.requestAnimationFrame(animate);
+                } else {
+
+                    current_animation._startNextFunction();
+                    current_animation.end();
+
+                    if (current_animation.synchronous) syncGameEngine.stop(false);
+
+                }
+
             }
 
-        });
+        );
 
     }
 
@@ -99,9 +120,10 @@ class Animation {
 
         let y;
         let x = time_fraction;
+        let k = this.timing_function.coefficient;
         let distance = property.final_value - property.start_value;
 
-        switch (this.timing_function) {
+        switch (this.timing_function.name) {
 
             case 'ease':
                 // y = sin (x * π/4)
@@ -121,6 +143,16 @@ class Animation {
             case 'linear':
                 // y = x
                 y = x;
+                break;
+
+            case 'bounce_start':
+                // y = (k + 1) * x^3 - k * x^2
+                y = (k + 1) * Math.pow(x, 3) - k * Math.pow(x, 2)
+                break;
+
+            case 'bounce_end':
+                // y = (1 - k) * x^3 + k * x^2
+                y = (1 - k) * Math.pow(x, 3) + k * Math.pow(x, 2)
                 break;
 
         }
@@ -160,3 +192,45 @@ class Animation {
 
 // export //
 export { Animation };
+
+
+
+// Notes //
+
+// n.1
+
+
+        // let wait_launch_animation = new Promise(function (resolve, reject) {
+
+        //     if (this.delay >= 0) {
+
+        //         let id_timeout = setTimeout(
+
+        //             function () {
+
+        //                 clearTimeout(id_timeout);
+        //                 resolve();
+
+        //             }, this.delay
+
+        //         );
+
+        //     } else reject();
+
+        // });
+
+        // let current_animation = this;
+
+        // wait_launch_animation.then(
+
+        //     resolve => {
+        //         this._launchAniamtion(current_animation);
+        //     },
+        //     reject => {
+        //         new Error('Your delay < 0');
+        //         if (this.synchronous) {
+        //             syncGameEngine.stop(this.synchronous);
+        //         }
+        //     }
+
+        // );
