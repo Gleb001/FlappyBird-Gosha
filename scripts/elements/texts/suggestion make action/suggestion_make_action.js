@@ -3,7 +3,6 @@
 import { patterns_game_elements } from '../../../abstractions/game patterns/patterns_game_elements.js';
 import { play_field } from '../../../components/play field/play_field.js';
 
-
 // suggestion to start the game class //
 class SuggestionMakeStart extends patterns_game_elements.GameElement {
 
@@ -59,26 +58,24 @@ const suggestion_make_action = new SuggestionMakeStart({
         start_styles: `left: ${-175}px`,
         get html_value() {
 
-            if(window.screen.availWidth > 1024) {
+            if (window.screen.availWidth > 1024) {
 
                 return `
                 <div class="suggestion_make_action">
-                    <img src='../../../images/suggestion make action/click_mouse.png' class="click_mouse">
+                    <img src='./images/suggestion make action/click_mouse.png' class="click_mouse">
                 </div>
                 <div class="suggestion_make_action">
-                    <img src='../../../images/suggestion make action/button_space.png' class="button_space">
+                    <img src='./images/suggestion make action/button_space.png' class="button_space">
                 </div>
-                `
+                `;
 
-            } else {
+            } else
 
                 return `
                 <div class="suggestion_make_action">
-                    <img src='../../../images/suggestion make action/click_arm.png' class="click_arm">
+                    <img src='./images/suggestion make action/click_arm.png' class="click_arm">
                 </div>
-                `
-
-            }
+                `;
 
         }
 
