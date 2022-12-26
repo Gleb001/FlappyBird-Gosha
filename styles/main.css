@@ -1,31 +1,44 @@
 
-/* imports */
+/* imports ===================================================== */
 
-/* components == */
-@import url('../scripts/components/obstacle/obstacle.css');
-@import url('../scripts/components/play field/play_field.css');
-@import url('../scripts/components/player/player.css');
+/* animations -------------------------------------------------- */
 
-/* elements == */
+/* main */
+@import url("./animations/animations.css");
 
-/* texts */
-@import url('../scripts/elements/texts/game name/game_name.css');
-@import url('../scripts/elements/texts/game over text/game_over_text.css');
-@import url('../scripts/elements/texts/introduction message/introduction_message.css');
-@import url('../scripts/elements/texts/result gamer/result_gamer.css');
-@import url('../scripts/elements/texts/suggestion make action/suggestion_make_action.css');
+/* elements */
+@import url("./animations/elements/circle.css");
 
-/* counters */
-@import url('../scripts/elements/counters/counter obstacles/counter_obstacles.css');
+/* game components --------------------------------------------- */
 
-/* figures */
-@import url('../scripts/elements/figures/circle/circle.css');
+/* main */
+@import url("./game_components/main/counter_obstacles.css");
+@import url("./game_components/main/play_field.css");
+@import url("./game_components/main/obstacle.css");
+@import url("./game_components/main/player.css");
 
-/* texts - fonts == */
+/* additional */
+@import url("./game_components/additional/game_name.css");
+@import url("./game_components/additional/introduction_message.css");
+@import url("./game_components/additional/result_gamer.css");
+@import url("./game_components/additional/suggestion_make_action.css");
+
+/* texts - fonts ----------------------------------------------- */
+
+/* main */
 @import url('./texts/texts.css');
 
 
-/* body */
+
+/* main ======================================================== */
+
+/* all --------------------------------------------------------- */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/* body -------------------------------------------------------- */
 body {
 
     margin: 0px;
@@ -40,15 +53,12 @@ body {
 
 }
 
-/* game author */
-#game_author {
+/* container game ---------------------------------------------- */
+.container_game {
+    
+    margin: 0 auto;
 
-    width: 100%;
-    text-align: center;
-
-    position: absolute;
-    bottom: 20px;
-
-    z-index: 5;
+    height: 100vh;
+    width: 100vw;
 
 }

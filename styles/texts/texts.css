@@ -1,13 +1,11 @@
-
 /* styles texts */
 .main_title {
 
     color: black;
     font-family: 'Segoe UI', sans-serif;
     font-weight: 300;
-
+    
 }
-
 .main_text {
 
     color: black;
@@ -15,15 +13,13 @@
     font-weight: 300;
 
 }
-
 .counter_obstacles_text {
 
-    color: rgb(230, 230, 230);
+    color: rgba(0, 0, 0, 0.445);
     font-family: 'Segoe UI', sans-serif;
     font-weight: 400;
 
 }
-
 .main_under_title {
 
     color: black;
@@ -38,17 +34,14 @@
     .main_title {
         font-size: 2.75em;
     }
-
     .main_text {
         font-size: .9em;
     }
-
     .main_under_title {
         font-size: .75em;
     }
-
     .counter_obstacles_text {
-        font-size: 5.5em;
+        font-size: 6.5em;
     }
 
 }
@@ -56,29 +49,36 @@
 @media screen and (max-width: 1600px) {
 
     .main_title {
-        font-size: 2.7em;
+        font-size: 2.55em;
     }
-
     .main_text {
         font-size: .8em;
     }
-
     .counter_obstacles_text {
-        font-size: 5.25em;
+        font-size: 5.5em;
     }
 
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 1370px) {
 
     .main_title {
-        font-size: 2.55em;
+        font-size: 2.4em;
     }
-
     .main_text {
         font-size: .8em;
     }
+    .counter_obstacles_text {
+        font-size: 5em;
+    }
 
+}
+
+@media screen and (max-width: 1000px) {
+
+    .main_title {
+        font-size: 2.25em;
+    }
     .counter_obstacles_text {
         font-size: 5em;
     }
@@ -87,16 +87,8 @@
 
 @media screen and (max-width: 768px) {
 
-    .main_title {
-        font-size: 2.4em;
-    }
-
     .main_text {
         font-size: .8em;
-    }
-
-    .counter_obstacles_text {
-        font-size: 5.25em;
     }
 
 }
@@ -104,15 +96,7 @@
 @media screen and (max-width: 478px) {
 
     .main_title {
-        font-size: 1.9em;
-    }
-
-    .main_text {
-        font-size: .635em;
-    }
-
-    .counter_obstacles_text {
-        font-size: 4.8em;
+        font-size: 2.05em;
     }
 
 }

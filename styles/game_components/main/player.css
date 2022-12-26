@@ -1,0 +1,19 @@
+
+/* player */
+#player {
+
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    position: absolute;
+
+}
+
+.player_fall,
+.losing_fall {
+    background-image: url(../../../images/player/player_fall.svg);
+}
+
+.player_fly {
+    background-image: url(../../../images/player/player_fly.svg);
+}

@@ -1,0 +1,18 @@
+
+/* game name */
+#game_name {
+    margin: 5px auto;
+    text-align: center;
+}
+.game_name__wrapper {
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    position: relative;
+    bottom: 9px;
+
+    z-index: 2;
+
+}

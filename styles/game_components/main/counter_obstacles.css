@@ -1,0 +1,14 @@
+
+/* obstacle counter */
+#counter_obstacles {
+
+    width: 160px;
+
+    border: none;
+    background-color: transparent;
+
+    text-align: right;
+
+    position: absolute;
+
+}
