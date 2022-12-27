@@ -22,11 +22,13 @@ const suggestion_make_action = {
                 <div class="suggestion_make_action">
                     <img
                         src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_mouse.svg"
+                        alt="click"
                     >
                 </div>
                 <div class="suggestion_make_action">
                     <img
                         src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/button_space.svg"
+                        alt="button space"
                     >
                 </div>
             `;
@@ -35,6 +37,7 @@ const suggestion_make_action = {
                 <div class="suggestion_make_action">
                     <img
                         src=".https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_arm.svg"
+                        alt="tap
                     >
                 </div>
             `;
