@@ -17,7 +17,7 @@ const suggestion_make_action = {
     // inner value
     get inner_value() {
 
-        if (window.screen.availWidth > 1024) {
+        if (window.screen.width > 1024) {
             return `
                 <div class="suggestion_make_action">
                     <img
@@ -37,7 +37,7 @@ const suggestion_make_action = {
                 <div class="suggestion_make_action">
                     <img
                         src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_arm.svg"
-                        alt="tap
+                        alt="tap"
                     >
                 </div>
             `;
