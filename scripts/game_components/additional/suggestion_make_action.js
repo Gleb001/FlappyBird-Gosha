@@ -21,14 +21,12 @@ const suggestion_make_action = {
             return `
                 <div class="suggestion_make_action">
                     <img
-                        src="../../../images/suggestion_make_action/click_mouse.svg"
-                        alt="click"
+                        src="../../../images/suggestion_make_action/click_mouse.svg?example=foo&sanitize=true"
                     >
                 </div>
                 <div class="suggestion_make_action">
                     <img
-                        src="../../../images/suggestion_make_action/button_space.svg"
-                        alt="enter space"
+                        src="../../../images/suggestion_make_action/button_space.svg?example=foo&sanitize=true"
                     >
                 </div>
             `;
@@ -36,8 +34,7 @@ const suggestion_make_action = {
             return `
                 <div class="suggestion_make_action">
                     <img
-                        src="../../../images/suggestion_make_action/click_arm.svg"
-                        alt="tap"
+                        src="../../../images/suggestion_make_action/click_arm.svg?example=foo&sanitize=true"
                     >
                 </div>
             `;
