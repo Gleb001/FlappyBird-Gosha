@@ -112,7 +112,7 @@ const components_of_algorithms = {
                 index++
             ) {
                 let child = children_play_field[index];
-                child.style.animation = "1s linear disappear forwards";
+                child.style.animation = "900ms linear disappear forwards";
             }
 
             // 3. remove hidden children of the playing field
@@ -286,14 +286,14 @@ const components_of_algorithms = {
                 let x_position_player = player.HTML.offsetLeft + player.HTML.offsetWidth;
 
                 // pixel
-                let pixel = 15;
+                let pixel = 10;
 
                 let first_expression =
-                    player.HTML.offsetLeft - pixel <= x_end_position_obstacle &&
-                    x_position_player - pixel >= current_obstacle.offsetLeft;
+                    player.HTML.offsetLeft <= x_end_position_obstacle &&
+                    x_position_player >= current_obstacle.offsetLeft;
 
                 let second_expression =
-                    player.HTML.offsetTop - pixel <= (obstacle_top.clientHeight - player.HTML.offsetHeight * 0.38) ||
+                    player.HTML.offsetTop - pixel <= (obstacle_top.clientHeight - player.HTML.offsetHeight * 0.6) ||
                     (player.HTML.offsetHeight + player.HTML.offsetTop) - pixel >= (obstacle_bottom.offsetTop - player.HTML.offsetHeight * 0.6);
 
                 if (first_expression && second_expression) return true;
@@ -308,7 +308,7 @@ const components_of_algorithms = {
         removePlayFieldProcessGameClass() {
             play_field.HTML.classList.remove(play_field.statuses.process_game);
         },
-        showResultGamer() {
+        showResultGamer() { 
 
             // 1. create score
             let score_player = createElementHTML({
@@ -330,6 +330,9 @@ const components_of_algorithms = {
 
             // 3. show game name
             score_player.style.animation = "appear 1000ms linear forwards";
+
+            GameEngine.pause();
+            setTimeout(() => GameEngine.startAfterPause(), 1000);
 
         },
         clearPlayField() {
