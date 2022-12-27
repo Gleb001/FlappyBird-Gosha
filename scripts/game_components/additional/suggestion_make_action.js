@@ -21,12 +21,12 @@ const suggestion_make_action = {
             return `
                 <div class="suggestion_make_action">
                     <img
-                        src="https://gleb001.github.io/FlappyGosha/images/suggestion_make_action/click_mouse.svg"
+                        src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_mouse.svg"
                     >
                 </div>
                 <div class="suggestion_make_action">
                     <img
-                        src="https://gleb001.github.io/FlappyGosha/images/suggestion_make_action/button_space.svg"
+                        src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/button_space.svg"
                     >
                 </div>
             `;
@@ -34,7 +34,7 @@ const suggestion_make_action = {
             return `
                 <div class="suggestion_make_action">
                     <img
-                        src=".https://gleb001.github.io/FlappyGosha/images/suggestion_make_action/click_arm.svg"
+                        src=".https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_arm.svg"
                     >
                 </div>
             `;
