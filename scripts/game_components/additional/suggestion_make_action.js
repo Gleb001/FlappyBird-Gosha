@@ -36,7 +36,7 @@ const suggestion_make_action = {
             return `
                 <div class="suggestion_make_action">
                     <img
-                        src=".https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_arm.svg"
+                        src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_arm.svg"
                         alt="tap
                     >
                 </div>
