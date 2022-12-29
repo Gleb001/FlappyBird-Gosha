@@ -3,7 +3,7 @@
 * [FlappyBird-Gosha (ru)](#FlappyBird-Gosha(ru))
 * [FlappyBird-Gosha (en)](#FlappyBird-Gosha(en))
 
-# FlappyBird-Gosha(ru)
+#FlappyBird-Gosha(ru)
 
 ## Вступление
 Привет, перед тобой представлен мой первый домашний проект-игра под названием "FlappyBird-Gosha". Над данным проектом было пролито не мало крови, пота, слёз, сил и времени с одной целью - создать наиболее хорошую (идеальную) систему браузерной игры; в качестве испытательного прототипа была взята небезизвестная всеми игра [FlappyBird](https://ru.wikipedia.org/wiki/Flappy_Bird). Насколько удачно у меня получилось реализовать представленную цель вы можете увидеть через непосредственно код игры и результат, отображаемый в браузере.
@@ -336,7 +336,7 @@ html_element.style.animation = `${name_current_animation} 1000ms linear forwards
 
 
 
-# FlappyBird-Gosha(en)
+#FlappyBird-Gosha(en)
 
 ## Introduction
 Hi, here is my first home project-a game called "FlappyBird-Gosha". A lot of blood, sweat, tears, effort and time were shed on this project with one goal - to create the best (ideal) browser game system; the well-known game was taken as a test prototype [FlappyBird](https://en.wikipedia.org/wiki/Flappy_Bird). You can see how successfully I managed to implement the presented goal through the game code itself and the result displayed in the browser.
