@@ -15,15 +15,15 @@
 ### Обзор файловой структуры (системы) JS-части проекта
 Как можно заметить корневой каталог данного проекта является привычным. Его описывать я не вижу смысла, поэтому перейдём к интересующим меня двум каталогам - /styles и /scripts, наименование которых отражает их содержание.
 
-#### catalog utility русская версия
+#### каталог utility русская версия
 Данный каталог содержит самописные утилиты, которые позволяют реализовать данную игру в браузере. Грубо говоря, рассматриваемый каталог - это и есть своеобразная библиотека по созданию подобного рода игр и не только. В данный каталог входят три независимых модуля:
-- Движок (в данном проекте) - это сущность, которая управляет потоком (процессом) выполнения алгоритмов. Реализация данной сущности заложена в абстракции под названием miniSyncEngine, отвечающей за выполнение только синхронных алгоритмов. Однако у данного движка есть метод по выполнению асинхронной функции как синхронной (в рамках потока выполнения данной сущности). Приставка mini говорит об отсутствии сложных абстракций и тяжёлого размера файла, при условии, что вся реализация данного проекта построенная на использовании рассматриваемой абстракции. [Описание API по работе с данной абстракцией](####miniSyncEngine-API-русккая-версия).
-- work_with_animations.js - модуль по созданию динамических анимаций. С помощью данного модуля можно создавать как CSS, так и JS анимацию. Настоятельно рекомендую ознакомится с даннмы модулем. [Описание API по работе с данной абстракцией](####work_with_animations-API-русккая-версия).
+- Движок (в данном проекте) - это сущность, которая управляет потоком (процессом) выполнения алгоритмов. Реализация данной сущности заложена в абстракции под названием miniSyncEngine, отвечающей за выполнение только синхронных алгоритмов. Однако у данного движка есть метод по выполнению асинхронной функции как синхронной (в рамках потока выполнения данной сущности). Приставка mini говорит об отсутствии сложных абстракций и тяжёлого размера файла, при условии, что вся реализация данного проекта построенная на использовании рассматриваемой абстракции. [Описание API по работе с данной абстракцией](####miniSyncEngine-API-русская-версия).
+- work_with_animations.js - модуль по созданию динамических анимаций. С помощью данного модуля можно создавать как CSS, так и JS анимацию. Настоятельно рекомендую ознакомится с даннмы модулем. [Описание API по работе с данной абстракцией](####work_with_animations-API-русская-версия).
 - work_with_html.js - модуль по созданию html элементов. Рассматриваемый модуль состоит из одной функции - createElementHTML(). Описание API по работе с данной абстракцией не прилагаются.
 
 Как было сказано выше утилиты выступают в роли каркаса для данного проекта. Изменению утилит как правило приводит к полному изменению остальных частей рассматриваемого каталога /sсripts! У любого решения есть свои плюсы и минусы, с которыми приходится мириться. В нашем случае минусом является полное изменение всего проекта при изменении какой-либо утилиты, а плюсом - легкость в поддержке проекта.
 
-#### catalog game_components русская версия
+#### каталог game_components русская версия
 Компонент (игры) - это JS-объект, который содержит ссылку на HTML элемент, а также определённые свойства и методы, предназначенные для работы с ним (HTML элементом). Как правило (относительно данного проекта), для работы с рассматриваемой сущностью используются два ранее описанных модуля: work_with_animations.js и work_with_html.js. В качестве наглядного примера возьмём один из уже написанных - player.js.
 
 ```js
@@ -85,15 +85,15 @@ const player = {
 };
 ```
 
-#### catalog components_of_algorithms русская версия
+#### каталог components_of_algorithms русская версия
 Данный каталог содержит JS-файлы, внтури которых помещены компоненты для [алгоритмов](https://ru.wikipedia.org/wiki/Алгоритм). Компонент алгоритма - это один шаг алгоритма, определённое действие. Так, например, алгоритм создания бумажного кораблика содержит следующие компоненты (не упорядочены): *) согните лист А4; *) Теперь необходимо согнуть углы так, чтобы получилось два одинаковых треугольника; *) возьмите лист A4 и т.п. Упорядоченные компоненты алгоритма - это и есть алгоритм.
 
 #### main.js русская версия
-main.js - точка входа (запуска), в которой собираются исходные алгоритмы игры с помощью каталога [/components_of_algorithms](####catalog-components_of_algorithms-русская-версия) и утилиты (miniSyncEngine)[####miniSyncEngine-API-русккая-версия), а также начинается игры при наступлении события "load" у глобального объекта window.
+main.js - точка входа (запуска), в которой собираются исходные алгоритмы игры с помощью каталога [/components_of_algorithms](####каталог-components_of_algorithms-русская-версия) и утилиты (miniSyncEngine)[####miniSyncEngine-API-русская-версия), а также начинается игры при наступлении события "load" у глобального объекта window.
 
 ### Документация к утилитам
 
-#### miniSyncEngine API русккая версия
+#### miniSyncEngine API русская версия
 miniSyncEngine - это сущность, которая управляет синхронным потоком (процессом, который на данный момент не имеет возможности разделиться, т.е. иметь ветвления) выполнения алгоритмов. Так, например, для начала работы вам необходимо передать данному движку алгоритмы, компоненты которых являются синхронными функциями. Чтобы это сделать воспользуйтесь методом - algorithm.add({ name, name_next, components, trigger }) как показано ниже.
 
 ```js
@@ -105,7 +105,10 @@ miniSyncEngine.algorithm.add({
         function component_2() { console.log("Launch second component");},
         ...
     ],
-    trigger: function trigger() { return true; }, // триггер по запуску текущего алгоритма. Данный триггер должен возвращать булевое значение, чтобы функция, отвечающая за переключение алгоритмов, знала, когда требуется запустить текущий алгоритм
+    trigger: function trigger() { return true; },
+    // триггер по запуску текущего алгоритма. Данный триггер должен возвращать булевое
+    // значение, чтобы функция, отвечающая за переключение алгоритмов, знала, когда
+    // требуется запустить текущий алгоритм
 });
 ```
 
@@ -175,8 +178,14 @@ let curret_animation = new AnimationJS({
     timing_settings: {
         timing_function: function linear(time_fraction) {
             return time_fraction; // f(x) = x - алгебраическая функция
-        }, // данная функция должна возвращать результат алгебраической функции. В качестве координаты Х всегда выступает time_fraction. Именно данная координата под данным именем (time_fraction) с течением времени изменяется. Ваша задача настроить её изменение с помощью данной функции - либо замедлить делением, либо ускорить умножением и т.п. в зависимости от заданной вами алгебраической функции f(x).
-        // Также вы можете воспользоваться заранее написанными алгебраическими функциями. Они храняться в свойстве TIMING_FUNCTIONS рассматриваемого класса AnimationJS.
+        },
+        // данная функция должна возвращать результат алгебраической функции. В качестве координаты
+        // Х всегда выступает time_fraction. Именно данная координата под данным именем (time_fraction)
+        // с течением времени изменяется. Ваша задача настроить её изменение с помощью данной функции
+        // - либо замедлить делением, либо ускорить умножением и т.п. в зависимости от заданной вами
+        // алгебраической функции f(x).
+        // Также вы можете воспользоваться заранее написанными алгебраическими функциями. Они храняться
+        // в свойстве TIMING_FUNCTIONS рассматриваемого класса AnimationJS.
         duration: 1000, // длительность анимации измеряется в ms(милисекундах)
         delay, // задержка анимации измеряется в ms(милисекундах)
     },
@@ -208,7 +217,14 @@ new AnimationJS({
     timing_settings: {
         timing_function: function linear(time_fraction) {
             return time_fraction; // f(x) = x - алгебраическая функция
-        }, // данная функция должна возвращать результат алгебраической функции. В качестве координаты Х всегда выступает time_fraction. Именно данная координата под данным именем (time_fraction) с течением времени изменяется. Ваша задача настроить её изменение с помощью данной функции - либо замедлить делением, либо ускорить умножением и т.п. в зависимости от заданной вами алгебраической функции f(x).
+        },
+        // данная функция должна возвращать результат алгебраической функции. В качестве координаты
+        // Х всегда выступает time_fraction. Именно данная координата под данным именем (time_fraction)
+        // с течением времени изменяется. Ваша задача настроить её изменение с помощью данной функции
+        // - либо замедлить делением, либо ускорить умножением и т.п. в зависимости от заданной вами
+        // алгебраической функции f(x).
+        // Также вы можете воспользоваться заранее написанными алгебраическими функциями. Они храняться
+        // в свойстве TIMING_FUNCTIONS рассматриваемого класса AnimationJS.
         duration: 1000, // длительность анимации измеряется в ms(милисекундах)
         delay, // задержка анимации измеряется в ms(милисекундах)
     },
@@ -247,11 +263,7 @@ let curret_animation = new AnimationCSS({
         }, // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
     ],
     timing_settings: {
-        timing_function: function linear(time_fraction) {
-            return time_fraction; // f(x) = x - алгебраическая функция
-        }, // данная функция должна возвращать результат алгебраической функции. В качестве координаты Х всегда выступает time_fraction. Именно данная координата под данным именем (time_fraction) с течением времени изменяется. Ваша задача настроить её изменение с помощью данной функции - либо замедлить делением, либо ускорить умножением и т.п. в зависимости от заданной вами алгебраической функции f(x).
-        // Также вы можете воспользоваться заранее написанными алгебраическими функциями. Они храняться в свойстве TIMING_FUNCTIONS рассматриваемого класса AnimationJS.
-        duration: 1000, // длительность анимации измеряется в ms(милисекундах)
+        timing_function: "linear", // вводите только значения свойства animation-timing-function
         delay, // задержка анимации измеряется в ms(милисекундах)
     },
     next_function: function startAfterExecutionThisAnimation() {
@@ -261,7 +273,7 @@ let curret_animation = new AnimationCSS({
 curret_animation.start();
 
 // 2. нигде не храним анимацию, а сразу её исполняем
-new AnimationJS({
+new AnimationCSS({
     name_animation: "change_opacity_and_transform_player" // может быть не указан
     changing_elements: [player.HTML], // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
     changing_properties: [
@@ -281,9 +293,7 @@ new AnimationJS({
         }, // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
     ],
     timing_settings: {
-        timing_function: function linear(time_fraction) {
-            return time_fraction; // f(x) = x - алгебраическая функция
-        }, // данная функция должна возвращать результат алгебраической функции. В качестве координаты Х всегда выступает time_fraction. Именно данная координата под данным именем (time_fraction) с течением времени изменяется. Ваша задача настроить её изменение с помощью данной функции - либо замедлить делением, либо ускорить умножением и т.п. в зависимости от заданной вами алгебраической функции f(x).
+        timing_function: "linear", // вводите только значения свойства animation-timing-function
         duration: 1000, // длительность анимации измеряется в ms(милисекундах)
         delay, // задержка анимации измеряется в ms(милисекундах)
     },
@@ -301,7 +311,6 @@ curret_animation.end();
 Однако класс AnimationCSS предоставляет вам дополнительную возможность в добавлении css файлов с помощью метода - createAnimationCSSFile(changing_properties, name_animation). Это может вам пригодиться если у вас есть несколько элементов, которым вы хотите добавить одну и ту же CSS анимацию (+ если параметры анимации динамически изменяемые).
 
 ```js
-
 // 1. наименование анимации
 let name_current_animation = "name_current_animation";
 
@@ -442,7 +451,10 @@ miniSyncEngine.algorithm.add({
         function component_2() { console.log("Launch second component");},
         ...
     ],
-    trigger: function trigger() { return true; }, // trigger to start the current algorithm. This trigger should return a Boolean value so that the function responsible for switching algorithms knows when to run the current algorithm
+    trigger: function trigger() { return true; },
+    // trigger to start the current algorithm. This trigger should return a
+    // Boolean value so that the function responsible for switching algorithms
+    // knows when to run the current algorithm
 });
 ```
 
@@ -512,8 +524,13 @@ let current_animation = new AnimationJS({
     timing_settings: {
         timing_function: function linear(time_fraction) {
             return time_fraction; // f(x) = x is an algebraic function
-        }, // this function should return the result of an algebraic function. The X coordinate is always time_fraction. It is this coordinate under the given name (time_fraction) that changes over time. Your task is to adjust its change using this function - either slow it down by division, or speed it up by multiplication, etc., depending on the algebraic function f(x) you set.
-        // You can also use pre-written algebraic functions. They are stored in the TIMING_FUNCTIONS property of the AnimationJS class in question.
+        },
+        // this function should return the result of an algebraic function. The X coordinate is always
+        // time_fraction. It is this coordinate under the given name (time_fraction) that changes over
+        // time. Your task is to adjust its change using this function - either slow it down by division,
+        // or speed it up by multiplication, etc., depending on the algebraic function f(x) you set.
+        // You can also use pre-written algebraic functions. They are stored in the TIMING_FUNCTIONS
+        // property of the AnimationJS class in question.
         duration: 1000, // animation duration is measured in ms(milliseconds)
         delay, // animation delay is measured in ms(milliseconds)
     },
@@ -545,7 +562,13 @@ new AnimationJS({
     timing_settings: {
         timing_function: function linear(time_fraction) {
             return time_fraction; // f(x) = x is an algebraic function
-        }, // this function should return the result of an algebraic function. The X coordinate is always time_fraction. It is this coordinate under the given name (time_fraction) that changes over time. Your task is to adjust its change using this function - either slow it down by division, or speed it up by multiplication, etc., depending on the algebraic function f(x) you set.
+        },
+        // this function should return the result of an algebraic function. The X coordinate is always
+        // time_fraction. It is this coordinate under the given name (time_fraction) that changes over
+        // time. Your task is to adjust its change using this function - either slow it down by division,
+        // or speed it up by multiplication, etc., depending on the algebraic function f(x) you set.
+        // You can also use pre-written algebraic functions. They are stored in the TIMING_FUNCTIONS
+        // property of the AnimationJS class in question.
         duration: 1000, // animation duration is measured in ms(milliseconds)
         delay, // animation delay is measured in ms(milliseconds)
     },
@@ -564,7 +587,7 @@ When working with AnimationCSS, the settings are similar to those already presen
 
 ```js
 // 1. we store the animation in a variable.
-let current_animation = new animationcss({
+let current_animation = new animationCSS({
     name_animation: "change_opacity_and_transform_player" // may not be specified
     changing_elements: [player.HTML ], // array containing elements that will be changed during the playback of the animation
     changing_properties: [
@@ -584,10 +607,7 @@ let current_animation = new animationcss({
         }, // final result: transform: rotate(0deg) -> transform: rotate(45deg)
     ],
     timing_settings: {
-        timing_function: function linear(time_fraction) {
-            return time_fraction; // f(x) = x is an algebraic function
-        }, // this function should return the result of an algebraic function. The X coordinate is always time_fraction. It is this coordinate under the given name (time_fraction) that changes over time. Your task is to adjust its change using this function - either slow it down by division, or speed it up by multiplication, etc., depending on the algebraic function f(x) you set.
-        // You can also use pre-written algebraic functions. They are stored in the TIMING_FUNCTIONS property of the AnimationJS class in question.
+        timing_function: "linear" // enter only the values of the animation-timing-function property
         duration: 1000, // animation duration is measured in ms(milliseconds)
         delay, // animation delay is measured in ms(milliseconds)
     },
@@ -598,7 +618,7 @@ let current_animation = new animationcss({
 curret_animation.start();
 
 // 2. we don't store animation anywhere, but we execute it right away
-new AnimationJS({
+new AnimationCSS({
     name_animation: "change_opacity_and_transform_player" // may not be specified
     changing_elements: [player.HTML ], // an array containing elements that will be changed during the animation playback
     changing_properties: [
@@ -618,9 +638,7 @@ new AnimationJS({
         }, // final result: transform: rotate(0deg) -> transform: rotate(45deg)
     ],
     timing_settings: {
-        timing_function: function linear(time_fraction) {
-            return time_fraction; // f(x) = x is an algebraic function
-        }, // this function should return the result of an algebraic function. The X coordinate is always time_fraction. It is this coordinate under the given name (time_fraction) that changes over time. Your task is to adjust its change using this function - either slow it down by division, or speed it up by multiplication, etc., depending on the algebraic function f(x) you set.
+        timing_function: "linear" // enter only the values of the animation-timing-function property
         duration: 1000, // animation duration is measured in ms(milliseconds)
         delay, // animation delay is measured in ms(milliseconds)
     },
@@ -638,7 +656,6 @@ current_animation.end();
 However, the AnimationCSS class provides you with an additional option in adding css files using the - createAnimationCSSFile(changing_properties, name_animation) method. This can be useful to you if you have several elements to which you want to add the same CSS animation (+ if the animation parameters are dynamically changeable).
 
 ```js
-
 // 1. animation name
 let name_current_animation = "name_current_animation";
 
