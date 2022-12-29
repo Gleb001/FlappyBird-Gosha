@@ -17,7 +17,7 @@ const suggestion_make_action = {
     // inner value
     get inner_value() {
 
-        if (window.screen.width > 1024) {
+        if (window.screen.width > 1200) {
             return `
                 <div class="suggestion_make_action">
                     <img
