@@ -160,6 +160,7 @@ AnimationCSS и AnimationJS - это классы (шаблоны) для соз
 let curret_animation = new AnimationJS({
     // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
     changing_elements: [player.HTML],
+    // массив, содержащий изменяемые свойства
     changing_properties: [
     
         // итоговый результат: opacity: 0 -> opacity: 1
