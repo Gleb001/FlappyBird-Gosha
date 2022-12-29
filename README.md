@@ -363,8 +363,8 @@ As you can see, the root directory of this project is familiar. I don't see any 
 
 #### Catalog utility english version
 This catalog contains self-written utilities that allow you to implement this game in the browser. Roughly speaking, the catalog in question is a kind of library for creating this kind of games and not only. This catalog includes three independent modules:
-- The engine (in this project) is an entity that controls the flow (process) of executing algorithms. The implementation of this entity is embedded in an abstraction called miniSyncEngine, which is responsible for executing only synchronous algorithms. However, this engine has a method for executing an asynchronous function as synchronous (within the execution flow of this entity). The mini prefix indicates the absence of complex abstractions and heavy file size, provided that the entire implementation of this project is based on the use of the abstraction in question. [API description for working with this abstraction](https://github.com/Gleb001/FlappyBird-Gosha/blob/master/README.md####miniSyncEngine.js-API-english-version).
-- work_with_animations.js is a module for creating dynamic animations. With this module, you can create both CSS and JS animations. I strongly recommend that you familiarize yourself with this module. [API description for working with this abstraction](https://github.com/Gleb001/FlappyBird-Gosha/blob/master/README.md####work_with_animations.js-API-english-version).
+- The engine (in this project) is an entity that controls the flow (process) of executing algorithms. The implementation of this entity is embedded in an abstraction called miniSyncEngine, which is responsible for executing only synchronous algorithms. However, this engine has a method for executing an asynchronous function as synchronous (within the execution flow of this entity). The mini prefix indicates the absence of complex abstractions and heavy file size, provided that the entire implementation of this project is based on the use of the abstraction in question. [API description for working with this abstraction](#miniSyncEngine-API-english-version).
+- work_with_animations.js is a module for creating dynamic animations. With this module, you can create both CSS and JS animations. I strongly recommend that you familiarize yourself with this module. [API description for working with this abstraction](#API-module-for-working-with-animations-english-version).
 - work_with_html.js is a module for creating html elements. The module in question consists of one function - createElementHTM(). API descriptions for working with this abstraction are not included.
 
 As mentioned above, utilities act as a framework for this project. Changing utilities usually leads to a complete change in the remaining parts of the /scripts directory in question! Any solution has its pros and cons, which you have to put up with. In our case, the downside is a complete change of the entire project when changing any utility, and the plus is the ease of project support.
@@ -431,15 +431,15 @@ const player = {
 };
 ```
 
-#### Catalog components_of_algorithms english version
+#### Catalog components_of_algorithms
 This directory contains JS files, in which components for [algorithms](https://en.wikipedia.org/wiki/Algorithm) are placed. The algorithm component is one step of the algorithm, a certain action. So, for example, the algorithm for creating a paper boat contains the following components (not ordered): *) bend the A4 sheet; *) Now you need to bend the corners so that you get two identical triangles; *) take the A4 sheet, etc. The ordered components of the algorithm are the algorithm.
 
-#### main.js english version
-main.js is the entry point (launch point) where the game's source algorithms are assembled using the [/components_of_algorithms](https://github.com/Gleb001/FlappyBird-Gosha/blob/master/README.md####Catalog-components_of_algorithms-english-version) directory and the utility [miniSyncEngine.js](https://github.com/Gleb001/FlappyBird-Gosha/blob/master/README.md####miniSyncEngine.js-API-english-version), and also the game starts when the "load" event occurs at the global window object.
+#### main.js
+main.js is the entry point (launch point) where the game's source algorithms are assembled using the [/components_of_algorithms](#Catalog-components_of_algorithms) directory and the utility [miniSyncEngine.js](#miniSyncEngine-API-english-version), and also the game starts when the "load" event occurs at the global window object.
 
 ### Documentation for utilities
 
-#### miniSyncEngine.js API english version
+#### miniSyncEngine API english version
 miniSyncEngine is an entity that manages the synchronous flow (a process that currently has no way to split, i.e. have branches) of executing algorithms. So, for example, to get started, you need to pass algorithms to this engine, the components of which are synchronous functions. To do this, use the method - algorithm.add({ name, name_next, components, trigger }) as shown below.
 
 ```js
@@ -496,7 +496,7 @@ After you have prepared and passed the algorithms to the engine in question (als
 miniSyncEngine.start();
 ```
 
-#### work_with_animations.js API english version
+#### API module for working with animations English version
 AnimationCSS and AnimationJS are classes (templates) for creating and managing animations. So, for example, you can create an animation and pass it to some variable to use the animation in different parts of the program, or you can play it as a regular function immediately after creating the animation.
 
 Initially, let's consider working with the AnimationJS class.
