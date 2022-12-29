@@ -217,7 +217,7 @@ class AnimationCSS {
         );
 
         // 2. create animation css file
-        let animation_css_file = AnimationCSS.createAnimationCSSFile(
+        let animation_css_file = AnimationCSS.createFile(
             this.changing_properties,
             this.name_animation
         );
@@ -264,7 +264,7 @@ class AnimationCSS {
     }
 
     // get animation css file ------------------------- //
-    static createAnimationCSSFile(
+    static createFile(
         changing_properties = [
             // pattern property description 
             {

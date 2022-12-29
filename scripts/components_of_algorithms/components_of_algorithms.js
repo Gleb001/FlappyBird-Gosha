@@ -220,7 +220,7 @@ const components_of_algorithms = {
             play_field.HTML.append(obstacle_wrapper);
 
             // 3. create animation css file
-            AnimationCSS.createAnimationCSSFile(
+            AnimationCSS.createFile(
                 [
                     {
                         name: "left",
