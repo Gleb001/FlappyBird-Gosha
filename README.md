@@ -204,10 +204,10 @@ let curret_animation = new AnimationJS({
         },
         // длительность анимации измеряется в ms(милисекундах)
         duration: 1000,
-        // задержка анимации измеряется в ms(милисекундах)
-        delay,
+        // задержка анимации измеряется в ms(милисекундах) - можно не указывать
+        delay: 10,
     },
-    // функция, выполняемая после проигрывания анимации
+    // функция, выполняемая после проигрывания анимации - можно не указывать
     next_function: function startAfterExecutionThisAnimation() {
         ...
     },
@@ -264,10 +264,10 @@ new AnimationJS({
         },
         // длительность анимации измеряется в ms(милисекундах)
         duration: 1000,
-        // задержка анимации измеряется в ms(милисекундах)
+        // задержка анимации измеряется в ms(милисекундах) - можно не указывать
         delay,
     },
-    // функция, выполняемая после проигрывания анимации
+    // функция, выполняемая после проигрывания анимации - можно не указывать
     next_function: function startAfterExecutionThisAnimation() {
         ...
     },
@@ -326,10 +326,10 @@ let curret_animation = new AnimationCSS({
         timing_function: "linear", 
         // длительность анимации измеряется в ms(милисекундах)
         duration: 1000,
-        // задержка анимации измеряется в ms(милисекундах)
-        delay,
+        // задержка анимации измеряется в ms(милисекундах) - можно не указывать
+        delay: 0,
     },
-    // функция, выполняемая после проигрывания анимации
+    // функция, выполняемая после проигрывания анимации - можно не указывать
     next_function: function startAfterExecutionThisAnimation() {
         ...
     },
@@ -380,10 +380,10 @@ new AnimationCSS({
         timing_function: "linear", 
         // длительность анимации измеряется в ms(милисекундах)
         duration: 1000,
-        // задержка анимации измеряется в ms(милисекундах)
+        // задержка анимации измеряется в ms(милисекундах) - можно не указывать
         delay,
     },
-    // функция, выполняемая после проигрывания анимации
+    // функция, выполняемая после проигрывания анимации - можно не указывать
     next_function: function startAfterExecutionThisAnimation() {
         ...
     },
@@ -639,10 +639,10 @@ let current_animation = new AnimationJS({
         },
         // animation duration is measured in ms(milliseconds)
         duration: 1000, 
-        // animation delay is measured in ms(milliseconds)
-        delay, 
+        // animation delay is measured in ms(milliseconds) - may not be specified
+        delay: 0, 
     },
-    // function executed after animation playback
+    // function executed after animation playback - may not be specified
     next_function: function startAfterExecutionThisAnimation() {
         ...
     },
@@ -697,10 +697,10 @@ new AnimationJS({
         },
         // animation duration is measured in ms(milliseconds)
         duration: 1000, 
-        // animation delay is measured in ms(milliseconds)
-        delay, 
+        // animation delay is measured in ms(milliseconds) - may not be specified
+        delay: 0, 
     },
-    // function executed after animation playback
+    // function executed after animation playback - may not be specified
     next_function: function startAfterExecutionThisAnimation() {
         ...
     },
@@ -758,10 +758,10 @@ let current_animation = new animationCSS({
         timing_function: "linear",
         // animation duration is measured in ms(milliseconds)
         duration: 1000, 
-        // animation delay is measured in ms(milliseconds)
-        delay, 
+        // animation delay is measured in ms(milliseconds) - may not be specified
+        delay: 0, 
     },
-    // function executed after animation playback
+    // function executed after animation playback - may not be specified
     next_function: function startAfterExecutionThisAnimation() {
         ...
     },
@@ -811,10 +811,10 @@ new AnimationCSS({
         timing_function: "linear",
         // animation duration is measured in ms(milliseconds)
         duration: 1000, 
-        // animation delay is measured in ms(milliseconds)
-        delay, 
+        // animation delay is measured in ms(milliseconds) - may not be specified
+        delay: 0, 
     },
-    // function executed after animation playback
+    // function executed after animation playback - may not be specified
     next_function: function startAfterExecutionThisAnimation() {
         ...
     },
