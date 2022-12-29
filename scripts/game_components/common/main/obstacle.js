@@ -18,7 +18,7 @@ const obstacle_settings = {
 
         let distance = 4 * width_player;
         let speed_obstacle = (width_play_field + (2 * this.width)) / this.duration_moving;
-        let time_interval = distance + (2 * this.width + 30) / speed_obstacle;
+        let time_interval = distance + (2 * this.width + 40) / speed_obstacle;
 
         return time_interval;
 

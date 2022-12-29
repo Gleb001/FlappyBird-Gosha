@@ -2,10 +2,10 @@
 // main ======================================================== //
 
 // utilities --------------------------------------------------- //
-import createElementHTML from "../../utility/work_with_html.js";
+import createElementHTML from "../../../utility/work_with_html.js";
 
 // elements ---------------------------------------------------- //
-import player from "./player.js";
+import player from "./player.js"
 
 
 // main ======================================================== //

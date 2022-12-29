@@ -5,8 +5,8 @@
 import play_field from "../main/play_field.js";
 
 // utilities --------------------------------------------------- //
-import { AnimationJS } from "../../utility/work_with_animations.js";
-import createElementHTML from "../../utility/work_with_html.js";
+import createElementHTML from "../../../utility/work_with_html.js";
+import { AnimationJS } from "../../../utility/work_with_animations.js";
 
 
 // main ======================================================== //
@@ -21,13 +21,13 @@ const suggestion_make_action = {
             return `
                 <div class="suggestion_make_action">
                     <img
-                        src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_mouse.svg"
+                        src="../../../../images/suggestion_make_action/click_mouse.svg"
                         alt="click"
                     >
                 </div>
                 <div class="suggestion_make_action">
                     <img
-                        src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/button_space.svg"
+                        src="../../../../images/suggestion_make_action/button_space.svg"
                         alt="button space"
                     >
                 </div>
@@ -36,7 +36,7 @@ const suggestion_make_action = {
             return `
                 <div class="suggestion_make_action">
                     <img
-                        src="https://gleb001.github.io/Flappy-Bird-Gosha-/images/suggestion_make_action/click_arm.svg"
+                        src="../../../../images/suggestion_make_action/click_arm.svg"
                         alt="tap"
                     >
                 </div>
@@ -130,4 +130,4 @@ const suggestion_make_action = {
 
 
 // export ====================================================== //
-export { suggestion_make_action };
+export default suggestion_make_action;

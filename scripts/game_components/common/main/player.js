@@ -2,12 +2,13 @@
 // import ====================================================== //
 
 // utility ----------------------------------------------------- //
-import { AnimationCSS, AnimationJS } from "../../utility/work_with_animations.js";
-import createElementHTML from "../../utility/work_with_html.js";
 import obstacle_settings from "./obstacle.js";
+import createElementHTML from "../../../utility/work_with_html.js";
+import { AnimationCSS, AnimationJS } from "../../../utility/work_with_animations.js";
 
 // elements ---------------------------------------------------- //
 import play_field from "./play_field.js";
+import miniSyncEngine from "../../../utility/miniSyncEngine.js";
 
 
 // main ======================================================== //
@@ -19,35 +20,7 @@ const player = {
         attributes: { id: "player", }
     }),
 
-    // statuses ------------------------------------------------ //
-    statuses: {
-        fly: 'player_fly',
-        fall: 'player_fall',
-        losing_fall: 'losing_fall',
-    },
-
-    // size ---------------------------------------------------- //
-    get size() { 
-
-        // 1. get size window
-        let window_width = window.screen.width;
-        let height_window = window.screen.height;
-
-        // 2. get check size
-        let check_size = window_width;
-        if (window_width < height_window) check_size = height_window;
-
-        // 3. get devide value
-        let devide_value = 20;
-        if(window_width < 1300) devide_value = 17.5;
-        if(window_width < 1024) devide_value = 13;
-
-        // 3. return size
-        return check_size / devide_value;
-
-    },
-
-    // animation ----------------------------------------------- //
+    // animations ---------------------------------------------- //
     ANIMATIONS: {
 
         // durations
@@ -119,25 +92,58 @@ const player = {
 
             player.HTML.className = player.statuses.losing_fall;
 
-            new AnimationJS({
-                changing_elements: [player.HTML],
-                changing_properties: [
-                    {
-                        name: 'transform',
-                        unit_of_measurement: 'deg',
-                        start_value: 0,
-                        end_value: 360,
-                        function_value: 'rotate',
-                    },
-                ],
-                timing_settings: {
-                    synchronous: true,
-                    timing_function: AnimationJS.TIMING_FUNCTIONS.linear,
-                    duration: 450
+            let duration_losing_fall = 450;
+            miniSyncEngine.executionDelay(
+                () => {
+                    new AnimationJS({
+                        changing_elements: [player.HTML],
+                        changing_properties: [
+                            {
+                                name: 'transform',
+                                unit_of_measurement: 'deg',
+                                start_value: 0,
+                                end_value: 360,
+                                function_value: 'rotate',
+                            },
+                        ],
+                        timing_settings: {
+                            timing_function: AnimationJS.TIMING_FUNCTIONS.linear,
+                            duration: duration_losing_fall
+                        },
+                    }).start();
                 },
-            }).start();
+                duration_losing_fall
+            );
 
         }
+
+    },
+
+    // statuses ------------------------------------------------ //
+    statuses: {
+        fly: 'player_fly',
+        fall: 'player_fall',
+        losing_fall: 'losing_fall',
+    },
+
+    // size ---------------------------------------------------- //
+    get size() {
+
+        // 1. get size window
+        let window_width = window.screen.width;
+        let height_window = window.screen.height;
+
+        // 2. get check size
+        let check_size = window_width;
+        if (window_width < height_window) check_size = height_window;
+
+        // 3. get devide value
+        let devide_value = 20;
+        if (window_width < 1300) devide_value = 17.5;
+        if (window_width < 1024) devide_value = 13;
+
+        // 3. return size
+        return check_size / devide_value;
 
     },
 
@@ -185,7 +191,7 @@ const player = {
                 let center_of_the_play_field = window.screen.availHeight / 2 - 70;
                 if (player.HTML.offsetTop >= center_of_the_play_field) {
                     let animation_fly = player.ANIMATIONS.fly;
-                    if(animation_fly) animation_fly.start();
+                    if (animation_fly) animation_fly.start();
                 }
 
             }, player.ANIMATIONS.durations.fly + 75

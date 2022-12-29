@@ -2,42 +2,17 @@
 // main ======================================================== //
 
 // game engine ------------------------------------------------- //
-const GameEngine = {
+const miniSyncEngine = {
 
-    // status -------------------------------------------------- //
-    _status: {
-        // list
-        list: {
-            // PS: each property contains its own name, so that when
-            // switching properties it is easier to check if the
-            // engine has this status
-            algorithm_finished: "algorithm_finished", // the algorithm has finished its execution
-            work: "work",                             // algorithm execution
-            pause: "pause",                           // suspending the execution of the algorithm
-        },
-        // current
-        set(new_status) {
+    // methods of working with a synchronous game engine ------- //
 
-            if (this.list[new_status]) {
-                this._current = new_status;
-            } else {
-                console.error(
-                    `given status(${new_status}) cannot be set to a` +
-                    `synchronous game engine`
-                );
-            }
-
-        },
-        get() { return this._current; },
-    },
-
-    // algorithm ----------------------------------------------- //
+    // algorithm
     algorithm: {
 
         // work with the list ---------------------------------- //
         list: {},
         // adding an algorithm to the list
-        add({ name = "", name_next = "", components = [], trigger, }) {
+        add({ name = "", name_next = "", components = [], trigger }) {
 
             // 1. check the arguments for validity
             let message = _isValidArguments();
@@ -77,6 +52,7 @@ const GameEngine = {
             }
 
         },
+
         // getting the name of the initial algorithm
         get name_initial() {
 
@@ -120,15 +96,13 @@ const GameEngine = {
 
             get() { return this._self; },
             set(name_algorithm) {
-                if (!GameEngine.algorithm.list[name_algorithm]) return;
-                this._self = GameEngine.algorithm.list[name_algorithm];
+                if (!miniSyncEngine.algorithm.list[name_algorithm]) return;
+                this._self = miniSyncEngine.algorithm.list[name_algorithm];
             },
 
         },
 
     },
-
-    // methods of working with a synchronous game engine ------- //
 
     // start
     start() {
@@ -146,18 +120,53 @@ const GameEngine = {
 
     },
 
-    // stop
-    pause() {
+    // execution delay
+    executionDelay(async_function, duration_delay) {
+
+        // 1. pause mini sync engine
         this._status.set(this._status.list.pause);
+
+        // 2. launch asynchronous function
+        async_function();
+
+        // 3. start after pause mini sync engine
+        setTimeout(() => {
+            this._status.set(this._status.list.work);
+            this._launchAlgorithm();
+        }, duration_delay);
+
     },
 
-    // starting after the pause
-    startAfterPause() {
-        this._status.set(this._status.list.work);
-        this._launchAlgorithm();
-    },
+
 
     // the mechanism of operation of the synchronous engine ---- //
+
+    // status
+    _status: {
+        // list
+        list: {
+            // PS: each property contains its own name, so that when
+            // switching properties it is easier to check if the
+            // engine has this status
+            algorithm_finished: "algorithm_finished", // the algorithm has finished its execution
+            work: "work",                             // algorithm execution
+            pause: "pause",                           // suspending the execution of the algorithm
+        },
+        // current
+        set(new_status) {
+
+            if (this.list[new_status]) {
+                this._current = new_status;
+            } else {
+                console.error(
+                    `given status(${new_status}) cannot be set to a` +
+                    `synchronous game engine`
+                );
+            }
+
+        },
+        get() { return this._current; },
+    },
 
     // launch trigger
     _launchTrigger() {
@@ -243,163 +252,4 @@ const GameEngine = {
 };
 
 // export ====================================================== //
-export default GameEngine;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // for (
-        //     let index = algorithm.index_component;
-        //     index <= components.length;
-        //     index++
-        // ) {
-
-        //     console.log(index);
-
-        //     setTimeout(() => {
-
-        //         // 2.1 check status engine
-        //         if (
-        //             this._status.get() ==
-        //             this._status.list.pause
-        //         ) {
-        //             algorithm.index_component = index;
-        //             return;
-        //         }
-
-        //         // 2.2 check end algorithm
-        //         if (index == components.length) {
-        //             this._status.set(this._status.list.algorithm_finished);
-        //         } else {
-        //             components[index]();
-        //         }
-
-        //     }, 0);
-
-        // }
-
-                // // 1. get current algorithm
-        // let algorithm = this.algorithm.current.get();
-        // algorithm.components[this.algorithm.current.index_component++]();
-
-        // if (
-        //     this.algorithm.current.index_component ==
-        //     algorithm.components.length
-        // ) {
-        //     this._status.set(this._status.list.algorithm_finished);
-        //     return;
-        // }
-
-        // let id_interval = setInterval(() => {
-
-        //     if (this._status.get() != this._status.list.pause) {
-        //         clearInterval(id_interval);
-        //         this._launchAlgorithm();
-        //     } 
-
-        // }, 45);
-
-
-
-// //
-// // GameEngine ---------------------------------------------- //
-// const GameEngine = {
-
-//     // public APIs ============================================= //
-
-//     // start --------------------------------------------------- //
-//     start(algorithm = {}) {
-
-//         // 1. check?
-
-//         // 2. update properties
-//         this._algorithm.setList(algorithm);
-//         this._algorithm.setCurrentAlgorithm(
-//             getInitialAlgorithm(algorithm)
-//         );
-//         this._status_settings.setCurrentStatus(
-//             this._status_settings.status.work
-//         );
-
-//         // 3. launch work algorithm
-//         this._launchAlgorithm();
-
-//     },
-
-//     // stop ---------------------------------------------------- //
-//     stop() {
-//         this._status_settings.setCurrentStatus(
-//             this._status_settings.status.pause
-//         );
-//     },
-
-//     // start after stop ---------------------------------------- //
-//     startAfterStop() {
-//         this._status_settings.setCurrentStatus(
-//             this._status_settings.status.work
-//         );
-//         this._launchAlgorithm();
-//     },
-
-//     // launch -------------------------------------------------- //
-//     _launchAlgorithm() {
-
-//         // 1. check
-//         let first_condition = !this._algorithm.getCurrentAlgorithm();
-//         let second_condition = !this._status_settings.isCurrentStatus(
-//             this._status_settings.status.work
-//         );
-
-//         if (first_condition || second_condition) return;
-
-//         // 2. execution current algorithm
-//         let algorithm = this._algorithm.getCurrentAlgorithm();
-//         let components_algorithm = algorithm.components;
-
-//         // 3. execution algorithm
-//         for (
-//             let index = 0;
-//             index < components_algorithm.length;
-//             index++
-//         ) {
-
-//             setTimeout(
-
-//                 () => {
-
-//                     // 3.1 check status engine
-//                     if (this._status_settings.isCurrentStatus(
-//                         this._status_settings.status.pause
-//                     )) return;
-
-//                     // 3.2 launch and delete component algorithm
-//                     components_algorithm[0]();
-//                     components_algorithm.shift();
-
-//                     // 3.3 set next algorithm when:
-//                     if (!components_algorithm.length) {
-//                         this._algorithm.setNextAlgorithm();
-//                         this._status_settings.setCurrentStatus(
-//                             this._status_settings.status.expectation
-//                         );
-//                     }
-
-//                 }, 0
-
-//             );
-
-//         }
-
-//     },
+export default miniSyncEngine;

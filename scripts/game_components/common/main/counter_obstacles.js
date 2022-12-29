@@ -2,7 +2,7 @@
 // imports ===================================================== //
 
 // utilities --------------------------------------------------- //
-import createElementHTML from "../../utility/work_with_html.js";
+import createElementHTML from "../../../utility/work_with_html.js";
 
 // components -------------------------------------------------- //
 import play_field from "./play_field.js";

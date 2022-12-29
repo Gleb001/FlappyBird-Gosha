@@ -2,19 +2,19 @@
 // import ====================================================== //
 
 // game elements ----------------------------------------------- //
-import play_field from "../game_components/main/play_field.js";
-import circle from "../animation_elements/circle.js";
-import player from "../game_components/main/player.js";
-import obstacle_settings from "../game_components/main/obstacle.js";
-import { suggestion_make_action } from "../game_components/additional/suggestion_make_action.js";
-import counter_obstacles from "../game_components/main/counter_obstacles.js";
+import circle from "../game_components/animations/circle.js";
+import player from "../game_components/common/main/player.js";
+import play_field from "../game_components/common/main/play_field.js";
+import obstacle_settings from "../game_components/common/main/obstacle.js";
+import counter_obstacles from "../game_components/common/main/counter_obstacles.js";
+import suggestion_make_action from "../game_components/common/additional/suggestion_make_action.js";
 
 // utility ----------------------------------------------------- //
-import { AnimationCSS } from "../utility/work_with_animations.js";
 import createElementHTML from "../utility/work_with_html.js";
+import { AnimationCSS } from "../utility/work_with_animations.js";
 
 // game engine ------------------------------------------------- //
-import GameEngine from "../game_engines/game_engine.js";
+import miniSyncEngine from "../utility/miniSyncEngine.js";
 
 
 // main ======================================================== //
@@ -30,23 +30,28 @@ const components_of_algorithms = {
 
             // 2. show play field
             if (window.screen.availWidth > 1000) {
-                new AnimationCSS({
-                    name_animation: "narrowing_play_field",
-                    changing_elements: [play_field.HTML],
-                    timing_settings: {
-                        duration: 750,
-                        timing_function: "ease-out",
-                        synchronous: true,
-                    },
-                    changing_properties: [
-                        {
-                            name: "width",
-                            unit_of_measurement: "vw",
-                            start_value: 100,
-                            end_value: 100 - play_field.narrowing_value
+
+                let duration_narrowing_play_field = 750;
+
+                miniSyncEngine.executionDelay(() => {
+                    new AnimationCSS({
+                        name_animation: "narrowing_play_field",
+                        changing_elements: [play_field.HTML],
+                        timing_settings: {
+                            duration: duration_narrowing_play_field,
+                            timing_function: "ease-out",
                         },
-                    ],
-                }).start();
+                        changing_properties: [
+                            {
+                                name: "width",
+                                unit_of_measurement: "vw",
+                                start_value: 100,
+                                end_value: 100 - play_field.narrowing_value
+                            },
+                        ],
+                    }).start();
+                },
+                duration_narrowing_play_field);
             }
 
         },
@@ -74,12 +79,13 @@ const components_of_algorithms = {
             game_name_wrapper.prepend(game_name);
             play_field.HTML.prepend(game_name_wrapper);
 
-            // 4. show game name
-            game_name.style.animation = "appear 1000ms linear forwards";
-
-            // 5. pause synchronous game engine
-            GameEngine.pause();
-            setTimeout(() => { GameEngine.startAfterPause(); }, 1000);
+            // 4. appear game name
+            let duration_appear_game_name = 1000;
+            miniSyncEngine.executionDelay(() => {
+                game_name.style.animation = `
+                    appear ${duration_appear_game_name}ms linear forwards
+                `;
+            }, duration_appear_game_name);
 
         },
         // suggestion make an action ----------------------- //
@@ -148,24 +154,29 @@ const components_of_algorithms = {
             // 2. insert counter obstacles
             play_field.HTML.prepend(counter_obstacles.HTML);
 
-            // 2. show counter obstacles
-            new AnimationCSS({
-                name_animation: "move_down_counter_obstacles",
-                changing_elements: [counter_obstacles.HTML],
-                timing_settings: {
-                    duration: 300,
-                    timing_function: "linear",
-                    synchronous: true,
+            // 3. show counter obstacles
+            let duration_move_down_counter_obstacles = 300;
+            miniSyncEngine.executionDelay(
+                () => {
+                    new AnimationCSS({
+                        name_animation: "move_down_counter_obstacles",
+                        changing_elements: [counter_obstacles.HTML],
+                        timing_settings: {
+                            duration: duration_move_down_counter_obstacles,
+                            timing_function: "linear",
+                        },
+                        changing_properties: [
+                            {
+                                name: "top",
+                                unit_of_measurement: "px",
+                                start_value: counter_obstacles.HTML.offsetTop,
+                                end_value: 0,
+                            }
+                        ],
+                    }).start();
                 },
-                changing_properties: [
-                    {
-                        name: "top",
-                        unit_of_measurement: "px",
-                        start_value: counter_obstacles.HTML.offsetTop,
-                        end_value: 0,
-                    }
-                ],
-            }).start();
+                duration_move_down_counter_obstacles
+            );
 
         },
         // player ------------------------------------------ //
@@ -308,7 +319,7 @@ const components_of_algorithms = {
         removePlayFieldProcessGameClass() {
             play_field.HTML.classList.remove(play_field.statuses.process_game);
         },
-        showResultGamer() { 
+        showResultGamer() {
 
             // 1. create score
             let score_player = createElementHTML({
@@ -317,7 +328,7 @@ const components_of_algorithms = {
                     style: "opacity: 0;",
                 },
                 inner_value:
-                `
+                    `
                     <p class="counter_obstacles_text">
                         ${counter_obstacles.score_player}
                     </p>
@@ -325,14 +336,19 @@ const components_of_algorithms = {
                 `,
             });
 
-            // 2. insert game name
+            // 2. insert score player
             play_field.HTML.prepend(score_player);
 
-            // 3. show game name
-            score_player.style.animation = "appear 1000ms linear forwards";
-
-            GameEngine.pause();
-            setTimeout(() => GameEngine.startAfterPause(), 1000);
+            // 3. show score player
+            let duration_appear_score_player = 1000;
+            miniSyncEngine.executionDelay(
+                () => {
+                    score_player.style.animation = `
+                        appear ${duration_appear_score_player}ms linear forwards
+                    `;
+                },
+                duration_appear_score_player
+            );
 
         },
         clearPlayField() {

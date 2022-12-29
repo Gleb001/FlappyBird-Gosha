@@ -1,11 +1,4 @@
 
-// import ============================================= //
-
-// sync game engine ----------------------------------- //
-import syncGameEngine from "../game_engines/game_engine.js";
-import { setPropsWithDefaultValues } from "./work_with_objects.js";
-
-
 // main =============================================== //
 
 // class animation js --------------------------------- //
@@ -17,7 +10,6 @@ class AnimationJS {
     constructor(animation_settings = {
         changing_elements,
         timing_settings: {
-            synchronous,
             timing_function,
             duration,
             delay,
@@ -39,7 +31,7 @@ class AnimationJS {
 
         // default props
         let default_settings = {
-            timing_settings: { synchronous: false, delay: 0 },
+            timing_settings: { delay: 0 },
             changing_properties: { unit_of_measurement: "" },
         };
 
@@ -60,10 +52,7 @@ class AnimationJS {
         let duration = this.timing_settings.duration;
         let delay = this.timing_settings.delay;
 
-        // 2. checking on synchronous
-        if (synchronous) syncGameEngine.pause();
-
-        // 3. play an animation with a delay
+        // 2. play animation with a delay
         setTimeout(
             () => {
 
@@ -95,13 +84,10 @@ class AnimationJS {
     // end --------------------------------------------- //
     end() {
 
-        // 1. cancel animation frame and start next func
         window.cancelAnimationFrame(this.ID_ANIMATION);
-        this._startNextFunction();
 
-        // 2. checking on synchronous
-        if (this.timing_settings.synchronous) {
-            syncGameEngine.startAfterPause();
+        if (typeof this.next_function == "function") {
+            this.next_function();
         }
 
     }
@@ -176,11 +162,6 @@ class AnimationJS {
 
     }
 
-    // start next function ---------------------------- //
-    _startNextFunction() {
-        if (typeof this.next_function == "function") this.next_function();
-    }
-
 };
 
 // class animation css -------------------------------- //
@@ -193,7 +174,6 @@ class AnimationCSS {
         name_animation,
         changing_elements,
         timing_settings: {
-            synchronous,
             timing_function,
             duration,
             delay,
@@ -216,7 +196,7 @@ class AnimationCSS {
         // default props
         let default_settings = {
             name_animation: "animation_number_" + AnimationCSS.INDEX_ANIMATION++,
-            timing_settings: { synchronous: false, delay: 0 },
+            timing_settings: { delay: 0 },
             changing_properties: { unit_of_measurement: "" },
         };
         // set props for the animation object
@@ -231,23 +211,18 @@ class AnimationCSS {
     // start ------------------------------------------ //
     start() {
 
-        // 1. checking synchronous
-        if (this.timing_settings.synchronous) {
-            syncGameEngine.pause();
-        }
-
-        // 2. add styles animation for changing element
+        // 1. add styles animation for changing element
         this._addSpecStylesForChangingElements(
             AnimationCSS.STATUSES_ANIMATION.start
         );
 
-        // 3. create animation css file
+        // 2. create animation css file
         let animation_css_file = AnimationCSS.createAnimationCSSFile(
             this.changing_properties,
             this.name_animation
         );
 
-        // 4. end animation
+        // 3. end animation
         setTimeout(
             () => {
                 if (animation_css_file) {
@@ -270,17 +245,13 @@ class AnimationCSS {
             AnimationCSS.STATUSES_ANIMATION.end
         );
 
-        // 3. check syncronous
-        if (this.timing_settings.synchronous) {
-            syncGameEngine.startAfterPause();
-        }
-
-        // 4. start next function
+        // 3. start next function
         if (typeof this.next_function == "function") {
             this.next_function();
         }
 
     }
+
 
 
     // private properties and methods ================= //
@@ -362,8 +333,8 @@ class AnimationCSS {
 
     }
 
-    // add special styles for changing elements depend status
-    // animation (start or stop) ---------------------- //
+    // add special styles for changing elements depend
+    // status animation (start or stop) --------------- //
     _addSpecStylesForChangingElements(type_value) {
 
         // 1. set animation value
@@ -392,6 +363,64 @@ class AnimationCSS {
     }
 
 };
+
+
+// additional functions =============================== //
+
+// set default settings ------------------------------- //
+function setPropsWithDefaultValues(
+    object,
+    new_props = {},
+    default_props = {},
+) {
+
+    // 1. check presence the object
+    if (!object) {
+        console.error(
+            "Отсутствует объект, которому Вы " +
+            "желаете задать дефолтные свойства при " +
+            "условии, что у него (объекта) они (свойства) " +
+            "отсутствуют!"
+        );
+        return;
+    }
+
+    // 2. set new props for the object
+    Object.assign(object, new_props);
+
+    // 3. set new properties over default ones
+    for (let key in default_props) {
+
+        // 3.1 get new prop
+        let default_prop = default_props[key];
+        let new_prop = new_props[key];
+
+        // 3.2 quick check -> quick end
+        if (!new_prop) {
+            object[key] = default_prop;
+        } else if (Array.isArray(new_prop)) {
+            object[key] = new_prop.map(
+                prop => {
+
+                    if (
+                        typeof prop != "object" ||
+                        Array.isArray(prop) ||
+                        prop.tagName
+                    ) return prop;
+
+                    return Object.assign(
+                        {}, default_prop, prop
+                    );
+
+                }
+            );
+        } else if (typeof new_prop == "object") {
+            object[key] = Object.assign(default_prop, new_prop);
+        }
+
+    }
+
+}
 
 
 // export ============================================= //

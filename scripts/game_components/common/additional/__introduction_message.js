@@ -1,4 +1,12 @@
 
+// ======================================
+// This is a relic of the old code (i.e.
+// before the game system was changed)
+// ======================================
+
+
+
+
 // import //
 import { GameElement } from '../../../abstractions/game patterns/patterns_game_elements.js';
 

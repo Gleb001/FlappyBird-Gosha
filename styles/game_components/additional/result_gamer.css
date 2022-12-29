@@ -12,6 +12,8 @@
     position: relative;
     bottom: 20px;
 
+    z-index: 1;
+
 }
 .result_gamer_text {
 

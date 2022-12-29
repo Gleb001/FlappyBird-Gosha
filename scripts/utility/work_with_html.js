@@ -23,9 +23,7 @@ function createElementHTML({
 
     html_element.innerHTML = inner_value;
     for (let name_attr in attributes) {
-        html_element.setAttribute(
-            name_attr, attributes[name_attr]
-        )
+        html_element.setAttribute(name_attr, attributes[name_attr]);
     }
 
     // 3. return html element
