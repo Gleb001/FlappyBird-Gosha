@@ -99,16 +99,16 @@ miniSyncEngine - это сущность, которая управляет си
 ```js
 miniSyncEngine.algorithm.add({
     name: "name_current_algorithm",
-    name_next: "name_next_algorihm", // может отсутствовать
+    name_next: "name_next_algorihm", // можно не указывать
     components: [
         function component_1() { console.log("Launch first component"); },
         function component_2() { console.log("Launch second component");},
         ...
     ],
-    trigger: function trigger() { return true; },
     // триггер по запуску текущего алгоритма. Данный триггер должен возвращать булевое
     // значение, чтобы функция, отвечающая за переключение алгоритмов, знала, когда
     // требуется запустить текущий алгоритм
+    trigger: function trigger() { return true; },
 });
 ```
 
@@ -158,27 +158,40 @@ AnimationCSS и AnimationJS - это классы (шаблоны) для соз
 ```js
 // 1. храним анимацию в переменной.
 let curret_animation = new AnimationJS({
-    changing_elements: [player.HTML], // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
+    // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
+    changing_elements: [player.HTML],
     changing_properties: [
+    
+        // итоговый результат: opacity: 0 -> opacity: 1
         {
-            name: 'opacity', // наименование анимации
-            unit_of_measurement: '', // единица измерения анимации - может быть не указана
-            function_value: "",  // функция изменяемого свойства - может быть не указана
-            start_value: 0, // начальное значение
-            end_value: 1, // конечное значение
-        }, // итоговый результат: opacity: 0 -> opacity: 1
+            // наименование анимации
+            name: 'opacity',
+            // единица измерения анимации - может быть не указана
+            unit_of_measurement: '',
+            // функция изменяемого свойства - может быть не указана
+            function_value: "",
+            // начальное значение
+            start_value: 0,
+            // конечное значение
+            end_value: 1,
+        }, 
+        
+        // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
         {
-            name: 'transform', // наименование анимации
-            unit_of_measurement: 'deg', // единица измерения анимации - может быть не указана
-            function_value: "rotate",  // функция изменяемого свойства - может быть не указана
-            start_value: 0, // начальное значение
-            end_value: 45, // конечное значение
-        }, // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
+            // наименование анимации
+            name: 'transform',
+            // единица измерения анимации - может быть не указана
+            unit_of_measurement: 'deg',
+            // функция изменяемого свойства - может быть не указана
+            function_value: "rotate",
+            // начальное значение
+            start_value: 0,
+            // конечное значение
+            end_value: 45, 
+        },
+        
     ],
     timing_settings: {
-        timing_function: function linear(time_fraction) {
-            return time_fraction; // f(x) = x - алгебраическая функция
-        },
         // данная функция должна возвращать результат алгебраической функции. В качестве координаты
         // Х всегда выступает time_fraction. Именно данная координата под данным именем (time_fraction)
         // с течением времени изменяется. Ваша задача настроить её изменение с помощью данной функции
@@ -186,38 +199,59 @@ let curret_animation = new AnimationJS({
         // алгебраической функции f(x).
         // Также вы можете воспользоваться заранее написанными алгебраическими функциями. Они храняться
         // в свойстве TIMING_FUNCTIONS рассматриваемого класса AnimationJS.
-        duration: 1000, // длительность анимации измеряется в ms(милисекундах)
-        delay, // задержка анимации измеряется в ms(милисекундах)
+        timing_function: function linear(time_fraction) {
+            return time_fraction; // f(x) = x - алгебраическая функция
+        },
+        // длительность анимации измеряется в ms(милисекундах)
+        duration: 1000,
+        // задержка анимации измеряется в ms(милисекундах)
+        delay,
     },
+    // функция, выполняемая после проигрывания анимации
     next_function: function startAfterExecutionThisAnimation() {
         ...
-    }; // функция, выполняемая после проигрывания анимации
+    },
 });
 curret_animation.start();
 
 // 2. нигде не храним анимацию, а сразу её исполняем
 new AnimationJS({
-    changing_elements: [player.HTML], // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
+    // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
+    changing_elements: [player.HTML],
+    // массив, содержащий изменяемые свойства
     changing_properties: [
+    
+        // итоговый результат: opacity: 0 -> opacity: 1
         {
-            name: 'opacity', // наименование анимации
-            unit_of_measurement: '', // единица измерения анимации - может быть не указана
-            function_value: "",  // функция изменяемого свойства - может быть не указана
-            start_value: 0, // начальное значение
-            end_value: 1, // конечное значение
-        }, // итоговый результат: opacity: 0 -> opacity: 1
+            // наименование изменяемого свойства
+            name: 'opacity',
+            // единица измерения анимации - может быть не указана
+            unit_of_measurement: '',
+            // функция изменяемого свойства - может быть не указана
+            function_value: "",
+            // начальное значение
+            start_value: 0,
+            // конечное значение
+            end_value: 1,
+        }, 
+        
+        // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
         {
-            name: 'transform', // наименование анимации
-            unit_of_measurement: 'deg', // единица измерения анимации - может быть не указана
-            function_value: "rotate",  // функция изменяемого свойства - может быть не указана
-            start_value: 0, // начальное значение
-            end_value: 45, // конечное значение
-        }, // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
-    ],
-    timing_settings: {
-        timing_function: function linear(time_fraction) {
-            return time_fraction; // f(x) = x - алгебраическая функция
+            // наименование изменяемого свойства
+            name: 'transform',
+            // единица измерения анимации - может быть не указана
+            unit_of_measurement: 'deg',
+            // функция изменяемого свойства - может быть не указана
+            function_value: "rotate",
+            // начальное значение
+            start_value: 0,
+            // конечное значение
+            end_value: 45, 
         },
+        
+    ],
+    // настройки времени анимации
+    timing_settings: {
         // данная функция должна возвращать результат алгебраической функции. В качестве координаты
         // Х всегда выступает time_fraction. Именно данная координата под данным именем (time_fraction)
         // с течением времени изменяется. Ваша задача настроить её изменение с помощью данной функции
@@ -225,12 +259,18 @@ new AnimationJS({
         // алгебраической функции f(x).
         // Также вы можете воспользоваться заранее написанными алгебраическими функциями. Они храняться
         // в свойстве TIMING_FUNCTIONS рассматриваемого класса AnimationJS.
-        duration: 1000, // длительность анимации измеряется в ms(милисекундах)
-        delay, // задержка анимации измеряется в ms(милисекундах)
+        timing_function: function linear(time_fraction) {
+            return time_fraction; // f(x) = x - алгебраическая функция
+        },
+        // длительность анимации измеряется в ms(милисекундах)
+        duration: 1000,
+        // задержка анимации измеряется в ms(милисекундах)
+        delay,
     },
+    // функция, выполняемая после проигрывания анимации
     next_function: function startAfterExecutionThisAnimation() {
         ...
-    }; // функция, выполняемая после проигрывания анимации
+    },
 }).start();
 
 // 3. останавливаем анимацию с помощью метода end(), созданной вами анимации
@@ -244,62 +284,109 @@ curret_animation.end();
 ```js
 // 1. храним анимацию в переменной.
 let curret_animation = new AnimationCSS({
-    name_animation: "change_opacity_and_transform_player" // может быть не указан
-    changing_elements: [player.HTML], // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
+    // наименование анимации - может быть не указано
+    name_animation: "change_opacity_and_transform_player",
+    // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
+    changing_elements: [player.HTML],
+    // массив, содержащий изменяемые свойства
     changing_properties: [
+    
+        // итоговый результат: opacity: 0 -> opacity: 1
         {
-            name: 'opacity', // наименование анимации
-            unit_of_measurement: '', // единица измерения анимации - может быть не указана
-            function_value: "",  // функция изменяемого свойства - может быть не указана
-            start_value: 0, // начальное значение
-            end_value: 1, // конечное значение
-        }, // итоговый результат: opacity: 0 -> opacity: 1
+            // наименование изменяемого свойства
+            name: 'opacity',
+            // единица измерения анимации - может быть не указана
+            unit_of_measurement: '',
+            // функция изменяемого свойства - может быть не указана
+            function_value: "",
+            // начальное значение
+            start_value: 0,
+            // конечное значение
+            end_value: 1,
+        }, 
+        
+        // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
         {
-            name: 'transform', // наименование анимации
-            unit_of_measurement: 'deg', // единица измерения анимации - может быть не указана
-            function_value: "rotate",  // функция изменяемого свойства - может быть не указана
-            start_value: 0, // начальное значение
-            end_value: 45, // конечное значение
-        }, // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
+            // наименование изменяемого свойства
+            name: 'transform',
+            // единица измерения анимации - может быть не указана
+            unit_of_measurement: 'deg',
+            // функция изменяемого свойства - может быть не указана
+            function_value: "rotate",
+            // начальное значение
+            start_value: 0,
+            // конечное значение
+            end_value: 45, 
+        },
+        
     ],
+    // настройки времени анимации
     timing_settings: {
-        timing_function: "linear", // вводите только значения свойства animation-timing-function
-        delay, // задержка анимации измеряется в ms(милисекундах)
+        // временная функция анимации приниает значения свойства animation-timing-function
+        timing_function: "linear", 
+        // длительность анимации измеряется в ms(милисекундах)
+        duration: 1000,
+        // задержка анимации измеряется в ms(милисекундах)
+        delay,
     },
+    // функция, выполняемая после проигрывания анимации
     next_function: function startAfterExecutionThisAnimation() {
         ...
-    }; // функция, выполняемая после проигрывания анимации
+    },
 });
 curret_animation.start();
 
 // 2. нигде не храним анимацию, а сразу её исполняем
 new AnimationCSS({
-    name_animation: "change_opacity_and_transform_player" // может быть не указан
-    changing_elements: [player.HTML], // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
+    // наименование анимации - может быть не указано
+    name_animation: "change_opacity_and_transform_player",
+    // массив, содержащий элементы, которые будут изменены в ходе проигрывания анимации
+    changing_elements: [player.HTML],
+    // массив, содержащий изменяемые свойства
     changing_properties: [
+    
+        // итоговый результат: opacity: 0 -> opacity: 1
         {
-            name: 'opacity', // наименование анимации
-            unit_of_measurement: '', // единица измерения анимации - может быть не указана
-            function_value: "",  // функция изменяемого свойства - может быть не указана
-            start_value: 0, // начальное значение
-            end_value: 1, // конечное значение
-        }, // итоговый результат: opacity: 0 -> opacity: 1
+            // наименование изменяемого свойства
+            name: 'opacity',
+            // единица измерения анимации - может быть не указана
+            unit_of_measurement: '',
+            // функция изменяемого свойства - может быть не указана
+            function_value: "",
+            // начальное значение
+            start_value: 0,
+            // конечное значение
+            end_value: 1,
+        }, 
+        
+        // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
         {
-            name: 'transform', // наименование анимации
-            unit_of_measurement: 'deg', // единица измерения анимации - может быть не указана
-            function_value: "rotate",  // функция изменяемого свойства - может быть не указана
-            start_value: 0, // начальное значение
-            end_value: 45, // конечное значение
-        }, // итоговый результат: transform: rotate(0deg) -> transform: rotate(45deg)
+            // наименование изменяемого свойства
+            name: 'transform',
+            // единица измерения анимации - может быть не указана
+            unit_of_measurement: 'deg',
+            // функция изменяемого свойства - может быть не указана
+            function_value: "rotate",
+            // начальное значение
+            start_value: 0,
+            // конечное значение
+            end_value: 45, 
+        },
+        
     ],
+    // настройки времени анимации
     timing_settings: {
-        timing_function: "linear", // вводите только значения свойства animation-timing-function
-        duration: 1000, // длительность анимации измеряется в ms(милисекундах)
-        delay, // задержка анимации измеряется в ms(милисекундах)
+        // временная функция анимации приниает значения свойства animation-timing-function
+        timing_function: "linear", 
+        // длительность анимации измеряется в ms(милисекундах)
+        duration: 1000,
+        // задержка анимации измеряется в ms(милисекундах)
+        delay,
     },
+    // функция, выполняемая после проигрывания анимации
     next_function: function startAfterExecutionThisAnimation() {
         ...
-    }; // функция, выполняемая после проигрывания анимации
+    },
 }).start();
 
 // 3. останавливаем анимацию с помощью метода end(), созданной вами анимации
@@ -315,7 +402,8 @@ curret_animation.end();
 let name_current_animation = "name_current_animation";
 
 // 2. создание CSS файла с анимацией
-AnimationCSS.createAnimationCSSFile(
+AnimationCSS.createFile(
+    // массив, содержащий изменяемые свойства (changing_properties)
     [
         {
             name: "background-color",
@@ -324,6 +412,7 @@ AnimationCSS.createAnimationCSSFile(
             end_value: "black",
         }
     ],
+    // наименование анимации
     name_current_animation
 );
 
@@ -451,10 +540,10 @@ miniSyncEngine.algorithm.add({
         function component_2() { console.log("Launch second component");},
         ...
     ],
-    trigger: function trigger() { return true; },
     // trigger to start the current algorithm. This trigger should return a
     // Boolean value so that the function responsible for switching algorithms
     // knows when to run the current algorithm
+    trigger: function trigger() { return true; },
 });
 ```
 
@@ -504,77 +593,117 @@ Initially, let's consider working with the AnimationJS class.
 ```js
 // 1. we store the animation in a variable.
 let current_animation = new AnimationJS({
-    changing_elements: [player.HTML ], // array containing elements that will be changed during animation playback
+    // array containing elements that will be changed during animation playback
+    changing_elements: [player.HTML],
+    // an array containing mutable properties
     changing_properties: [
+    
+        // final result: opacity: 0 -> opacity: 1
         {
-            name: 'opacity', // animation name
-            unit_of_measuration: ", // animation unit - may not be specified
-            function_value: "", // function of the property being modified - may not be specified
-            start_value: 0, // initial value
-            end_value: 1, // final value
-        }, // final result: opacity: 0 -> opacity: 1
+            // animation name
+            name: 'opacity',
+            // animation unit - may not be specified
+            unit_of_measuration: ", 
+            // function of the property being modified - may not be specified
+            function_value: "", 
+            // initial value
+            start_value: 0, 
+            // final value
+            end_value: 1, 
+        }, 
+        
+        // final result: transform: rotate(0deg) -> transform: rotate(45deg)
         {
-            name: 'transform', // animation name
-            unit_of_measuration: 'deg', // animation unit - may not be specified
-            function_value: "rotate", // the function of the property being changed - may not be specified
-            start_value: 0, // initial value
-            end_value: 45, // final value
-        }, // final result: transform: rotate(0deg) -> transform: rotate(45deg)
+            // animation name
+            name: 'transform', 
+            // animation unit - may not be specified
+            unit_of_measuration: 'deg',
+            // the function of the property being changed - may not be specified
+            function_value: "rotate", 
+            // initial value
+            start_value: 0, 
+            // final value
+            end_value: 45, 
+        }, 
+        
     ],
     timing_settings: {
-        timing_function: function linear(time_fraction) {
-            return time_fraction; // f(x) = x is an algebraic function
-        },
         // this function should return the result of an algebraic function. The X coordinate is always
         // time_fraction. It is this coordinate under the given name (time_fraction) that changes over
         // time. Your task is to adjust its change using this function - either slow it down by division,
         // or speed it up by multiplication, etc., depending on the algebraic function f(x) you set.
         // You can also use pre-written algebraic functions. They are stored in the TIMING_FUNCTIONS
         // property of the AnimationJS class in question.
-        duration: 1000, // animation duration is measured in ms(milliseconds)
-        delay, // animation delay is measured in ms(milliseconds)
+        timing_function: function linear(time_fraction) {
+            return time_fraction; // f(x) = x is an algebraic function
+        },
+        // animation duration is measured in ms(milliseconds)
+        duration: 1000, 
+        // animation delay is measured in ms(milliseconds)
+        delay, 
     },
+    // function executed after animation playback
     next_function: function startAfterExecutionThisAnimation() {
         ...
-    }; // function executed after animation playback
+    },
 });
 curret_animation.start();
 
 // 2. we don't store animation anywhere, but we execute it right away
 new AnimationJS({
-    changing_elements: [player.HTML ], // array containing elements that will be changed during animation playback
+    // array containing elements that will be changed during animation playback
+    changing_elements: [player.HTML],
+    // an array containing mutable properties
     changing_properties: [
+    
+        // final result: opacity: 0 -> opacity: 1
         {
-            name: 'opacity', // animation name
-            unit_of_measuration: ", // animation unit - may not be specified
-            function_value: "", // function of the property being modified - may not be specified
-            start_value: 0, // initial value
-            end_value: 1, // final value
-        }, // final result: opacity: 0 -> opacity: 1
+            // animation name
+            name: 'opacity',
+            // animation unit - may not be specified
+            unit_of_measuration: ", 
+            // function of the property being modified - may not be specified
+            function_value: "", 
+            // initial value
+            start_value: 0, 
+            // final value
+            end_value: 1, 
+        }, 
+        
+        // final result: transform: rotate(0deg) -> transform: rotate(45deg)
         {
-            name: 'transform', // animation name
-            unit_of_measuration: 'deg', // animation unit - may not be specified
-            function_value: "rotate", // the function of the property being changed - may not be specified
-            start_value: 0, // initial value
-            end_value: 45, // final value
-        }, // final result: transform: rotate(0deg) -> transform: rotate(45deg)
+            // animation name
+            name: 'transform', 
+            // animation unit - may not be specified
+            unit_of_measuration: 'deg',
+            // the function of the property being changed - may not be specified
+            function_value: "rotate", 
+            // initial value
+            start_value: 0, 
+            // final value
+            end_value: 45, 
+        }, 
+        
     ],
     timing_settings: {
-        timing_function: function linear(time_fraction) {
-            return time_fraction; // f(x) = x is an algebraic function
-        },
         // this function should return the result of an algebraic function. The X coordinate is always
         // time_fraction. It is this coordinate under the given name (time_fraction) that changes over
         // time. Your task is to adjust its change using this function - either slow it down by division,
         // or speed it up by multiplication, etc., depending on the algebraic function f(x) you set.
         // You can also use pre-written algebraic functions. They are stored in the TIMING_FUNCTIONS
         // property of the AnimationJS class in question.
-        duration: 1000, // animation duration is measured in ms(milliseconds)
-        delay, // animation delay is measured in ms(milliseconds)
+        timing_function: function linear(time_fraction) {
+            return time_fraction; // f(x) = x is an algebraic function
+        },
+        // animation duration is measured in ms(milliseconds)
+        duration: 1000, 
+        // animation delay is measured in ms(milliseconds)
+        delay, 
     },
+    // function executed after animation playback
     next_function: function startAfterExecutionThisAnimation() {
         ...
-    }; // function executed after animation playback
+    },
 }).start();
 
 // 3. we stop the animation using the end() method of the animation you created
@@ -588,63 +717,107 @@ When working with AnimationCSS, the settings are similar to those already presen
 ```js
 // 1. we store the animation in a variable.
 let current_animation = new animationCSS({
-    name_animation: "change_opacity_and_transform_player" // may not be specified
-    changing_elements: [player.HTML ], // array containing elements that will be changed during the playback of the animation
+    // animation name - may not be specified
+    name_animation: "change_opacity_and_transform_player"
+    // array containing elements that will be changed during animation playback
+    changing_elements: [player.HTML],
+    // an array containing mutable properties
     changing_properties: [
+    
+        // final result: opacity: 0 -> opacity: 1
         {
-            name: 'opacity', // animation name
-            unit_of_measuration: ", // animation unit - may not be specified
-            function_value: "", // function of the property being modified - may not be specified
-            start_value: 0, // initial value
-            end_value: 1, // final value
-        }, // final result: opacity: 0 -> opacity: 1
+            // animation name
+            name: 'opacity',
+            // animation unit - may not be specified
+            unit_of_measuration: ", 
+            // function of the property being modified - may not be specified
+            function_value: "", 
+            // initial value
+            start_value: 0, 
+            // final value
+            end_value: 1, 
+        }, 
+        
+        // final result: transform: rotate(0deg) -> transform: rotate(45deg)
         {
-            name: 'transform', // animation name
-            unit_of_measuration: 'deg', // animation unit - may not be specified
-            function_value: "rotate", // the function of the property being changed - may not be specified
-            start_value: 0, // initial value
-            end_value: 45, // final value
-        }, // final result: transform: rotate(0deg) -> transform: rotate(45deg)
+            // animation name
+            name: 'transform', 
+            // animation unit - may not be specified
+            unit_of_measuration: 'deg',
+            // the function of the property being changed - may not be specified
+            function_value: "rotate", 
+            // initial value
+            start_value: 0, 
+            // final value
+            end_value: 45, 
+        }, 
+        
     ],
     timing_settings: {
-        timing_function: "linear" // enter only the values of the animation-timing-function property
-        duration: 1000, // animation duration is measured in ms(milliseconds)
-        delay, // animation delay is measured in ms(milliseconds)
+        // the temporary animation function takes the values of the animation-timing-function property
+        timing_function: "linear",
+        // animation duration is measured in ms(milliseconds)
+        duration: 1000, 
+        // animation delay is measured in ms(milliseconds)
+        delay, 
     },
+    // function executed after animation playback
     next_function: function startAfterExecutionThisAnimation() {
         ...
-    }; // function executed after animation playback
+    },
 });
 curret_animation.start();
 
 // 2. we don't store animation anywhere, but we execute it right away
 new AnimationCSS({
-    name_animation: "change_opacity_and_transform_player" // may not be specified
-    changing_elements: [player.HTML ], // an array containing elements that will be changed during the animation playback
+    // animation name - may not be specified
+    name_animation: "change_opacity_and_transform_player"
+    // array containing elements that will be changed during animation playback
+    changing_elements: [player.HTML],
+    // an array containing mutable properties
     changing_properties: [
+    
+        // final result: opacity: 0 -> opacity: 1
         {
-            name: 'opacity', // animation name
-            unit_of_measuration: ", // animation unit - may not be specified
-            function_value: "", // function of the property being modified - may not be specified
-            start_value: 0, // initial value
-            end_value: 1, // final value
-        }, // final result: opacity: 0 -> opacity: 1
+            // animation name
+            name: 'opacity',
+            // animation unit - may not be specified
+            unit_of_measuration: ", 
+            // function of the property being modified - may not be specified
+            function_value: "", 
+            // initial value
+            start_value: 0, 
+            // final value
+            end_value: 1, 
+        }, 
+        
+        // final result: transform: rotate(0deg) -> transform: rotate(45deg)
         {
-            name: 'transform', // animation name
-            unit_of_measuration: 'deg', // animation unit - may not be specified
-            function_value: "rotate", // the function of the property being changed - may not be specified
-            start_value: 0, // initial value
-            end_value: 45, // final value
-        }, // final result: transform: rotate(0deg) -> transform: rotate(45deg)
+            // animation name
+            name: 'transform', 
+            // animation unit - may not be specified
+            unit_of_measuration: 'deg',
+            // the function of the property being changed - may not be specified
+            function_value: "rotate", 
+            // initial value
+            start_value: 0, 
+            // final value
+            end_value: 45, 
+        }, 
+        
     ],
     timing_settings: {
-        timing_function: "linear" // enter only the values of the animation-timing-function property
-        duration: 1000, // animation duration is measured in ms(milliseconds)
-        delay, // animation delay is measured in ms(milliseconds)
+        // the temporary animation function takes the values of the animation-timing-function property
+        timing_function: "linear",
+        // animation duration is measured in ms(milliseconds)
+        duration: 1000, 
+        // animation delay is measured in ms(milliseconds)
+        delay, 
     },
+    // function executed after animation playback
     next_function: function startAfterExecutionThisAnimation() {
-...
-}; // function executed after animation playback
+        ...
+    },
 }).start();
 
 // 3. we stop the animation using the end() method of the animation you created
@@ -660,7 +833,8 @@ However, the AnimationCSS class provides you with an additional option in adding
 let name_current_animation = "name_current_animation";
 
 // 2. creating a CSS file with animation
-AnimationCSS.createAnimationCSSFile(
+AnimationCSS.createFile(
+    // array containing changeable properties (changing_properties)
     [
         {
             name: "background-color",
@@ -669,6 +843,7 @@ AnimationCSS.createAnimationCSSFile(
             end_value: "black",
         }
     ],
+    // name animation
     name_current_animation
 );
 
