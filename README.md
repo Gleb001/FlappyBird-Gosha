@@ -1,9 +1,9 @@
 
 # Table of contents
-* [FlappyBird-Gosha (ru)](#FlappyBird-Gosha(ru))
-* [FlappyBird-Gosha (en)](#FlappyBird-Gosha(en))
+* [FlappyBird-Gosha (ru)] (#FlappyBird-Gosha(ru))
+* [FlappyBird-Gosha (en)] (#FlappyBird-Gosha(en))
 
-#FlappyBird-Gosha(ru)
+# FlappyBird-Gosha(ru)
 
 ## Вступление
 Привет, перед тобой представлен мой первый домашний проект-игра под названием "FlappyBird-Gosha". Над данным проектом было пролито не мало крови, пота, слёз, сил и времени с одной целью - создать наиболее хорошую (идеальную) систему браузерной игры; в качестве испытательного прототипа была взята небезизвестная всеми игра [FlappyBird](https://ru.wikipedia.org/wiki/Flappy_Bird). Насколько удачно у меня получилось реализовать представленную цель вы можете увидеть через непосредственно код игры и результат, отображаемый в браузере.
