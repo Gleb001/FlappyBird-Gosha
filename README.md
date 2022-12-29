@@ -1,7 +1,7 @@
 
 # Table of contents
-- [FlappyBird-Gosha (ru)](# FlappyBird-Gosha(ru))
-- [FlappyBird-Gosha (en)](# FlappyBird-Gosha(en))
+* [FlappyBird-Gosha (ru)](#FlappyBird-Gosha(ru))
+* [FlappyBird-Gosha (en)](#FlappyBird-Gosha(en))
 
 # FlappyBird-Gosha(ru)
 
