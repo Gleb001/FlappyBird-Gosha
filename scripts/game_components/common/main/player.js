@@ -17,7 +17,7 @@ const player = {
     // html ---------------------------------------------------- //
     HTML: createElementHTML({
         tag_name: "div",
-        attributes: { id: "player", }
+        attributes: { id: "player" }
     }),
 
     // animations ---------------------------------------------- //

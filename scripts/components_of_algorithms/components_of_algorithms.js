@@ -297,11 +297,11 @@ const components_of_algorithms = {
                 let x_position_player = player.HTML.offsetLeft + player.HTML.offsetWidth;
 
                 // pixel
-                let pixel = 10;
+                let pixel = 5;
 
                 let first_expression =
-                    player.HTML.offsetLeft <= x_end_position_obstacle &&
-                    x_position_player >= current_obstacle.offsetLeft;
+                    player.HTML.offsetLeft + pixel <= x_end_position_obstacle &&
+                    x_position_player - pixel >= current_obstacle.offsetLeft;
 
                 let second_expression =
                     player.HTML.offsetTop - pixel <= (obstacle_top.clientHeight - player.HTML.offsetHeight * 0.6) ||

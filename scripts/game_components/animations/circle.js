@@ -58,7 +58,7 @@ const circle = {
                     },
                     next_function: function () {
                         play_field.style.backgroundColor = circle.HTML.style.backgroundColor;
-                        circle.HTML.remove();
+                        setTimeout(() => circle.HTML.remove(), 5);
                     }
                 }).start();
             },
