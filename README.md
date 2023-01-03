@@ -860,6 +860,6 @@ Disadvantages:
 2. Requires adaptation to use.
 
 After analyzing the module I wrote, I came to the following conclusion: use this module only if:
-- you want to make an unusual animation (relative to CSS). The algebraic function you have written can help you with this;
-- your task is to dynamically change the animation parameters, for example, the size or time relative to the browser window, etc.
+- You want to make an unusual animation (relative to CSS). The algebraic function you have written can help you with this;
+- Your task is to dynamically change the animation parameters, for example, the size or time relative to the browser window, etc.
 In other cases, do not use this module, as it eats a lot of memory => performance drops => it is better to use @keyframes in CSS.
