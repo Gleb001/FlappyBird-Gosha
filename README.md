@@ -18,7 +18,7 @@
 #### Каталог utility
 Данный каталог содержит самописные утилиты, которые позволяют реализовать данную игру в браузере. Грубо говоря, рассматриваемый каталог - это и есть своеобразная библиотека по созданию подобного рода игр и не только. В данный каталог входят три независимых модуля:
 - Движок (в данном проекте) - это сущность, которая управляет потоком (процессом) выполнения алгоритмов. Реализация данной сущности заложена в абстракции под названием miniSyncEngine, отвечающей за выполнение только синхронных алгоритмов. Однако у данного движка есть метод по выполнению асинхронной функции как синхронной (в рамках потока выполнения данной сущности). Приставка mini говорит об отсутствии сложных абстракций и тяжёлого размера файла, при условии, что вся реализация данного проекта построенная на использовании рассматриваемой абстракции. [Описание API по работе с данной абстракцией](#miniSyncEngine-API-ru).
-- work_with_animations.js - модуль по созданию динамических анимаций. С помощью данного модуля можно создавать как CSS, так и JS анимацию. Настоятельно рекомендую ознакомится с даннмы модулем. [Описание API по работе с данной абстракцией](#AnimationJS/AnimationCSS-API-ru).
+- work_with_animations.js - модуль по созданию динамических анимаций. С помощью данного модуля можно создавать как CSS, так и JS анимацию. Настоятельно рекомендую ознакомится с даннмы модулем. [Описание API по работе с данной абстракцией](#AnimationJS-and-AnimationCSS-API-ru).
 - work_with_html.js - модуль по созданию html элементов. Рассматриваемый модуль состоит из одной функции - createElementHTML(). Описание API по работе с данной абстракцией не прилагаются.
 
 Как было сказано выше утилиты выступают в роли каркаса для данного проекта. Изменению утилит как правило приводит к полному изменению остальных частей рассматриваемого каталога /sсripts! У любого решения есть свои плюсы и минусы, с которыми приходится мириться. В нашем случае минусом является полное изменение всего проекта при изменении какой-либо утилиты, а плюсом - легкость в поддержке проекта.
@@ -150,7 +150,7 @@ miniSyncEngine.algorithm.add({
 miniSyncEngine.start();
 ```
 
-#### AnimationJS/AnimationCSS API ru
+#### AnimationJS and AnimationCSS API ru
 AnimationCSS и AnimationJS - это классы (шаблоны) для созданию и управлению анимациями. Так, например, вы можете создать анимацию и передать её в какую-либо переменную, чтобы использовать анимацию в разных частях программы, или можете сразу после создания анимации её проиграть как обычную функцию.
 
 Изначально рассмотрим работу с классом AnimationJS.
@@ -423,15 +423,16 @@ html_element.style.animation = `${name_current_animation} 1000ms linear forwards
 ```
 
 Достоинства данного подхода в работе с анимациями:
-1. можем динамически изменять свойства в зависимости от условий (состояния) программы;
-2. можем настроить алгебраическую функцию согласно нашим желаниям.
+1. Можем динамически изменять свойства в зависимости от условий (состояния) программы;
+2. Можем настроить алгебраическую функцию согласно нашим желаниям.
+
 Недостатки:
 1. Занимает немало места!;
 2. Требует адаптацию к использованию.
 
 Проанализировав написанный мною модуль я пришёл к следующему выводу: используйте данный модуль только, если:
-- вы хотите сделать необычную анимацию (относительно CSS). Помочь вам в этом сможет написанная вами алгебраическая функция;
-- перед вами стоит задача динамически изменять параметры анимации, например, размер или время относительно окна браузера и т.п.
+- Вы хотите сделать необычную анимацию (относительно CSS). Помочь вам в этом сможет написанная вами алгебраическая функция;
+- Перед вами стоит задача динамически изменять параметры анимации, например, размер или время относительно окна браузера и т.п.
 В иных случаях не используйте данный модуль, так как он ест не мало памяти => производительность падает => лучше используйте @keyframes в CSS.
 
 
@@ -450,8 +451,8 @@ As you can see, the root directory of this project is familiar. I don't see any 
 
 #### Catalog utility
 This catalog contains self-written utilities that allow you to implement this game in the browser. Roughly speaking, the catalog in question is a kind of library for creating this kind of games and not only. This catalog includes three independent modules:
-- The engine (in this project) is an entity that controls the flow (process) of executing algorithms. The implementation of this entity is embedded in an abstraction called miniSyncEngine, which is responsible for executing only synchronous algorithms. However, this engine has a method for executing an asynchronous function as synchronous (within the execution flow of this entity). The mini prefix indicates the absence of complex abstractions and heavy file size, provided that the entire implementation of this project is based on the use of the abstraction in question. [API description for working with this abstraction](#miniSyncEngine-API-english-version).
-- work_with_animations.js is a module for creating dynamic animations. With this module, you can create both CSS and JS animations. I strongly recommend that you familiarize yourself with this module. [API description for working with this abstraction](#AnimationJS/AnimationCSS-API-en).
+- The engine (in this project) is an entity that controls the flow (process) of executing algorithms. The implementation of this entity is embedded in an abstraction called miniSyncEngine, which is responsible for executing only synchronous algorithms. However, this engine has a method for executing an asynchronous function as synchronous (within the execution flow of this entity). The mini prefix indicates the absence of complex abstractions and heavy file size, provided that the entire implementation of this project is based on the use of the abstraction in question. [API description for working with this abstraction](#miniSyncEngine-API-en).
+- work_with_animations.js is a module for creating dynamic animations. With this module, you can create both CSS and JS animations. I strongly recommend that you familiarize yourself with this module. [API description for working with this abstraction](#AnimationJS-and-AnimationCSS-API-en).
 - work_with_html.js is a module for creating html elements. The module in question consists of one function - createElementHTM(). API descriptions for working with this abstraction are not included.
 
 As mentioned above, utilities act as a framework for this project. Changing utilities usually leads to a complete change in the remaining parts of the /scripts directory in question! Any solution has its pros and cons, which you have to put up with. In our case, the downside is a complete change of the entire project when changing any utility, and the plus is the ease of project support.
@@ -583,7 +584,7 @@ After you have prepared and passed the algorithms to the engine in question (als
 miniSyncEngine.start();
 ```
 
-#### AnimationJS/AnimationCSS API en
+#### AnimationJS and AnimationCSS API en
 AnimationCSS and AnimationJS are classes (templates) for creating and managing animations. So, for example, you can create an animation and pass it to some variable to use the animation in different parts of the program, or you can play it as a regular function immediately after creating the animation.
 
 Initially, let's consider working with the AnimationJS class.
@@ -851,8 +852,9 @@ html_element.style.animation = `${name_current_animation} 1000ms linear forwards
 ```
 
 Advantages of this approach in working with animations:
-1. we can dynamically change properties depending on the conditions (state) of the program;
-2. we can adjust the algebraic function according to our wishes.
+1. We can dynamically change properties depending on the conditions (state) of the program;
+2. We can adjust the algebraic function according to our wishes.
+
 Disadvantages:
 1. Takes up a lot of space!;
 2. Requires adaptation to use.
